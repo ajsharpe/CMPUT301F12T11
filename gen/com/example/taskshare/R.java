@@ -21,12 +21,11 @@ public final class R {
         public static final int activity_add_photo=0x7f030000;
         public static final int activity_fulfill_photo_task=0x7f030001;
         public static final int activity_fulfill_text_task=0x7f030002;
-        public static final int activity_main=0x7f030003;
-        public static final int activity_new_task=0x7f030004;
-        public static final int activity_take_photo=0x7f030005;
-        public static final int activity_task_share=0x7f030006;
-        public static final int activity_upload_photo=0x7f030007;
-        public static final int activity_view_task=0x7f030008;
+        public static final int activity_new_task=0x7f030003;
+        public static final int activity_take_photo=0x7f030004;
+        public static final int activity_task_share=0x7f030005;
+        public static final int activity_upload_photo=0x7f030006;
+        public static final int activity_view_task=0x7f030007;
     }
     public static final class menu {
         public static final int activity_add_photo=0x7f060000;
