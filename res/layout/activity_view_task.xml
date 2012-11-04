@@ -4,11 +4,57 @@
     android:layout_height="match_parent" >
 
     <TextView
+        android:id="@+id/textName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:text="@string/hello_world"
-        tools:context=".ViewTaskActivity" />
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:text="Name"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TextView
+        android:id="@+id/textDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/linearButtonLayout"
+        android:layout_alignLeft="@+id/textName"
+        android:layout_alignRight="@+id/buttonFulfillTask"
+        android:layout_below="@+id/buttonFulfillTask"
+        android:text="Description" />
+
+    <Button
+        android:id="@+id/buttonFulfillTask"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/textName"
+        android:layout_alignBottom="@+id/textName"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="20dp"
+        android:text="@string/text_fulfill_task" />
+
+    <LinearLayout
+        android:id="@+id/linearButtonLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true" >
+
+        <Button
+            android:id="@+id/buttonStoreOffline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/text_store_offline" />
+
+        <Button
+            android:id="@+id/buttonNotifyCreator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/text_notify_creator" />
+    </LinearLayout>
 
 </RelativeLayout>
