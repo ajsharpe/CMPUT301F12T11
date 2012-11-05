@@ -10,7 +10,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 public class ViewTaskActivity extends Activity implements FView<TaskShare>{
-	public final static int INDEX = "com.example.taskshare.MESSAGE";
+	public final static String INDEX = "com.example.myfirstapp.MESSAGE";
 	private Task currentTask;
 	
     @Override
@@ -24,11 +24,12 @@ public class ViewTaskActivity extends Activity implements FView<TaskShare>{
             //no index for currentTask - abort
         	finish();
             }
-        // Get data via the key
-        int index = extras.getInt(intent.INDEX);
-        //if (index != null) {
-          
-        //} 
+        // Get currentTask via the index
+        final int index = extras.getInt(INDEX);
+        if ((Integer) index != null) {
+        	TaskShare ts = TaskShareApplication.getTaskShare();
+        	currentTask = ts.getMyTaskList().get(index);
+        } else finish();
         
         
         //todo: set text of buttonStoreOffline depending on task privacy
@@ -41,8 +42,8 @@ public class ViewTaskActivity extends Activity implements FView<TaskShare>{
             @Override
             public void onClick(View arg0) {
             	if (currentTask.getClass() == TextTask.class){
-            		Intent i = new Intent(ViewTaskActivity.this, FulfillTextTask.class);
-            		i.putExtra("index", index);
+            		Intent i = new Intent(ViewTaskActivity.this, FulfillTextTaskActivity.class);
+            		i.putExtra("INDEX", index);
             		startActivity(i);
             	}
             	else if (currentTask.getClass() == PhotoTask.class){
