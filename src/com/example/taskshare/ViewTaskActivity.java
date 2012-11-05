@@ -7,6 +7,7 @@ import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class ViewTaskActivity extends Activity implements FView<TaskShare>{
@@ -18,6 +19,7 @@ public class ViewTaskActivity extends Activity implements FView<TaskShare>{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_task);
         
+        //load currentTask from index passed by main screen
         Intent intent = getIntent();
         Bundle extras = intent.getExtras();
         if (extras == null) {
@@ -32,9 +34,18 @@ public class ViewTaskActivity extends Activity implements FView<TaskShare>{
         } else finish();
         
         
-        //todo: set text of buttonStoreOffline depending on task privacy
-        //todo: load name and description into text fields
-        //load currentTask
+        //set text of buttonStoreOffline depending on task privacy
+        Button buttonStoreOffline = (Button) findViewById(R.id.buttonStoreOffline);
+        if (currentTask.getPrivacy() == true)
+        	buttonStoreOffline.setText(R.string.text_store_offline);
+        else
+        	buttonStoreOffline.setText(R.string.text_store_online);
+        	
+        //load name and description into text fields
+        TextView name = (TextView) findViewById(R.id.textName);
+        TextView description = (TextView) findViewById(R.id.textDescription);
+        name.setText(currentTask.getName());
+        description.setText(currentTask.getDescription());
         
         
         Button buttonFulfillTask = (Button) findViewById(R.id.buttonFulfillTask);
@@ -42,12 +53,16 @@ public class ViewTaskActivity extends Activity implements FView<TaskShare>{
             @Override
             public void onClick(View arg0) {
             	if (currentTask.getClass() == TextTask.class){
+
+                	Toast.makeText(ViewTaskActivity.this, "text", Toast.LENGTH_SHORT).show();
             		Intent i = new Intent(ViewTaskActivity.this, FulfillTextTaskActivity.class);
             		i.putExtra("INDEX", index);
             		startActivity(i);
             	}
             	else if (currentTask.getClass() == PhotoTask.class){
-            		
+            		Intent i = new Intent(ViewTaskActivity.this, FulfillPhotoTaskActivity.class);
+            		i.putExtra("INDEX", index);
+            		startActivity(i);            	
             	}
             }
         });
@@ -62,11 +77,13 @@ public class ViewTaskActivity extends Activity implements FView<TaskShare>{
             }
         });
         
-        Button buttonStoreOffline = (Button) findViewById(R.id.buttonStoreOffline);
         buttonStoreOffline.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View arg0) {
-
+            	//toggle online storage
+            	if (currentTask.getPrivacy() == true)
+                	currentTask.setPrivacy(false);
+                else currentTask.setPrivacy(true);
             }
         });
         

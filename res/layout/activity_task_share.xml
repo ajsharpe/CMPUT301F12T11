@@ -50,7 +50,9 @@
         android:layout_above="@+id/newTask"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/shared"
-        tools:listitem="@android:layout/simple_list_item_2" >
+        android:scrollbars="vertical"
+        tools:listitem="@android:layout/simple_list_item_2" 
+        >
 
     </ListView>
 

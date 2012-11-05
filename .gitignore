@@ -1,2 +1,5 @@
 *.class
 *R.java
+bin/
+*.autosave
+*~

@@ -22,6 +22,7 @@
 	<string name="text_fulfill_task">Fulfill Task</string>
 	<string name="text_view_previous_content">View Previous Content</string>
 	<string name="text_store_offline">Store Offline</string>
+	<string name="text_store_online">Store Online</string>
 	<string name="text_notify_creator">Notify Creator</string>
 	
 	<string name="text_photo">Photo</string>
