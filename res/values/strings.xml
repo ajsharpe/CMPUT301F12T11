@@ -40,4 +40,6 @@
 	
 	<string name="text_not_implemented">Not yet implemented.</string>
 	
+	<string name="text_update">Update Task</string>
+	
 </resources>
