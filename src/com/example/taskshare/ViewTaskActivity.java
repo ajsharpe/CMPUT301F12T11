@@ -53,8 +53,6 @@ public class ViewTaskActivity extends Activity implements FView<TaskShare>{
             @Override
             public void onClick(View arg0) {
             	if (currentTask.getClass() == TextTask.class){
-
-                	Toast.makeText(ViewTaskActivity.this, "text", Toast.LENGTH_SHORT).show();
             		Intent i = new Intent(ViewTaskActivity.this, FulfillTextTaskActivity.class);
             		i.putExtra("INDEX", index);
             		startActivity(i);

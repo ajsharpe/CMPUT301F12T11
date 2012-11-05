@@ -14,27 +14,38 @@ import android.widget.AdapterView.OnItemClickListener;
 
 
 public class TaskShareActivity extends Activity {
-
+	
+	
+    ArrayAdapter<Task> adapter = null;
+    
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_task_share);
         
-        TaskShare ts = TaskShareApplication.getTaskShare();
-        ArrayList<Task> listOfTasks = ts.getMyTaskList();        
-        ListView taskList = (ListView) findViewById(R.id.taskList);  
-        ArrayAdapter<Task> adapter = new ArrayAdapter<Task>(this,
+        /** Setup list of Tasks*/
+        TaskShare ts = TaskShareApplication.getTaskShare();				
+        ArrayList<Task> listOfTasks = ts.getMyTaskList(); 
+        
+        /** Setup listView*/
+        ListView taskList = (ListView) findViewById(R.id.taskList); 
+        
+        /** Setup List Adapter*/
+        adapter = new ArrayAdapter<Task>(this,
         		android.R.layout.simple_expandable_list_item_1, listOfTasks);
         taskList.setAdapter(adapter);
-        taskList.setOnItemClickListener(new OnItemClickListener() {
+        
+        /** Make List items Clickable*/
+        taskList.setOnItemClickListener(new OnItemClickListener() {    
         	@Override
         	public void onItemClick(AdapterView<?> parent, View view, int position, long id){
-        		Intent myIntent = new Intent(view.getContext(),ViewTaskActivity.class); 			
-        		myIntent.putExtra("Task_Position", position);
+        		Intent myIntent = new Intent(view.getContext(),ViewTaskActivity.class); 
+        		/** Switch to view the selected task, send index to next activity*/
+        		myIntent.putExtra("INDEX", position);
         		startActivityForResult(myIntent, 0); 
         	}
         });
-        
+  
         /** This is the first button which takes you to the NEW TASK screen*/
         Button newTaskButton = (Button) findViewById(R.id.newTask);
         newTaskButton.setOnClickListener(new View.OnClickListener() {
@@ -44,10 +55,16 @@ public class TaskShareActivity extends Activity {
         	}
         }); 
     }
+    
+    public void onResume (){
+    	super.onResume();
+        adapter.notifyDataSetChanged();  
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.activity_task_share, menu);
         return true;
     }
+    
 }
