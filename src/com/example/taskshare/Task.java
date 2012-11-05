@@ -67,7 +67,7 @@ public class Task<T>{
 		}
 	}
 	
-	public String toString(){
-		return this.name + this.modified.toString();
+	public String toString(){	
+		return this.name + " - " + this.modified.format("yyyy/MM/dd hh:mm");
 	}
 }
