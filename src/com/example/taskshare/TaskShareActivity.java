@@ -20,16 +20,24 @@ public class TaskShareActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_task_share);
         
-        TaskShare ts = TaskShareApplication.getTaskShare();
-        ArrayList<Task> listOfTasks = ts.getMyTaskList();        
-        ListView taskList = (ListView) findViewById(R.id.taskList);  
+        /** Setup list of Tasks*/
+        TaskShare ts = TaskShareApplication.getTaskShare();				
+        ArrayList<Task> listOfTasks = ts.getMyTaskList(); 
+        
+        /** Setup listView*/
+        ListView taskList = (ListView) findViewById(R.id.taskList); 
+        
+        /** Setup List Adapter*/
         ArrayAdapter<Task> adapter = new ArrayAdapter<Task>(this,
         		android.R.layout.simple_expandable_list_item_1, listOfTasks);
         taskList.setAdapter(adapter);
-        taskList.setOnItemClickListener(new OnItemClickListener() {
+        adapter.notifyDataSetChanged();
+        /** Make List items Clickable*/
+        taskList.setOnItemClickListener(new OnItemClickListener() {    
         	@Override
         	public void onItemClick(AdapterView<?> parent, View view, int position, long id){
-        		Intent myIntent = new Intent(view.getContext(),ViewTaskActivity.class); 			
+        		Intent myIntent = new Intent(view.getContext(),ViewTaskActivity.class); 
+        		/** Switch to view the selected task, send task position to next activity*/
         		myIntent.putExtra("INDEX", position);
         		startActivityForResult(myIntent, 0); 
         	}
