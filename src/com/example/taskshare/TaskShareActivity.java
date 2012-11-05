@@ -26,7 +26,6 @@ public class TaskShareActivity extends Activity {
         taskList.setAdapter(adapter);
         
         taskList.setOnItemClickListener(new OnItemClickListener() {
-        	@Override
         	public void onItemClick(AdapterView<?> parent, View view, int position, long id){
         		Intent myIntent = new Intent(view.getContext(),ViewTaskActivity.class);
         		int taskId = 0;			/**NEED WAY TO SEND TASK ID TO THE VIEW TASK SCREEN SO RIGHT TASK IS DISPLAYED*/

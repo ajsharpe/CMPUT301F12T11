@@ -50,7 +50,6 @@ public class FulfillPhotoTaskActivity extends Activity implements OnClickListene
         getMenuInflater().inflate(R.menu.activity_fulfill_photo_task, menu);
         return true;
     }
-	@Override
 	public void onClick(View v) {
 		if(v.equals(findViewById(R.id.takePhoto))){
 		// TODO Auto-generated method stub
