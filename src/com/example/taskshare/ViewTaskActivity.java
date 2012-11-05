@@ -11,7 +11,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class ViewTaskActivity extends Activity implements FView<TaskShare>{
-	public final static String INDEX = "com.example.myfirstapp.MESSAGE";
 	private Task currentTask;
 	
     @Override
@@ -27,10 +26,11 @@ public class ViewTaskActivity extends Activity implements FView<TaskShare>{
         	finish();
             }
         // Get currentTask via the index
-        final int index = extras.getInt(INDEX);
-        if ((Integer) index != null) {
+        final Long index = extras.getLong("INDEX");
+
+        if (index != null) {
         	TaskShare ts = TaskShareApplication.getTaskShare();
-        	currentTask = ts.getMyTaskList().get(index);
+        	currentTask = ts.getMyTaskList().get(index.intValue());
         } else finish();
         
         
@@ -79,9 +79,15 @@ public class ViewTaskActivity extends Activity implements FView<TaskShare>{
             @Override
             public void onClick(View arg0) {
             	//toggle online storage
-            	if (currentTask.getPrivacy() == true)
+            	Button buttonStoreOffline = (Button) findViewById(R.id.buttonStoreOffline);
+            	if (currentTask.getPrivacy() == true){
                 	currentTask.setPrivacy(false);
-                else currentTask.setPrivacy(true);
+                	buttonStoreOffline.postInvalidate();
+            	}
+                else {
+                	currentTask.setPrivacy(true);
+                	buttonStoreOffline.postInvalidate();
+                }
             }
         });
         

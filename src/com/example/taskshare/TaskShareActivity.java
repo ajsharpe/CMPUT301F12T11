@@ -10,6 +10,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 
 
@@ -39,9 +40,11 @@ public class TaskShareActivity extends Activity {
         taskList.setOnItemClickListener(new OnItemClickListener() {    
         	@Override
         	public void onItemClick(AdapterView<?> parent, View view, int position, long id){
-        		Intent myIntent = new Intent(view.getContext(),ViewTaskActivity.class); 
+        		Intent myIntent = new Intent(view.getContext(),ViewTaskActivity.class);
+        		Bundle extras = new Bundle();
+        		extras.putLong("INDEX", id);
         		/** Switch to view the selected task, send index to next activity*/
-        		myIntent.putExtra("INDEX", position);
+        		myIntent.putExtras(extras);
         		startActivityForResult(myIntent, 0); 
         	}
         });
