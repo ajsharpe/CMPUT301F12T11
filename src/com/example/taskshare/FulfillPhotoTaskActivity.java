@@ -40,7 +40,8 @@ public class FulfillPhotoTaskActivity extends Activity implements OnClickListene
     	iv = (ImageView) findViewById(R.id.imageView1);
     	takePhoto = (Button) findViewById(R.id.takePhoto);
     	takePhoto.setOnClickListener(this);
-    	
+    	uploadPhoto = (Button) findViewById(R.id.uploadPhoto);
+    	uploadPhoto.setOnClickListener(this);
     }
     
  
@@ -51,6 +52,7 @@ public class FulfillPhotoTaskActivity extends Activity implements OnClickListene
     }
 	@Override
 	public void onClick(View v) {
+		if(v.equals(findViewById(R.id.takePhoto))){
 		// TODO Auto-generated method stub
 		File root = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/tmp");
 		String folder = root.toString(); 
@@ -61,6 +63,16 @@ public class FulfillPhotoTaskActivity extends Activity implements OnClickListene
 		cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, outputFileUri);
 		
 		startActivityForResult(cameraIntent, cameraData);
+		}
+		else if(v.equals(findViewById(R.id.uploadPhoto))){
+			
+			Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
+			photoPickerIntent.setType("image/*");
+			startActivityForResult(photoPickerIntent, 1);
+			
+			
+			
+		}
 	}
 
 	protected void onActivityResult(int requestCode, int resultCode, Intent data){
