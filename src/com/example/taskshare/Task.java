@@ -7,18 +7,16 @@ public class Task<T>{
 	private String name, description;
 	private Time created, modified;
 	private Integer authorID;
-	private Boolean shared, storedOnline;
+	private Boolean sharedOnline;
 	private ArrayList<T> fulfillment;
 	
-	Task(String name, String description, Integer authorID, 
-			Time now, Boolean shared, Boolean storedOnline){
+	Task(String name, String description, Integer authorID, Boolean sharedOnline){
 		this.name = name;
 		this.description = description;
 		this.authorID = authorID;
-		this.created = now;
-		this.modified = now;
-		this.shared = shared;
-		this.storedOnline = storedOnline;
+		this.created = new Time(Time.getCurrentTimezone());
+		this.modified = new Time(Time.getCurrentTimezone());
+		this.sharedOnline = sharedOnline;
 		this.fulfillment = new ArrayList<T>();
 	}
 	
@@ -53,20 +51,11 @@ public class Task<T>{
 	}
 	
 	public Boolean getPrivacy(){
-		return this.shared;
+		return this.sharedOnline;
 	}
 	
-	public void setPrivacy(Boolean shared){
-		this.shared = shared;
-		this.modified = new Time(Time.getCurrentTimezone());
-	}
-	
-	public Boolean isStoredOnline(){
-		return this.storedOnline;
-	}
-	
-	public void toggleOnline(Boolean online){
-		this.storedOnline = online;
+	public void setPrivacy(Boolean sharedOnline){
+		this.sharedOnline = sharedOnline;
 		this.modified = new Time(Time.getCurrentTimezone());
 	}
 	

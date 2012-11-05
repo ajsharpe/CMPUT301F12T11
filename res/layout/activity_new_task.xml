@@ -23,7 +23,7 @@
         android:text="@string/text_description" />
 
     <EditText
-        android:id="@+id/editName"
+        android:id="@+id/editNewTaskName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/textName"
@@ -37,11 +37,11 @@
     </EditText>
 
     <EditText
-        android:id="@+id/editDescription"
+        android:id="@+id/editNewTaskDescription"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/textDescription"
-        android:layout_alignRight="@+id/editName"
+        android:layout_alignRight="@+id/editNewTaskName"
         android:layout_below="@+id/textDescription"
         android:ems="10"
         android:inputType="textMultiLine"
@@ -53,7 +53,7 @@
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_alignRight="@+id/editDescription"
+        android:layout_alignRight="@+id/editNewTaskDescription"
         android:layout_marginBottom="20dp"
         android:text="@string/text_save" />
 

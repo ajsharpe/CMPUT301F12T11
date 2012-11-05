@@ -10,7 +10,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:gravity="center"
-        android:text="@string/addPhotos1"
+        android:text="@string/text_add_photo"
         android:textSize="30sp" />
 
     <ImageView
@@ -21,7 +21,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
         android:layout_below="@+id/textView1"
-        android:contentDescription="@string/description"
+        android:contentDescription="@string/text_photo"
         android:src="@drawable/ic_launcher" />
 
     <Button
@@ -30,7 +30,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
-        android:text="@string/addPhotos3"
+        android:text="@string/text_save"
         android:textSize="25sp" />
 
     <Button
@@ -39,7 +39,7 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/SavePhotoB"
         android:layout_alignParentLeft="true"
-        android:text="@string/uploadPhoto"
+        android:text="@string/text_upload_photo"
         android:textSize="25sp" />
 
     <Button
@@ -50,6 +50,6 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
         android:textSize="25sp" 
-        android:text="@string/takePhoto" />
+        android:text="@string/text_take_photo" />
 
 </RelativeLayout>
