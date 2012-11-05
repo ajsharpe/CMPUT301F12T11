@@ -47,7 +47,9 @@ public class ViewTaskActivity extends Activity implements FView<TaskShare>{
             		startActivity(i);
             	}
             	else if (currentTask.getClass() == PhotoTask.class){
-            		
+            		Intent j = new Intent(ViewTaskActivity.this, FulfillPhotoTaskActivity.class);
+            		j.putExtra("INDEX", index);
+            		startActivity(j);
             	}
             }
         });
