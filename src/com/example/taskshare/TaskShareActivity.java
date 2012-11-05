@@ -1,3 +1,8 @@
+/** Main Screen
+ * -Has a list of all the saved tasks
+ * -Tasks on the list are selectable and take you to the view task screen for that task
+ * -Only other working button is New Task*/
+
 package com.example.taskshare;
 import java.util.ArrayList;
 

@@ -1,3 +1,7 @@
+/** Task class
+ * -getters and setters
+ * -allows a list of fulfillments that can be added to*/
+
 package com.example.taskshare;
 
 import java.util.ArrayList;

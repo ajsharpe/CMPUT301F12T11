@@ -1,3 +1,7 @@
+/**Class that allows the building of a list of tasks
+ * -also allows the adding and removing of tasks from a list
+ * -only makes offline lists as of now*/
+
 package com.example.taskshare;
 
 import java.util.ArrayList;

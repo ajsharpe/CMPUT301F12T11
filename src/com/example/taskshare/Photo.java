@@ -1,3 +1,5 @@
+/** Allows saving of photos */
+
 package com.example.taskshare;
 
 import android.graphics.Bitmap;

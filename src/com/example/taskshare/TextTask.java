@@ -1,3 +1,5 @@
+/**This is The text based Task class */
+
 package com.example.taskshare;
 
 import android.text.format.Time;

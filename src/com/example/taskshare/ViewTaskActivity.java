@@ -1,3 +1,6 @@
+/** This activity is used to view details of a selected tasks, and determine if 
+ * one would like to complete the given task
+ * currently the only working button is fulfill task */
 package com.example.taskshare;
 
 import android.os.Bundle;

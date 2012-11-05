@@ -1,3 +1,6 @@
+/** Allows creation of new task
+ * -saves task to the task list*/
+
 package com.example.taskshare;
 
 import android.os.Bundle;

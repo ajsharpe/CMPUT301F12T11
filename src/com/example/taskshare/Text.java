@@ -1,3 +1,8 @@
+/** Text class, allows text to have a title, a author, a date for both 
+ * creation and modification, and the text to be added to the task
+ * consists mainly of getters and setters making the building of a text 
+ * object simpler */
+
 package com.example.taskshare;
 
 import android.text.format.Time;
