@@ -15,20 +15,25 @@ public final class R {
         public static final int ic_launcher=0x7f020001;
     }
     public static final class id {
-        public static final int buttonFulfillTask=0x7f07000a;
-        public static final int buttonNotifyCreator=0x7f07000c;
-        public static final int buttonSave=0x7f070004;
-        public static final int buttonStoreOffline=0x7f07000b;
-        public static final int checkBoxSharedOnline=0x7f070005;
-        public static final int editDescription=0x7f070003;
-        public static final int editName=0x7f070002;
-        public static final int linearButtonLayout=0x7f070009;
-        public static final int menu_settings=0x7f07000d;
-        public static final int radioGroupTaskType=0x7f070006;
-        public static final int radioPhoto=0x7f070007;
-        public static final int radioText=0x7f070008;
-        public static final int textDescription=0x7f070001;
-        public static final int textName=0x7f070000;
+        public static final int SavePhotoB=0x7f070003;
+        public static final int buttonFulfillTask=0x7f07000f;
+        public static final int buttonNotifyCreator=0x7f070011;
+        public static final int buttonSave=0x7f070009;
+        public static final int buttonStoreOffline=0x7f070010;
+        public static final int checkBoxSharedOnline=0x7f07000a;
+        public static final int editDescription=0x7f070008;
+        public static final int editName=0x7f070007;
+        public static final int imageView1=0x7f070001;
+        public static final int linearButtonLayout=0x7f07000e;
+        public static final int menu_settings=0x7f070012;
+        public static final int radioGroupTaskType=0x7f07000b;
+        public static final int radioPhoto=0x7f07000c;
+        public static final int radioText=0x7f07000d;
+        public static final int takePhoto=0x7f070002;
+        public static final int textDescription=0x7f070006;
+        public static final int textName=0x7f070005;
+        public static final int textView1=0x7f070000;
+        public static final int uploadPhoto=0x7f070004;
     }
     public static final class layout {
         public static final int activity_add_photo=0x7f030000;
@@ -52,9 +57,13 @@ public final class R {
         public static final int activity_view_task=0x7f060008;
     }
     public static final class string {
+        public static final int addPhotos1=0x7f040015;
+        public static final int addPhotos3=0x7f040016;
         public static final int app_name=0x7f040000;
+        public static final int description=0x7f040014;
         public static final int hello_world=0x7f040001;
         public static final int menu_settings=0x7f040002;
+        public static final int takePhoto=0x7f040018;
         public static final int text_description=0x7f04000c;
         public static final int text_fulfill_task=0x7f040011;
         public static final int text_name=0x7f04000b;
@@ -72,6 +81,7 @@ public final class R {
         public static final int title_activity_task_share=0x7f040008;
         public static final int title_activity_upload_photo=0x7f040006;
         public static final int title_activity_view_task=0x7f040009;
+        public static final int uploadPhoto=0x7f040017;
     }
     public static final class style {
         public static final int AppTheme=0x7f050000;
