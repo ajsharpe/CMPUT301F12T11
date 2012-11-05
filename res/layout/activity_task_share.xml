@@ -3,12 +3,55 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
-    <TextView
-        android:layout_width="wrap_content"
+    <Button
+        android:id="@+id/newTask"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:text="@string/hello_world"
-        tools:context=".TaskShareActivity" />
+        android:text="@string/text_new_task" />
+
+    <Button
+        android:id="@+id/myTasks"
+        android:layout_width="162dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:text="@string/text_my_task" />
+
+    <Button
+        android:id="@+id/otherTasks"
+        android:layout_width="162dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:text="@string/text_other_task" />
+
+    <Button
+        android:id="@+id/shared"
+        android:layout_width="162dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/myTasks"
+        android:text="@string/text_shared" />
+
+    <Button
+        android:id="@+id/stored"
+        android:layout_width="162dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/shared"
+        android:layout_alignBottom="@+id/shared"
+        android:layout_alignParentRight="true"
+        android:text="@string/text_stored" />
+
+    <ListView
+        android:id="@+id/taskList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/newTask"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/shared"
+        tools:listitem="@android:layout/simple_list_item_2" >
+
+    </ListView>
 
 </RelativeLayout>

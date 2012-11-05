@@ -27,6 +27,14 @@
 	<string name="text_add_photo">Add Photo</string>
     <string name="text_upload_photo">Upload Photo</string>
     <string name="text_take_photo">Take Photo</string>
-	
+    
+    <string name="text_title">Title</string>
+	<string name="text_author">Author</string>
+	<string name="text_add_text">Add Text</string>
+	<string name="text_my_task">My Tasks</string>
+	<string name="text_other_task">Others Tasks</string>
+	<string name="text_shared">Shared</string>
+	<string name="text_stored">Stored</string>
+	<string name="text_new_task">New Task</string>
 	
 </resources>
