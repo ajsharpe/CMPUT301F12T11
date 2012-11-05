@@ -1,4 +1,6 @@
 package com.example.taskshare;
+import java.util.ArrayList;
+
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
@@ -18,18 +20,18 @@ public class TaskShareActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_task_share);
         
-        ListView taskList = (ListView) findViewById(R.id.taskList);
-        Task[] listOfTasks = {}; 											/**NEED WAY TO GET A LIST OF ALL TASKS*/
-        
+        TaskShare ts = TaskShareApplication.getTaskShare();
+        ArrayList<Task> listOfTasks = ts.getMyTaskList();        
+        ListView taskList = (ListView) findViewById(R.id.taskList);  
         ArrayAdapter<Task> adapter = new ArrayAdapter<Task>(this,
         		android.R.layout.simple_expandable_list_item_1, listOfTasks);
         taskList.setAdapter(adapter);
-        
         taskList.setOnItemClickListener(new OnItemClickListener() {
+        	@Override
         	public void onItemClick(AdapterView<?> parent, View view, int position, long id){
-        		Intent myIntent = new Intent(view.getContext(),ViewTaskActivity.class);
-        		int taskId = 0;			/**NEED WAY TO SEND TASK ID TO THE VIEW TASK SCREEN SO RIGHT TASK IS DISPLAYED*/
-        		startActivityForResult(myIntent, taskId);
+        		Intent myIntent = new Intent(view.getContext(),ViewTaskActivity.class); 			
+        		myIntent.putExtra("Task_Position", position);
+        		startActivityForResult(myIntent, 0); 
         	}
         });
         
