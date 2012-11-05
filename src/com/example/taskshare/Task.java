@@ -66,4 +66,8 @@ public class Task<T>{
 			}
 		}
 	}
+	
+	public String toString(){
+		return this.name + this.modified.toString();
+	}
 }
