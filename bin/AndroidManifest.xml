@@ -8,12 +8,13 @@
         android:targetSdkVersion="15" />
 
     <application
+        android:name="TaskShareApplication"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name=".MainActivity"
-            android:label="@string/title_activity_main" >
+            android:name=".TaskShareActivity"
+            android:label="@string/title_activity_task_share" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -59,15 +60,6 @@
         <activity
             android:name=".AddPhotoActivity"
             android:label="@string/title_activity_add_photo" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity
-            android:name=".TaskShareActivity"
-            android:label="@string/title_activity_task_share" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
