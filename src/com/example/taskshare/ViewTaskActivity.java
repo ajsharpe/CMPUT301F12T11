@@ -18,14 +18,14 @@ public class ViewTaskActivity extends Activity implements FView<TaskShare>{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_task);
         
-        //load currentTask from index passed by main screen
+        /** Load currentTask from index passed by main screen */
         Intent intent = getIntent();
         Bundle extras = intent.getExtras();
-        if (extras == null) {
-            //no index for currentTask - abort
-        	finish();
-            }
-        // Get currentTask via the index
+        if (extras == null)
+            finish(); //no index for currentTask - abort
+            
+        
+        /** Get currentTask via the index */
         final Long index = extras.getLong("INDEX");
 
         if (index != null) {
@@ -34,20 +34,21 @@ public class ViewTaskActivity extends Activity implements FView<TaskShare>{
         } else finish();
         
         
-        //set text of buttonStoreOffline depending on task privacy
+        /** Set text of buttonStoreOffline depending on task privacy*/
         Button buttonStoreOffline = (Button) findViewById(R.id.buttonStoreOffline);
         if (currentTask.getPrivacy() == true)
         	buttonStoreOffline.setText(R.string.text_store_offline);
         else
         	buttonStoreOffline.setText(R.string.text_store_online);
         	
-        //load name and description into text fields
+        /** Load name and description into text fields */
         TextView name = (TextView) findViewById(R.id.textName);
         TextView description = (TextView) findViewById(R.id.textDescription);
         name.setText(currentTask.getName());
         description.setText(currentTask.getDescription());
         
         
+        /** Allows user to upload/take pictures or add text depending on the task type */
         Button buttonFulfillTask = (Button) findViewById(R.id.buttonFulfillTask);
         buttonFulfillTask.setOnClickListener(new OnClickListener() {
             @Override
@@ -65,6 +66,7 @@ public class ViewTaskActivity extends Activity implements FView<TaskShare>{
             }
         });
         
+        /** View previously added content to the fulfillment */
         Button buttonViewPreviousContent = (Button) findViewById(R.id.buttonViewPreviousContent);
         buttonViewPreviousContent.setOnClickListener(new OnClickListener() {
             @Override
@@ -75,10 +77,10 @@ public class ViewTaskActivity extends Activity implements FView<TaskShare>{
             }
         });
         
+        /* Toggles online storage */
         buttonStoreOffline.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View arg0) {
-            	//toggle online storage
             	Button buttonStoreOffline = (Button) findViewById(R.id.buttonStoreOffline);
             	if (currentTask.getPrivacy() == true){
                 	currentTask.setPrivacy(false);
@@ -91,6 +93,7 @@ public class ViewTaskActivity extends Activity implements FView<TaskShare>{
             }
         });
         
+        /** Sends updated fulfillment to task's creator */
         Button buttonNotifyCreator = (Button) findViewById(R.id.buttonNotifyCreator);
         buttonNotifyCreator.setOnClickListener(new OnClickListener() {
             @Override

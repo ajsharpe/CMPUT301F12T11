@@ -61,6 +61,7 @@ public class TaskShareActivity extends Activity {
     
     public void onResume (){
     	super.onResume();
+    	/** Reload task list when the activity is resumed */
         adapter.notifyDataSetChanged();  
     }
 

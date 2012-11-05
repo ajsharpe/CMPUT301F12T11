@@ -23,6 +23,7 @@ public class NewTaskActivity extends Activity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_task);
         
+        /** Saves a new task and adds it to the model */
         Button buttonSave = (Button) findViewById(R.id.buttonSave);
         buttonSave.setOnClickListener(new OnClickListener() {
             @Override
@@ -37,30 +38,35 @@ public class NewTaskActivity extends Activity{
         getMenuInflater().inflate(R.menu.activity_new_task, menu);
         return true;
     }
-    
+    /** Saves a new task and adds it to the model 		 /
+     *  Returns true if task has be successfully saved 	 /
+     *  or false otherwise.								*/
     public Boolean saveNewTask(){
     	Task newTask;
     	
     	EditText nameField = (EditText) findViewById(R.id.editNewTaskName);
     	EditText descriptionField = (EditText) findViewById(R.id.editNewTaskDescription);
     	
+    	// Check name field is not empty
     	String name = nameField.getText().toString();
     	if (name != null && name.trim().length() == 0){
     		Toast.makeText(NewTaskActivity.this, "Please Enter a Title", Toast.LENGTH_SHORT).show();
     		return false;
     	}
+    	// Check description field is not empty
     	String description = descriptionField.getText().toString();
     	if (description != null && description.trim().length() == 0){
     		Toast.makeText(NewTaskActivity.this, "Please Enter a Description", Toast.LENGTH_SHORT).show();
     		return false;
     	}
     	
+    	// Check whether or not to create the task with online storage
     	Boolean sharedOnline = false;
     	CheckBox checkBoxSharedOnline = (CheckBox) findViewById(R.id.checkBoxSharedOnline);
         if (checkBoxSharedOnline.isChecked())
             sharedOnline = true;
     	
-        //determine whether it is a photo or text based task
+        // Determine whether it is a photo or text based task from the radio buttons
     	RadioGroup radioGroupTaskType = (RadioGroup) findViewById(R.id.radioGroupTaskType);
     	int taskTypeIdSelected = radioGroupTaskType.getCheckedRadioButtonId();
     	RadioButton taskType = (RadioButton) findViewById(taskTypeIdSelected);
@@ -72,7 +78,8 @@ public class NewTaskActivity extends Activity{
     		newTask = new TextTask(name, description, Integer.valueOf(1), sharedOnline);
     	}
     	else return false;
-    	//add new task to the model before returning
+    	
+    	// Add new task to the model before returning
     	TaskShare ts = TaskShareApplication.getTaskShare();
     	ts.addMyTask(newTask);
     	return true;
