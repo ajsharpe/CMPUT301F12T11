@@ -1,6 +1,7 @@
 package com.example.taskshare;
 
 import java.io.File;
+import java.util.ArrayList;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -23,18 +24,21 @@ public class FulfillPhotoTaskActivity extends Activity implements OnClickListene
 	private String name = null;
 	private Photo newestPhoto = null;
 	//
+	private ArrayList<Photo> ArrayOfPhotoUpdates = null;
 	private static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 100;
 	private static final int UPLOAD_IMAGE_ACTIVITY_REQUEST_CODE = 110;
 	ImageView iv;
 	Uri outputFileUri;
 	Button takePhoto;
 	Button uploadPhoto;
+	Button save;
 	Intent cameraIntent;
 	File file;
 	final static int cameraData = 0;
 	static Uri photoUri;
     @Override
     public void onCreate(Bundle savedInstanceState) {
+    	 ArrayOfPhotoUpdates = new ArrayList<Photo>();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fulfill_photo_task);
         initialize();
@@ -47,6 +51,8 @@ public class FulfillPhotoTaskActivity extends Activity implements OnClickListene
     	takePhoto.setOnClickListener(this);
     	uploadPhoto = (Button) findViewById(R.id.uploadPhoto);
     	uploadPhoto.setOnClickListener(this);
+    	save = (Button) findViewById(R.id.SavePhotoB);
+    	save.setOnClickListener(this);
     }
     
  
@@ -80,6 +86,9 @@ public class FulfillPhotoTaskActivity extends Activity implements OnClickListene
 			photoPickerIntent.setType("image/*");
 			startActivityForResult(photoPickerIntent, UPLOAD_IMAGE_ACTIVITY_REQUEST_CODE);
 		}
+		if(v.equals(findViewById(R.id.SavePhotoB))){
+			//NOT IMPLEMENTED YET
+		}
 	}
  
 
@@ -94,6 +103,7 @@ public class FulfillPhotoTaskActivity extends Activity implements OnClickListene
 					/* Construct a photo object from data */
 					
 					newestPhoto = new Photo("Stupid", name, thumbnail, new Time(Time.getCurrentTimezone()));
+					ArrayOfPhotoUpdates.add(newestPhoto);
 			    	iv.setImageBitmap(thumbnail);
 			    	iv.invalidate();
 					//final Context context = this;
@@ -115,8 +125,9 @@ public class FulfillPhotoTaskActivity extends Activity implements OnClickListene
 			{
 				  if (data != null && resultCode == RESULT_OK) 
 		          {              
-					Bitmap thumbnail = (Bitmap) data.getExtras().get("data");
+					Bitmap thumbnail = (Bitmap) data.getExtras().get("data"); //NOT WORKING
 					newestPhoto = new Photo("Stupid", name, thumbnail, new Time(Time.getCurrentTimezone()));
+					ArrayOfPhotoUpdates.add(newestPhoto);
 			    	iv.setImageBitmap(thumbnail);
 			    	iv.invalidate();
 		          } else if (resultCode == RESULT_CANCELED) {
