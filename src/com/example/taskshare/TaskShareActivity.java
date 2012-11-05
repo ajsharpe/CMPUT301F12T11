@@ -30,7 +30,7 @@ public class TaskShareActivity extends Activity {
         	@Override
         	public void onItemClick(AdapterView<?> parent, View view, int position, long id){
         		Intent myIntent = new Intent(view.getContext(),ViewTaskActivity.class); 			
-        		myIntent.putExtra("Task_Position", position);
+        		myIntent.putExtra("INDEX", position);
         		startActivityForResult(myIntent, 0); 
         	}
         });
