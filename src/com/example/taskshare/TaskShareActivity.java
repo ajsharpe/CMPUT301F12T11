@@ -14,7 +14,10 @@ import android.widget.AdapterView.OnItemClickListener;
 
 
 public class TaskShareActivity extends Activity {
-
+	
+	
+    ArrayAdapter<Task> adapter = null;
+    
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,21 +31,21 @@ public class TaskShareActivity extends Activity {
         ListView taskList = (ListView) findViewById(R.id.taskList); 
         
         /** Setup List Adapter*/
-        ArrayAdapter<Task> adapter = new ArrayAdapter<Task>(this,
+        adapter = new ArrayAdapter<Task>(this,
         		android.R.layout.simple_expandable_list_item_1, listOfTasks);
         taskList.setAdapter(adapter);
-        adapter.notifyDataSetChanged();
+        
         /** Make List items Clickable*/
         taskList.setOnItemClickListener(new OnItemClickListener() {    
         	@Override
         	public void onItemClick(AdapterView<?> parent, View view, int position, long id){
         		Intent myIntent = new Intent(view.getContext(),ViewTaskActivity.class); 
-        		/** Switch to view the selected task, send task position to next activity*/
+        		/** Switch to view the selected task, send index to next activity*/
         		myIntent.putExtra("INDEX", position);
         		startActivityForResult(myIntent, 0); 
         	}
         });
-        
+  
         /** This is the first button which takes you to the NEW TASK screen*/
         Button newTaskButton = (Button) findViewById(R.id.newTask);
         newTaskButton.setOnClickListener(new View.OnClickListener() {
@@ -52,10 +55,16 @@ public class TaskShareActivity extends Activity {
         	}
         }); 
     }
+    
+    public void onResume (){
+    	super.onResume();
+        adapter.notifyDataSetChanged();  
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.activity_task_share, menu);
         return true;
     }
+    
 }
