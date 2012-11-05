@@ -15,7 +15,9 @@ public class Task<T>{
 		this.description = description;
 		this.authorID = authorID;
 		this.created = new Time(Time.getCurrentTimezone());
+		this.created.setToNow();
 		this.modified = new Time(Time.getCurrentTimezone());
+		this.modified.setToNow();
 		this.sharedOnline = sharedOnline;
 		this.fulfillment = new ArrayList<T>();
 	}
@@ -26,7 +28,7 @@ public class Task<T>{
 
 	public void setName(String name){
 		this.name = name;
-		this.modified = new Time(Time.getCurrentTimezone());
+		this.modified.setToNow();
 	}
 	
 	public String getDescription(){
@@ -35,8 +37,7 @@ public class Task<T>{
 
 	public void setDescription(String description){
 		this.description = description;
-		this.modified = new Time(Time.getCurrentTimezone());
-	}
+		this.modified.setToNow();	}
 	
 	public Integer getAuthorID(){
 		return this.authorID;
@@ -56,8 +57,7 @@ public class Task<T>{
 	
 	public void setPrivacy(Boolean sharedOnline){
 		this.sharedOnline = sharedOnline;
-		this.modified = new Time(Time.getCurrentTimezone());
-	}
+		this.modified.setToNow();	}
 	
 	public void updateFulfillment(ArrayList<T> newFulfillment){
 		for (T item : newFulfillment){
@@ -68,6 +68,6 @@ public class Task<T>{
 	}
 	
 	public String toString(){
-		return this.name + this.modified.toString();
+		return this.name + " - " + this.modified.format("%Y/%m/%d %H:%M");
 	}
 }
