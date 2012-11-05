@@ -1,5 +1,6 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/newTask"
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
@@ -45,31 +46,23 @@
         android:layout_below="@+id/textDescription"
         android:ems="10"
         android:inputType="textMultiLine"
-        android:maxLines="7"
+        android:maxLines="10"
         android:scrollbars="vertical" />
-
-    <Button
-        android:id="@+id/buttonSave"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignRight="@+id/editNewTaskDescription"
-        android:layout_marginBottom="20dp"
-        android:text="@string/text_save" />
 
     <CheckBox
         android:id="@+id/checkBoxSharedOnline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft='21dp'
-        android:layout_alignBottom="@+id/buttonSave"
+        android:layout_below="@+id/radioGroupTaskType"
         android:text="@string/text_shared_online" />
 
     <RadioGroup
         android:id="@+id/radioGroupTaskType"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/checkBoxSharedOnline"
+        android:layout_below="@+id/textDescription"
+        android:layout_marginTop='260dp'
         android:layout_alignLeft="@+id/checkBoxSharedOnline" >
 
         <RadioButton
@@ -85,5 +78,13 @@
             android:layout_height="wrap_content"
             android:text="@string/text_text_based_task" />
     </RadioGroup>
+
+    <Button
+        android:id="@+id/buttonSave"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/checkBoxSharedOnline"
+        android:layout_alignRight="@+id/editNewTaskDescription"
+        android:text="@string/text_save" />
 
 </RelativeLayout>

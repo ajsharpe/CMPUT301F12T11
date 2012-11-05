@@ -6,9 +6,12 @@ import android.content.Intent;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnTouchListener;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 import android.widget.RadioGroup;
 import android.widget.RadioButton;
@@ -24,9 +27,7 @@ public class NewTaskActivity extends Activity{
         buttonSave.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View arg0) {
-                if (saveNewTask() == true){
-                	finish();
-                }
+                if (saveNewTask() == true) finish();
             }
         });
     }
@@ -44,12 +45,12 @@ public class NewTaskActivity extends Activity{
     	EditText descriptionField = (EditText) findViewById(R.id.editNewTaskDescription);
     	
     	String name = nameField.getText().toString();
-    	if (name == null){
+    	if (name != null && name.trim().length() == 0){
     		Toast.makeText(NewTaskActivity.this, "Please Enter a Title", Toast.LENGTH_SHORT).show();
     		return false;
     	}
     	String description = descriptionField.getText().toString();
-    	if (description == null){
+    	if (description != null && description.trim().length() == 0){
     		Toast.makeText(NewTaskActivity.this, "Please Enter a Description", Toast.LENGTH_SHORT).show();
     		return false;
     	}
