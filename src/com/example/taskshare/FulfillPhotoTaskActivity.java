@@ -2,24 +2,29 @@ package com.example.taskshare;
 
 import java.io.File;
 
-import android.net.Uri;
-import android.os.Bundle;
-import android.os.Environment;
-import android.provider.MediaStore;
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
-
+import android.graphics.Bitmap;
+import android.net.Uri;
+import android.os.Bundle;
+import android.provider.MediaStore;
+import android.text.format.Time;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 
 public class FulfillPhotoTaskActivity extends Activity implements OnClickListener {
-	
-	
+	//MAKE PHOTO OBJECT
+	private String name = null;
+	private Photo newestPhoto = null;
+	//
+	private static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 100;
+	private static final int UPLOAD_IMAGE_ACTIVITY_REQUEST_CODE = 110;
 	ImageView iv;
 	Uri outputFileUri;
 	Button takePhoto;
@@ -27,7 +32,7 @@ public class FulfillPhotoTaskActivity extends Activity implements OnClickListene
 	Intent cameraIntent;
 	File file;
 	final static int cameraData = 0;
-	
+	static Uri photoUri;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,38 +57,80 @@ public class FulfillPhotoTaskActivity extends Activity implements OnClickListene
     }
 	public void onClick(View v) {
 		if(v.equals(findViewById(R.id.takePhoto))){
-		// TODO Auto-generated method stub
-		File root = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/tmp");
-		String folder = root.toString(); 
-	    file = new File(folder, "fileName" + ".jpg");
-	    Uri outputFileUri = Uri.fromFile(file);
+			Intent sCamera; 
+			Bundle bundle = getIntent().getExtras();
+					
+					sCamera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+					//sCamera.putExtras(bundle);
+					//photoUri = getOutputMediaFileUri(MEDIA_TYPE_IMAGE);     // Create a file to store the image
+//					DateFormat dateFormat = new SimpleDateFormat("yyyyMMdd-HHmm"); 
+					//Date dDate = new Date();        // get a timestamp too!
+					//time = new Timestamp(dDate.getTime());
 
-		cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-		cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, outputFileUri);
-		
-		startActivityForResult(cameraIntent, cameraData);
+					sCamera.putExtra(MediaStore.EXTRA_OUTPUT, photoUri);    // Sets the image file name
+					//Log.d("take photo", photoUri.getPath());
+
+
+					startActivityForResult(sCamera, CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE); // Calls the camera application to get a Photo
+
 		}
-		else if(v.equals(findViewById(R.id.uploadPhoto))){
+		if(v.equals(findViewById(R.id.uploadPhoto))){
 			
 			Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
 			photoPickerIntent.setType("image/*");
-			startActivityForResult(photoPickerIntent, 1);
-			
-			
-			
+			startActivityForResult(photoPickerIntent, UPLOAD_IMAGE_ACTIVITY_REQUEST_CODE);
 		}
 	}
+ 
 
-	protected void onActivityResult(int requestCode, int resultCode, Intent data){
-		super.onActivityResult(requestCode, resultCode, data);
-		if(requestCode == RESULT_OK)
-		{
-			iv = (ImageView)findViewById(R.id.imageView1);
-			iv.setImageDrawable(Drawable.createFromPath(outputFileUri.getPath()));
-		
+	 @Override
+		protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+			if (requestCode == CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE) 
+			{
+				if (resultCode == RESULT_OK) {
+					// Image captured and saved to fileUri specified in the Intent
+					/*if the program gets here, a picture was succesfully captured, call the method to tag the photo here */
+					Bitmap thumbnail = (Bitmap) data.getExtras().get("data");
+					/* Construct a photo object from data */
+					
+					newestPhoto = new Photo("Stupid", name, thumbnail, new Time(Time.getCurrentTimezone()));
+			    	iv.setImageBitmap(thumbnail);
+			    	iv.invalidate();
+					//final Context context = this;
+					//Intent intent = new Intent(context, FulfillPhotoTaskActivity.class);
+					
+	    			//startActivity(intent);1
+
+				} else if (resultCode == RESULT_CANCELED) {
+					// User cancelled the image capture
+					Toast.makeText(this, "You have canceled capturing a photo\n", Toast.LENGTH_LONG).show();
+					Log.d("SKINOBSERVER", "User canceled taking a photo.");
+					finish();
+				} else {
+					// Image capture failed, advise user1
+					Log.d("SKINOBSERVER", "There was an error capturing the photo.");
+				}
+			}
+			if (requestCode == UPLOAD_IMAGE_ACTIVITY_REQUEST_CODE) 
+			{
+				  if (data != null && resultCode == RESULT_OK) 
+		          {              
+					Bitmap thumbnail = (Bitmap) data.getExtras().get("data");
+					newestPhoto = new Photo("Stupid", name, thumbnail, new Time(Time.getCurrentTimezone()));
+			    	iv.setImageBitmap(thumbnail);
+			    	iv.invalidate();
+		          } else if (resultCode == RESULT_CANCELED) {
+						// User cancelled the image capture
+						Toast.makeText(this, "You have canceled capturing a photo\n", Toast.LENGTH_LONG).show();
+						Log.d("SKINOBSERVER", "User canceled taking a photo.");
+						finish();
+					} else {
+						// Image capture failed, advise user1
+						Log.d("SKINOBSERVER", "There was an error capturing the photo.");
+					}
+			}
+
 		}
-	}
 
-		
+
 }
-	
