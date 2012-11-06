@@ -1,3 +1,6 @@
+/** Allows fulfilment of photo based tasks
+ * -gives option to choose photo or to take photo*/
+
 package com.example.taskshare;
 
 import java.io.File;

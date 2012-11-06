@@ -1,3 +1,7 @@
+/**Allows fulfilment of text based tasks
+ * -allows you to keep adding text
+ * -must click save to save your updates to the task*/
+
 package com.example.taskshare;
 
 import java.util.ArrayList;
