@@ -46,6 +46,8 @@ public class TaskArrayAdapter extends ArrayAdapter<Task> {
         String message = "";
         if (task instanceof PhotoTask) message="Photo Based Task\n";
         if (task instanceof TextTask) message="Text Based Task\n";
+        holder.title.setHorizontallyScrolling(true);
+        holder.title.setLines(1);
         holder.title.setText(task.getName());
         holder.dateAndType.setTextSize(10);
         holder.dateAndType.setText(message + task.getDateAndTypeFormatted());
