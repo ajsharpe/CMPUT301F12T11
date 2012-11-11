@@ -61,7 +61,8 @@ public class Task<T>{
 	
 	public void setPrivacy(Boolean sharedOnline){
 		this.sharedOnline = sharedOnline;
-		this.modified.setToNow();	}
+		this.modified.setToNow();	
+	}
 	
 	public void updateFulfillment(ArrayList<T> newFulfillment){
 		for (T item : newFulfillment){
@@ -70,8 +71,11 @@ public class Task<T>{
 			}
 		}
 	}
+	public String getDateAndTypeFormatted(){
+		return "Modified on " + this.modified.format("%Y/%m/%d %H:%M");
+	}
 	
 	public String toString(){
-		return this.name + " - " + this.modified.format("%Y/%m/%d %H:%M");
+		return this.name + "\n" + this.modified.format("%Y/%m/%d %H:%M");
 	}
 }

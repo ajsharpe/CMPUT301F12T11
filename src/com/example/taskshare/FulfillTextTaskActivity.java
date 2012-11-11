@@ -62,7 +62,7 @@ public class FulfillTextTaskActivity extends Activity implements FView<TaskShare
         		if (ArrayOfTextUpdates != null && checkForText()== false){
         			currentTask.updateFulfillment(ArrayOfTextUpdates);
         			String message = "Updates Were Added To The Task!";
-                	Toast.makeText(FulfillTextTaskActivity.this, message, Toast.LENGTH_LONG).show();
+                	Toast.makeText(FulfillTextTaskActivity.this, message, Toast.LENGTH_SHORT).show();
                 	finish();  
         		}        		     		
         	}

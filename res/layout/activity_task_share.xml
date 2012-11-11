@@ -51,8 +51,7 @@
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/shared"
         android:scrollbars="vertical"
-        tools:listitem="@android:layout/simple_list_item_2" 
-        >
+        tools:listitem="@android:layout/simple_list_item_2" >
 
     </ListView>
 
