@@ -14,6 +14,36 @@
         android:text="Name"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
+    <TextView
+        android:id="@+id/textDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/linearUpperButtonLayout"
+        android:layout_alignLeft="@+id/textName"
+        android:layout_alignRight="@+id/buttonDelete"
+        android:layout_below="@+id/buttonDelete"
+        android:scrollbars="vertical"
+        android:text="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum." />
+
+    <Button
+        android:id="@+id/buttonDelete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="5dp"
+        android:text="@string/text_delete" />
+
+    <Button
+        android:id="@+id/buttonEdit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/buttonDelete"
+        android:layout_alignBottom="@+id/buttonDelete"
+        android:layout_toLeftOf="@+id/buttonDelete"
+        android:text="@string/text_edit" />
+
     <LinearLayout
         android:id="@+id/linearLowerButtonLayout"
         android:layout_width="wrap_content"
@@ -41,30 +71,23 @@
         android:id="@+id/linearUpperButtonLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_above="@+id/linearLowerButtonLayout"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"       
-        android:layout_above="@+id/linearLowerButtonLayout">
-	    <Button
-	        android:id="@+id/buttonFulfillTask"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:layout_weight="1"
-	        android:text="@string/text_fulfill_task" />
-	
-	    <Button
-	        android:id="@+id/buttonViewPreviousContent"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:layout_weight="1"
-	        android:text="@string/text_view_previous_content" />
-	</LinearLayout>
+        android:layout_alignParentRight="true" >
 
-    <TextView
-        android:id="@+id/textDescription"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textName"
-        android:layout_below="@+id/textName"
-        android:text="Description" />
-	
+        <Button
+            android:id="@+id/buttonFulfillTask"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/text_fulfill_task" />
+
+        <Button
+            android:id="@+id/buttonViewPreviousContent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/text_view_previous_content" />
+    </LinearLayout>
+
 </RelativeLayout>
