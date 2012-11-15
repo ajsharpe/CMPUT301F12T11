@@ -13,6 +13,8 @@ public class Task<T>{
 	private Integer authorID;
 	private Boolean sharedOnline;
 	private ArrayList<T> fulfillment;
+	private Integer likes;
+	private Boolean favourite;
 	
 	Task(String name, String description, Integer authorID, Boolean sharedOnline){
 		this.name = name;
@@ -24,6 +26,8 @@ public class Task<T>{
 		this.modified.setToNow();
 		this.sharedOnline = sharedOnline;
 		this.fulfillment = new ArrayList<T>();
+		this.likes = 0;
+		this.favourite = false;
 	}
 	
 	public String getName(){
@@ -68,6 +72,24 @@ public class Task<T>{
 			if (! this.fulfillment.contains((T) item)){
 				this.fulfillment.add(item);
 			}
+		}
+	}
+	
+	public Integer getLikes(){
+		return this.likes;
+	}
+	
+	public Boolean getFavourite(){
+		return this.favourite;
+	}
+	
+	public void setFavourite(){
+		if (this.favourite == true){
+			this.favourite = false;
+			this.likes--;
+		} else {
+			this.favourite = true;
+			this.likes++;
 		}
 	}
 	

@@ -11,12 +11,14 @@ public class Text {
 	private String title, author, text;
 	private Time created, modified;
 	
-	Text(String title, String author, String text, Time now){
+	Text(String title, String author, String text){
 		this.title = title;
 		this.author = author;
 		this.text = text;
-		this.created = now;
-		this.modified = now;
+		this.created = new Time(Time.getCurrentTimezone());
+		this.created.setToNow();
+		this.modified = new Time(Time.getCurrentTimezone());
+		this.modified.setToNow();
 	}
 	
 	public String getTitle(){
@@ -41,17 +43,17 @@ public class Text {
 	
 	public void setTitle(String title){
 		this.title = title;
-		this.modified = new Time(Time.getCurrentTimezone());
+		this.modified.setToNow();
 	}
 	
 	public void setAuthor(String author){
 		this.author = author;
-		this.modified = new Time(Time.getCurrentTimezone());
+		this.modified.setToNow();
 	}
 	
 	public void setText(String text){
 		this.text = text;
-		this.modified = new Time(Time.getCurrentTimezone());
+		this.modified.setToNow();
 	}
 
 }

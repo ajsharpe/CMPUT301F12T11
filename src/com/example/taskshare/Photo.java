@@ -10,12 +10,14 @@ public class Photo {
 	private Bitmap photo;
 	private Time created, modified;
 	
-	Photo(String title, String photographer, Bitmap photo, Time now){
+	Photo(String title, String photographer, Bitmap photo){
 		this.title = title;
 		this.photographer = photographer;
 		this.photo = photo;
-		this.created = now;
-		this.modified = now;
+		this.created = new Time(Time.getCurrentTimezone());
+		this.created.setToNow();
+		this.modified = new Time(Time.getCurrentTimezone());
+		this.modified.setToNow();
 	}
 	
 	public String getTitle(){

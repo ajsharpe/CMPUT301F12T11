@@ -51,10 +51,8 @@ public class FulfillTextTaskActivity extends Activity implements FView<TaskShare
         		String title = editTitle.getText().toString();
         		String author = editAuthor.getText().toString();
         		String text = editText.getText().toString();
-        		Time now = new Time();
-        		now.setToNow();
         		//Create a Text object and put it in a list
-        		Text Text = new Text(title, author, text, now);
+        		Text Text = new Text(title, author, text);
         		ArrayOfTextUpdates.add(Text);
         		//Empty all the text fields
         		((EditText) findViewById(R.id.textTitle)).setText("");

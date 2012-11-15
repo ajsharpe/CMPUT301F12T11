@@ -105,7 +105,7 @@ public class FulfillPhotoTaskActivity extends Activity implements OnClickListene
 					Bitmap thumbnail = (Bitmap) data.getExtras().get("data");
 					/* Construct a photo object from data */
 					
-					newestPhoto = new Photo("Stupid", name, thumbnail, new Time(Time.getCurrentTimezone()));
+					newestPhoto = new Photo("Stupid", name, thumbnail);
 					ArrayOfPhotoUpdates.add(newestPhoto);
 			    	iv.setImageBitmap(thumbnail);
 			    	iv.invalidate();
@@ -129,7 +129,7 @@ public class FulfillPhotoTaskActivity extends Activity implements OnClickListene
 				  if (data != null && resultCode == RESULT_OK) 
 		          {              
 					Bitmap thumbnail = (Bitmap) data.getExtras().get("data"); //NOT WORKING
-					newestPhoto = new Photo("Stupid", name, thumbnail, new Time(Time.getCurrentTimezone()));
+					newestPhoto = new Photo("Stupid", name, thumbnail);
 					ArrayOfPhotoUpdates.add(newestPhoto);
 			    	iv.setImageBitmap(thumbnail);
 			    	iv.invalidate();
