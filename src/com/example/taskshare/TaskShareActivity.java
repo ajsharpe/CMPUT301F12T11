@@ -33,15 +33,14 @@ public class TaskShareActivity extends Activity {
         TaskShare ts = TaskShareApplication.getTaskShare();				
         ArrayList<Task> listOfTasks = ts.getMyTaskList(); 
         
+        /** Setup List Adapter*/
+        adapter = new TaskArrayAdapter(this, listOfTasks);
+        
         /** Setup listView*/
         ListView taskList = (ListView) findViewById(R.id.taskList); 
-        
-        /** Setup List Adapter*/
-        adapter = new ArrayAdapter<Task>(this,
-        		android.R.layout.simple_expandable_list_item_1, listOfTasks);
         taskList.setAdapter(adapter);
-        
-        /** Make List items Clickable*/
+                
+        /** Make List items Click able*/
         taskList.setOnItemClickListener(new OnItemClickListener() {    
         	@Override
         	public void onItemClick(AdapterView<?> parent, View view, int position, long id){

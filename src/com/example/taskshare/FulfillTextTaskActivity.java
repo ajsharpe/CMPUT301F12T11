@@ -12,7 +12,10 @@ import android.text.format.Time;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 public class FulfillTextTaskActivity extends Activity implements FView<TaskShare>{
@@ -40,7 +43,7 @@ public class FulfillTextTaskActivity extends Activity implements FView<TaskShare
         	TaskShare ts = TaskShareApplication.getTaskShare();
         	currentTask = ts.getMyTaskList().get(index);
         } else finish();
-                
+        //Error check and add text to local list of text objects        
         Button addTextButton = (Button) findViewById(R.id.addText);
         addTextButton.setOnClickListener(new View.OnClickListener() {
         	public void onClick(View view) {
@@ -61,18 +64,25 @@ public class FulfillTextTaskActivity extends Activity implements FView<TaskShare
         		findViewById(R.id.textTitle).requestFocus();
         		String message = getResources().getString(R.string.text_added_to_task);
             	Toast.makeText(FulfillTextTaskActivity.this, message, Toast.LENGTH_LONG).show();
+
+        		if (addText() == true){
+        			clearAllText();
+        			String errorMessage = getResources().getString(R.string.text_added_to_task);
+                	Toast.makeText(FulfillTextTaskActivity.this, errorMessage, Toast.LENGTH_LONG).show();
+        		}        		
         	}
-        }); 
-        
+        });         
         /** This is the update button which takes you to the NEW TASK screen*/
         Button updateTaskButton = (Button) findViewById(R.id.updateTask);
         updateTaskButton.setOnClickListener(new View.OnClickListener() {
         	public void onClick(View view) {        		
         		//Updates current task with added text
-        		if (ArrayOfTextUpdates != null ){
+        		if (ArrayOfTextUpdates != null && checkForText()== false){
         			currentTask.updateFulfillment(ArrayOfTextUpdates);
-        		}
-        		finish();       		
+        			String message = "Updates Were Added To The Task!";
+                	Toast.makeText(FulfillTextTaskActivity.this, message, Toast.LENGTH_SHORT).show();
+                	finish();  
+        		}        		     		
         	}
         }); 
     }
@@ -85,5 +95,75 @@ public class FulfillTextTaskActivity extends Activity implements FView<TaskShare
     
     public void update(TaskShare taskshare){
     	
+    }
+    //error checking and building the text object
+    public Boolean addText(){
+    
+    	EditText editTitle = (EditText) findViewById(R.id.textTitle);
+		EditText editAuthor = (EditText) findViewById(R.id.textAuthor);
+		EditText editText = (EditText) findViewById(R.id.addedText);
+    	
+    	// Check title field is not empty
+    	String title = editTitle.getText().toString();
+    	if (title != null && title.trim().length() == 0){
+    		Toast.makeText(FulfillTextTaskActivity.this, "Please Enter a Title", Toast.LENGTH_SHORT).show();
+    		return false;
+    	}
+    	// Check author field is not empty
+    	String author = editAuthor.getText().toString();
+    	if (author != null && author.trim().length() == 0){
+    		Toast.makeText(FulfillTextTaskActivity.this, "Please Enter a Author", Toast.LENGTH_SHORT).show();
+    		return false;
+    	}   	
+    	// Check Text field is not empty
+    	String text = editText.getText().toString();
+    	if (text != null && text.trim().length() == 0){
+    		Toast.makeText(FulfillTextTaskActivity.this, "Please Enter Text", Toast.LENGTH_SHORT).show();
+    		return false;
+    	}
+    	else{
+    		Time now = new Time();
+    		now.setToNow();
+    		//Create a Text object and put it in a list
+    		Text Text = new Text(title, author, text);
+    		ArrayOfTextUpdates.add(Text);
+    		return true;
+    	}    
+    }
+  //Empty all the text fields
+    public void clearAllText(){
+   		((EditText) findViewById(R.id.textTitle)).setText("");
+		((EditText) findViewById(R.id.textAuthor)).setText("");
+		((EditText) findViewById(R.id.addedText)).setText("");
+		findViewById(R.id.textTitle).requestFocus();
+    }
+    //make sure theres no unadded text
+    public Boolean checkForText(){
+        
+    	EditText editTitle = (EditText) findViewById(R.id.textTitle);
+		EditText editAuthor = (EditText) findViewById(R.id.textAuthor);
+		EditText editText = (EditText) findViewById(R.id.addedText);
+    	String message = "Please Add Your Text Before Saving, Or Clear All Text Fields!";
+    	// Check title field is not empty
+    	String title = editTitle.getText().toString();
+    	if (title != null && !(title.trim().length() == 0)){
+    		Toast.makeText(FulfillTextTaskActivity.this, message, Toast.LENGTH_LONG).show();
+    		return true;
+    	}
+    	// Check author field is not empty
+    	String author = editAuthor.getText().toString();
+    	if (author != null && !(author.trim().length() == 0)){
+    		Toast.makeText(FulfillTextTaskActivity.this, message, Toast.LENGTH_LONG).show();
+    		return true;
+    	}   	
+    	// Check Text field is not empty
+    	String text = editText.getText().toString();
+    	if (text != null && !(text.trim().length() == 0)){
+    		Toast.makeText(FulfillTextTaskActivity.this, message, Toast.LENGTH_LONG).show();
+    		return true;
+    	}
+    	else{
+    		return false;
+    	}    
     }
 }
