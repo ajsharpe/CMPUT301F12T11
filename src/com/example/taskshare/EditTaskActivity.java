@@ -11,6 +11,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class EditTaskActivity extends Activity {
@@ -37,10 +38,11 @@ public class EditTaskActivity extends Activity {
         } else finish();
         
         
-        
-        //todo: load task name, description, etc into text fields
-        
-        
+		/** Load name and description into EditText fields */
+		EditText name = (EditText) findViewById(R.id.editTaskName);
+		EditText description = (EditText) findViewById(R.id.editTaskDescription);
+		name.setText(currentTask.getName());
+		description.setText(currentTask.getDescription());
         
         
         /** Saves edited task and adds it to the model, removes old task */
