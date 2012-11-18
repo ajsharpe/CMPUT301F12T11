@@ -1,0 +1,13 @@
+offline tasks - stored locally
+
+online task - visible to all users
+	- cloud storage
+	- fulfillment stored online
+	- current local fulfillment stored locally, 
+		- when notify is clicked, sends a notification email to creator, 
+		    pushes new fulfillment to cloud, but not visible to all users yet. 
+		- if creator accepts then the new fulfillment becomes visible, 
+		- else, it is removed from the cloud
+
+
+sql database?
