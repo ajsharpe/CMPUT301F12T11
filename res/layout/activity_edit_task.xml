@@ -1,6 +1,6 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/editTask"
+    android:id="@+id/newTask"
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
@@ -18,7 +18,6 @@
         android:id="@+id/textDescription"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/radioGroupTaskType"
         android:layout_alignLeft="@+id/textName"
         android:layout_below="@+id/textName"
         android:layout_marginTop="20dp"
@@ -42,20 +41,20 @@
         android:id="@+id/editTaskDescription"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textDescription"
-        android:layout_alignRight="@+id/editNewTaskName"
+        android:layout_alignLeft="@+id/textName"
+        android:layout_alignRight="@+id/editTaskName"
         android:layout_below="@+id/textDescription"
         android:ems="10"
         android:inputType="textMultiLine"
-        android:maxLines="5"
+        android:maxLines="6"
         android:scrollbars="vertical" />
 
     <RadioGroup
         android:id="@+id/radioGroupTaskType"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/checkBoxSharedOnline"
-        android:layout_above="@+id/checkBoxSharedOnline"
+        android:layout_alignLeft="@+id/textName"
+        android:layout_below="@+id/textDescription"
         android:layout_marginTop="170dp" >
 
         <RadioButton
@@ -88,20 +87,19 @@
         android:id="@+id/checkBoxSharedOnline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/radioGroupTaskType"
+        android:layout_alignLeft="@+id/radioGroupTaskType"
         android:layout_marginBottom="10dp"
-        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
         android:text="@string/text_shared_online" />
 
     <Button
         android:id="@+id/buttonSave"
         android:layout_width="120dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginBottom="10dp"
-        android:layout_marginRight="10dp"
+        android:layout_alignBaseline="@+id/checkBoxSharedOnline"
+        android:layout_alignBottom="@+id/checkBoxSharedOnline"
+        android:layout_alignRight="@+id/editTaskDescription"
         android:text="@string/text_save" />
 
 </RelativeLayout>

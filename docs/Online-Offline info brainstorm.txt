@@ -1,13 +1,37 @@
 offline tasks - stored locally
+	- user clicks store online, task is pushed to the cloud, 
+		visible to all users, and removed from local storage
 
 online task - visible to all users
 	- cloud storage
 	- fulfillment stored online
 	- current local fulfillment stored locally, 
 		- when notify is clicked, sends a notification email to creator, 
-		    pushes new fulfillment to cloud, but not visible to all users yet. 
+		    pushes new fulfillment to cloud, but only visible to creator.
 		- if creator accepts then the new fulfillment becomes visible, 
 		- else, it is removed from the cloud
+	- user clicks store offline, task is removed from cloud - stored locally
 
 
-sql database?
+sql database:
+
+USERS{
+Email  |  Date added  |  Confirmed?
+
+-send a confirmation email to users
+-if current date = date added + 3, remove user
+}
+
+TASKS{
+Email  |  Task name  |  Task description  |  Task type
+}
+
+Fulfillment{
+Email  |  Task name  |  Fulfillment name  |  fulfillment descriptor  |  fulfillment content
+
+-email is for person fulfilling task, not creator
+-fulfillment descriptor is artist, author, photographer, or description for
+	audio, text, photo, and video tasks respectively
+-fulfillment content is either the body of text for text tasks,
+	or a url pointing to a video, audio, or photo file
+}
