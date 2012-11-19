@@ -52,7 +52,6 @@ public class EditTaskActivity extends Activity {
         /** Saves edited task and adds it to the model, removes old task */
         Button buttonSave = (Button) findViewById(R.id.buttonSave);
         buttonSave.setOnClickListener(new OnClickListener() {
-            @Override
             public void onClick(View arg0) {
                 if (saveEditedTask() == true) finish();
             }

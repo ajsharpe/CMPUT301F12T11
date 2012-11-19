@@ -43,7 +43,6 @@ public class ViewTaskActivity extends Activity implements FView<TaskShare>{
 		/** Allows user to edit task */
 		Button buttonEditTask = (Button) findViewById(R.id.buttonEditTask);
 		buttonEditTask.setOnClickListener(new OnClickListener() {
-			@Override
 			public void onClick(View arg0) {
 				Intent i = new Intent(ViewTaskActivity.this, EditTaskActivity.class);
 				i.putExtra("INDEX", index);
@@ -55,7 +54,6 @@ public class ViewTaskActivity extends Activity implements FView<TaskShare>{
 		/** Allows user to upload/take pictures or add text depending on the task type */
 		Button buttonFulfillTask = (Button) findViewById(R.id.buttonFulfillTask);
 		buttonFulfillTask.setOnClickListener(new OnClickListener() {
-			@Override
 			public void onClick(View arg0) {
 				if (currentTask.getClass() == TextTask.class){
 					Intent i = new Intent(ViewTaskActivity.this, FulfillTextTaskActivity.class);
@@ -67,13 +65,22 @@ public class ViewTaskActivity extends Activity implements FView<TaskShare>{
 					i.putExtra("INDEX", index);
 					startActivity(i);            	
 				}
+				else if (currentTask.getClass() == AudioTask.class){
+					Intent i = new Intent(ViewTaskActivity.this, FulfillAudioTaskActivity.class);
+					i.putExtra("INDEX", index);
+					startActivity(i);            	
+				}
+				else if (currentTask.getClass() == VideoTask.class){
+					Intent i = new Intent(ViewTaskActivity.this, FulfillVideoTaskActivity.class);
+					i.putExtra("INDEX", index);
+					startActivity(i);            	
+				}
 			}
 		});
 
 		/** View previously added content to the fulfillment */
 		Button buttonViewPreviousContent = (Button) findViewById(R.id.buttonViewPreviousContent);
 		buttonViewPreviousContent.setOnClickListener(new OnClickListener() {
-			@Override
 			public void onClick(View arg0) {
 				//not yet implemented
 				String message = getResources().getString(R.string.text_not_implemented);
@@ -84,7 +91,6 @@ public class ViewTaskActivity extends Activity implements FView<TaskShare>{
 		/* Toggles online storage */
 		Button buttonStoreOffline = (Button) findViewById(R.id.buttonStoreOffline);
 		buttonStoreOffline.setOnClickListener(new OnClickListener() {
-			@Override
 			public void onClick(View arg0) {
 				Button buttonStoreOffline = (Button) findViewById(R.id.buttonStoreOffline);
 				if (currentTask.getPrivacy() == true){
@@ -101,7 +107,6 @@ public class ViewTaskActivity extends Activity implements FView<TaskShare>{
 		/** Sends updated fulfillment to task's creator */
 		Button buttonNotifyCreator = (Button) findViewById(R.id.buttonNotifyCreator);
 		buttonNotifyCreator.setOnClickListener(new OnClickListener() {
-			@Override
 			public void onClick(View arg0) {
 				//not yet implemented
 				String message = getResources().getString(R.string.text_not_implemented);
