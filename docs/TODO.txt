@@ -1,0 +1,17 @@
+TO DO LIST:
+
+-Prompt user to enter email on first use
+-Allow user to change email - affects database on a large scale, as the 
+	email will need to be changed in the database
+-Only display "Edit Task" And "Delete" Buttons for myTasks - cant edit 
+	other users tasks
+-Set up file storage and online connection stuff
+-(Possibly) change model for photos and audio so that the content is 
+	stored as a file URL instead of Bitmap or AudioClip
+-Set up email notifications for user confirmation and fulfillment confirmation
+
+*** We need to focus on croudsourcing before part 4 is finished. more focus 
+	on multiple user situations and less on implementation.
+
+Put your ccid beside any of the items you want to work on, and add anything
+I haven't put here yet.
