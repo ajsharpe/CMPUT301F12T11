@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import android.text.format.Time;
 
 public class Task<T>{
+	private String user;
 	private String name, description;
 	private Time created, modified;
 	private Integer authorID;
@@ -28,6 +29,8 @@ public class Task<T>{
 		this.fulfillment = new ArrayList<T>();
 		this.likes = 0;
 		this.favourite = false;
+		
+		//todo: set user from model
 	}
 	
 	public String getName(){
@@ -95,6 +98,10 @@ public class Task<T>{
 			this.favourite = true;
 			this.likes++;
 		}
+	}
+	
+	public String getUser(){
+		return this.user;
 	}
 	
 	public String toString(){
