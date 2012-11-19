@@ -27,11 +27,13 @@ Email  |  Task name  |  Task description  |  Task type
 }
 
 Fulfillment{
-Email  |  Task name  |  Fulfillment name  |  fulfillment descriptor  |  fulfillment content
+Email  |  Task name  |  Fulfillment name  |  fulfillment descriptor  |  fulfillment content  |   confirmed by creator
 
 -email is for person fulfilling task, not creator
 -fulfillment descriptor is artist, author, photographer, or description for
 	audio, text, photo, and video tasks respectively
 -fulfillment content is either the body of text for text tasks,
 	or a url pointing to a video, audio, or photo file
+-confirmed by creator will affect visibility - unconfirmed fulfillments will 
+	only be visible to creator of the task. after confirmed, will be fully visible
 }
