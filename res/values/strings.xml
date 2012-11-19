@@ -42,5 +42,7 @@
     <string name="text_update">Update Task</string>
     <string name="text_added_to_task">Text Was Added, Make Sure To Click Save To Save Your Work!</string>
     <string name="title_activity_edit_task">EditTaskActivity</string>
+    <string name="title_activity_fulfill_audio_task">FulfillAudioTaskActivity</string>
+    <string name="title_activity_fulfill_video_task">FulfillVideoTaskActivity</string>
 
 </resources>

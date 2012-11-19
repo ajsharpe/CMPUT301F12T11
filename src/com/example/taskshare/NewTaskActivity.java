@@ -29,7 +29,6 @@ public class NewTaskActivity extends Activity{
         /** Saves a new task and adds it to the model */
         Button buttonSave = (Button) findViewById(R.id.buttonSave);
         buttonSave.setOnClickListener(new OnClickListener() {
-            @Override
             public void onClick(View arg0) {
                 if (saveNewTask() == true) finish();
             }

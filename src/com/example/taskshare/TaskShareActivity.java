@@ -42,7 +42,6 @@ public class TaskShareActivity extends Activity {
                 
         /** Make List items Click able*/
         taskList.setOnItemClickListener(new OnItemClickListener() {    
-        	@Override
         	public void onItemClick(AdapterView<?> parent, View view, int position, long id){
         		Intent myIntent = new Intent(view.getContext(),ViewTaskActivity.class);
         		Bundle extras = new Bundle();
