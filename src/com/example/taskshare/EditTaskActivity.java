@@ -43,6 +43,10 @@ public class EditTaskActivity extends Activity {
 		EditText description = (EditText) findViewById(R.id.editTaskDescription);
 		name.setText(currentTask.getName());
 		description.setText(currentTask.getDescription());
+		
+		
+		/** todo: Load task type and online status into radio buttons and checkbox*/
+		
         
         
         /** Saves edited task and adds it to the model, removes old task */
@@ -64,8 +68,8 @@ public class EditTaskActivity extends Activity {
     public Boolean saveEditedTask(){
     	Task editedTask;
     	
-    	EditText nameField = (EditText) findViewById(R.id.editNewTaskName);
-    	EditText descriptionField = (EditText) findViewById(R.id.editNewTaskDescription);
+    	EditText nameField = (EditText) findViewById(R.id.editTaskName);
+    	EditText descriptionField = (EditText) findViewById(R.id.editTaskDescription);
     	
     	// Check name field is not empty
     	String name = nameField.getText().toString();
