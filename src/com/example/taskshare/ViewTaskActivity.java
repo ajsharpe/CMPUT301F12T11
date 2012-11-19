@@ -36,20 +36,10 @@ public class ViewTaskActivity extends Activity implements FView<TaskShare>{
 			currentTask = ts.getMyTaskList().get(index.intValue());
 		} else finish();
 
-
-		/** Set text of buttonStoreOffline depending on task privacy*/
-		Button buttonStoreOffline = (Button) findViewById(R.id.buttonStoreOffline);
-		if (currentTask.getPrivacy() == true)
-			buttonStoreOffline.setText(R.string.text_store_offline);
-		else
-			buttonStoreOffline.setText(R.string.text_store_online);
-
-		/** Load name and description into text fields */
-		TextView name = (TextView) findViewById(R.id.textName);
-		TextView description = (TextView) findViewById(R.id.textDescription);
-		name.setText(currentTask.getName());
-		description.setText(currentTask.getDescription());
-
+		//Task info is loaded into fields in onResume() method
+		
+		
+		//Initiate onclick listeners
 		/** Allows user to edit task */
 		Button buttonEditTask = (Button) findViewById(R.id.buttonEditTask);
 		buttonEditTask.setOnClickListener(new OnClickListener() {
@@ -92,6 +82,7 @@ public class ViewTaskActivity extends Activity implements FView<TaskShare>{
 		});
 
 		/* Toggles online storage */
+		Button buttonStoreOffline = (Button) findViewById(R.id.buttonStoreOffline);
 		buttonStoreOffline.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View arg0) {
@@ -118,7 +109,23 @@ public class ViewTaskActivity extends Activity implements FView<TaskShare>{
 			}
 		});        
 	}
+	
+	@Override
+	public void onResume(){
+		/** Set text of buttonStoreOffline depending on task privacy*/
+		Button buttonStoreOffline = (Button) findViewById(R.id.buttonStoreOffline);
+		if (currentTask.getPrivacy() == true)
+			buttonStoreOffline.setText(R.string.text_store_offline);
+		else
+			buttonStoreOffline.setText(R.string.text_store_online);
 
+		/** Load name and description into text fields */
+		TextView name = (TextView) findViewById(R.id.textName);
+		TextView description = (TextView) findViewById(R.id.textDescription);
+		name.setText(currentTask.getName());
+		description.setText(currentTask.getDescription());
+	}
+	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		getMenuInflater().inflate(R.menu.activity_view_task, menu);
