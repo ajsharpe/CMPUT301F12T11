@@ -8,12 +8,15 @@ import java.util.ArrayList;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
@@ -60,6 +63,32 @@ public class TaskShareActivity extends Activity {
         		startActivityForResult(myIntent, 0);
         	}
         }); 
+        /** 1 try getting user email */
+        AlertDialog.Builder alert = new AlertDialog.Builder(this);
+
+        alert.setTitle("Welcome");
+        alert.setMessage("Please Type the email address!");
+
+        // Set an EditText view to get user input 
+        final EditText userEmail = new EditText(this);
+        alert.setView(userEmail);
+        
+        alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+        	public void onClick(DialogInterface dialog, int whichButton) {
+        	  String value = userEmail.getText().toString();
+        	  // Do something with value!
+        	  }
+        	});
+
+
+        alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+          public void onClick(DialogInterface dialog, int whichButton) {
+            // Canceled.djdkdjkl
+          }
+        });
+
+        alert.show();
+        
     }
     
     public void onResume (){
