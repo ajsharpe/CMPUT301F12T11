@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 public class EditTaskActivity extends Activity {
 	private Task currentTask;
+	private Long index;
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -30,7 +31,7 @@ public class EditTaskActivity extends Activity {
             
         
         /** Get currentTask via the index */
-        final Long index = extras.getLong("INDEX");
+        index = extras.getLong("INDEX");
 
         if (index != null) {
         	TaskShare ts = TaskShareApplication.getTaskShare();
@@ -45,9 +46,26 @@ public class EditTaskActivity extends Activity {
 		description.setText(currentTask.getDescription());
 		
 		
-		/** todo: Load task type and online status into radio buttons and checkbox*/
-		
+		/** Load task type into radio buttons */
+		RadioGroup radioGroupTaskType = (RadioGroup) findViewById(R.id.radioGroupTaskType);
+		radioGroupTaskType.clearCheck();
+		if (currentTask.getClass() == TextTask.class){
+			radioGroupTaskType.check(R.id.radioText);
+		}
+		else if (currentTask.getClass() == PhotoTask.class){
+			radioGroupTaskType.check(R.id.radioPhoto);
+		}
+		else if (currentTask.getClass() == AudioTask.class){
+			radioGroupTaskType.check(R.id.radioAudio);
+		}
+		else if (currentTask.getClass() == VideoTask.class){
+			radioGroupTaskType.check(R.id.radioVideo);
+		}
         
+		/**Load online status into checkbox*/
+		CheckBox storedOnline = (CheckBox) findViewById(R.id.checkBoxSharedOnline);
+		storedOnline.setChecked(currentTask.getPrivacy());
+		
         
         /** Saves edited task and adds it to the model, removes old task */
         Button buttonSave = (Button) findViewById(R.id.buttonSave);
@@ -112,8 +130,7 @@ public class EditTaskActivity extends Activity {
     	TaskShare ts = TaskShareApplication.getTaskShare();
     	
     	//remove old task from model before adding edited task
-    	ts.removeMyTask(this.currentTask);
-    	ts.addMyTask(editedTask);
+    	ts.replaceMyTask(editedTask, index.intValue());
     	return true;
     	
     }

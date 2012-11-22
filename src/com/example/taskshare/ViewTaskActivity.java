@@ -13,28 +13,23 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class ViewTaskActivity extends Activity implements FView<TaskShare>{
+public class ViewTaskActivity extends Activity{
 	private Task currentTask;
+	private Long index;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_view_task);
 
-		/** Load currentTask from index passed by main screen */
+		/** Load list index for currentTask passed by main screen */
 		Intent intent = getIntent();
 		Bundle extras = intent.getExtras();
 		if (extras == null)
 			finish(); //no index for currentTask - abort
+		index = extras.getLong("INDEX");
 
 
-		/** Get currentTask via the index */
-		final Long index = extras.getLong("INDEX");
-
-		if (index != null) {
-			TaskShare ts = TaskShareApplication.getTaskShare();
-			currentTask = ts.getMyTaskList().get(index.intValue());
-		} else finish();
 
 		//Task info is loaded into fields in onResume() method
 		/*This is not yet working, as currentTask will remain the same after
@@ -52,6 +47,18 @@ public class ViewTaskActivity extends Activity implements FView<TaskShare>{
 				Intent i = new Intent(ViewTaskActivity.this, EditTaskActivity.class);
 				i.putExtra("INDEX", index);
 				startActivity(i);
+			}
+		});
+		
+		/** Allows user to delete task */
+		Button buttonDeleteTask = (Button) findViewById(R.id.buttonDeleteTask);
+		buttonDeleteTask.setOnClickListener(new OnClickListener() {
+			public void onClick(View arg0) {
+		    	TaskShare ts = TaskShareApplication.getTaskShare();
+		    	ts.removeMyTask(currentTask);
+		    	finish();/**
+				Intent i = new Intent(ViewTaskActivity.this, EditTaskActivity.class);
+				startActivity(i); //a hack, but it works*/
 			}
 		});
 
@@ -123,18 +130,24 @@ public class ViewTaskActivity extends Activity implements FView<TaskShare>{
 	
 	public void onResume(){
 		super.onResume();
-		/** Set text of buttonStoreOffline depending on task privacy*/
-		Button buttonStoreOffline = (Button) findViewById(R.id.buttonStoreOffline);
-		if (currentTask.getPrivacy() == true)
-			buttonStoreOffline.setText(R.string.text_store_offline);
-		else
-			buttonStoreOffline.setText(R.string.text_store_online);
+		/**Load current task from index in the TaskList*/
+		if (index != null) {
+			TaskShare ts = TaskShareApplication.getTaskShare();
+			currentTask = ts.getMyTaskList().get(index.intValue());
+		} else finish();
 
 		/** Load name and description into text fields */
 		TextView name = (TextView) findViewById(R.id.textName);
 		TextView description = (TextView) findViewById(R.id.textDescription);
 		name.setText(currentTask.getName());
 		description.setText(currentTask.getDescription());
+		
+		/** Set text of buttonStoreOffline depending on task privacy*/
+		Button buttonStoreOffline = (Button) findViewById(R.id.buttonStoreOffline);
+		if (currentTask.getPrivacy() == true)
+			buttonStoreOffline.setText(R.string.text_store_offline);
+		else
+			buttonStoreOffline.setText(R.string.text_store_online);
 	}
 	
 	@Override
@@ -143,7 +156,4 @@ public class ViewTaskActivity extends Activity implements FView<TaskShare>{
 		return true;
 	}
 
-	public void update(TaskShare taskshare){
-
-	}
 }

@@ -20,13 +20,13 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/linearUpperButtonLayout"
         android:layout_alignLeft="@+id/textName"
-        android:layout_alignRight="@+id/buttonDelete"
-        android:layout_below="@+id/buttonDelete"
+        android:layout_alignRight="@+id/buttonDeleteTask"
+        android:layout_below="@+id/buttonDeleteTask"
         android:scrollbars="vertical"
         android:text="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum." />
 
     <Button
-        android:id="@+id/buttonDelete"
+        android:id="@+id/buttonDeleteTask"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
@@ -39,9 +39,9 @@
         android:id="@+id/buttonEditTask"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/buttonDelete"
-        android:layout_alignBottom="@+id/buttonDelete"
-        android:layout_toLeftOf="@+id/buttonDelete"
+        android:layout_alignBaseline="@+id/buttonDeleteTask"
+        android:layout_alignBottom="@+id/buttonDeleteTask"
+        android:layout_toLeftOf="@+id/buttonDeleteTask"
         android:text="@string/text_edit" />
 
     <LinearLayout
