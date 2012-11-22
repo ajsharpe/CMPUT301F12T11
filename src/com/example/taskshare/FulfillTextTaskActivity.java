@@ -12,10 +12,7 @@ import android.text.format.Time;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.Toast;
 
 public class FulfillTextTaskActivity extends Activity implements FView<TaskShare>{
@@ -119,7 +116,7 @@ public class FulfillTextTaskActivity extends Activity implements FView<TaskShare
 		((EditText) findViewById(R.id.addedText)).setText("");
 		findViewById(R.id.textTitle).requestFocus();
     }
-    //make sure theres no unadded text
+    //make sure there's no un-added text
     public Boolean checkForText(){
         
     	EditText editTitle = (EditText) findViewById(R.id.textTitle);

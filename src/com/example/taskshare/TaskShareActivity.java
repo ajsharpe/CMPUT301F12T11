@@ -17,28 +17,83 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ToggleButton;
 
 
 public class TaskShareActivity extends Activity {
 	
 	
     ArrayAdapter<Task> adapter = null;
+    boolean mytasks = true;
+    boolean otherstasks = false;
+    boolean shared = false;
+    boolean stored = true;
+    ArrayList<Task> listOfTasks = null;
+    TaskShare ts = TaskShareApplication.getTaskShare();
+
     
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_task_share);
-        
-        /** Setup list of Tasks*/
-        TaskShare ts = TaskShareApplication.getTaskShare();				
-        ArrayList<Task> listOfTasks = ts.getMyTaskList(); 
-        
+        setContentView(R.layout.activity_task_share);  
+
+        //Initiate the four top toggle buttons
+        final ToggleButton myTasksButton = (ToggleButton) findViewById(R.id.myTasks);
+        final ToggleButton othersTasksButton = (ToggleButton) findViewById(R.id.otherTasks);
+        final ToggleButton sharedButton = (ToggleButton) findViewById(R.id.shared);
+        final ToggleButton storedButton = (ToggleButton) findViewById(R.id.stored);
+        //On launch it'll show stored tasks that you created
+        myTasksButton.setChecked(true);
+        storedButton.setChecked(true);
+        listOfTasks = ts.getMyTaskList(); 
         /** Setup List Adapter*/
         adapter = new TaskArrayAdapter(this, listOfTasks);
-        
         /** Setup listView*/
         ListView taskList = (ListView) findViewById(R.id.taskList); 
         taskList.setAdapter(adapter);
+        
+        //Clicking one button toggles the other off
+        myTasksButton.setOnClickListener(new View.OnClickListener() {
+        	public void onClick(View view) {
+        		mytasks = true;
+        		otherstasks = false; 
+        		myTasksButton.setChecked(true);
+        		othersTasksButton.setChecked(false);
+        		setTaskList();
+        	}
+        });
+          
+        othersTasksButton.setOnClickListener(new View.OnClickListener() {
+        	public void onClick(View view) {
+        		mytasks = false;
+        		otherstasks = true;   
+        		myTasksButton.setChecked(false);
+        		othersTasksButton.setChecked(true);
+        		setTaskList();
+        	}
+        });
+        
+        sharedButton.setOnClickListener(new View.OnClickListener() {
+        	public void onClick(View view) {
+        		shared = true;
+        		stored = false;
+        		sharedButton.setChecked(true);
+        		storedButton.setChecked(false);
+        		setTaskList();
+        	}
+        });
+
+        storedButton.setOnClickListener(new View.OnClickListener() {
+        	public void onClick(View view) {
+        		shared = false;
+        		stored = true;
+        		sharedButton.setChecked(false);
+        		storedButton.setChecked(true);
+        		setTaskList();
+        	}
+        });
+                
+        
                 
         /** Make List items Click able*/
         taskList.setOnItemClickListener(new OnItemClickListener() {    
@@ -60,7 +115,8 @@ public class TaskShareActivity extends Activity {
         		Intent myIntent = new Intent(view.getContext(), NewTaskActivity.class);
         		startActivityForResult(myIntent, 0);
         	}
-        }); 
+        });
+        
     }
     
     public void onResume (){
@@ -74,5 +130,34 @@ public class TaskShareActivity extends Activity {
         getMenuInflater().inflate(R.menu.activity_task_share, menu);
         return true;
     }
-    
+    public void setTaskList(){
+    	//Need to figure out how to change the list of tasks according to the toggle buttons
+        if(mytasks & stored){
+        	ArrayList<Task> newlist = ts.getMyTaskList();
+        	if (newlist.isEmpty()){
+        		String message = "List Empty!";
+	        	Toast.makeText(TaskShareActivity.this, message, Toast.LENGTH_SHORT).show();
+        	}
+        	for (Task item : newlist){
+    			if (! listOfTasks.contains((Task) item)){
+    				listOfTasks.add(item);			
+    			}
+    			
+        	}
+        	adapter.notifyDataSetChanged(); 
+        	
+        }
+        else if(mytasks & shared){
+        	//TODO
+        	adapter.notifyDataSetChanged(); 
+        }
+        else if (otherstasks & shared){
+        	//TODO
+        	adapter.notifyDataSetChanged(); 
+        }
+        else if (otherstasks & stored){
+        	//TODO
+        	adapter.notifyDataSetChanged(); 
+        }
+    }
 }
