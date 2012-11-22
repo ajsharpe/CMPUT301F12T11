@@ -67,6 +67,17 @@ public class NewTaskActivity extends Activity{
     	CheckBox checkBoxSharedOnline = (CheckBox) findViewById(R.id.checkBoxSharedOnline);
         if (checkBoxSharedOnline.isChecked())
             sharedOnline = true;
+        
+        
+        
+        
+        /**TODO:
+         * if shared online is true, add the task to online database */
+        
+        
+        
+        
+        
     	
         // Determine whether it is a photo or text based task from the radio buttons
     	RadioGroup radioGroupTaskType = (RadioGroup) findViewById(R.id.radioGroupTaskType);

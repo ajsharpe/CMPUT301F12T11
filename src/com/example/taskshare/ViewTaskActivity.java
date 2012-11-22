@@ -28,16 +28,11 @@ public class ViewTaskActivity extends Activity{
 		if (extras == null)
 			finish(); //no index for currentTask - abort
 		index = extras.getLong("INDEX");
-
-
-
 		//Task info is loaded into fields in onResume() method
-		/*This is not yet working, as currentTask will remain the same after
-		EditTaskActivity has finished. EditTaskActivity removes the old task
-		and adds the new one. Instead, the current task will need to be loaded in
-		onResume(), and saving an edited task will need to overwrite the old task
-		at the index passed in the intent.
-		*/
+
+		
+		/**TODO:
+		 * don't display the edit or delete buttons if currentTask.user != taskShare.user*/
 		
 		//Initiate onclick listeners
 		/** Allows user to edit task */

@@ -106,6 +106,28 @@ public class EditTaskActivity extends Activity {
     	CheckBox checkBoxSharedOnline = (CheckBox) findViewById(R.id.checkBoxSharedOnline);
         if (checkBoxSharedOnline.isChecked())
             sharedOnline = true;
+        
+        
+        
+
+        
+        
+        /**TODO:
+         * if shared online is true, add the task to online database 
+         * 		- if currentTask was offline, delete it from myTaskList, 
+         * 		- if it was online, remove it from the database
+         * 
+         * if shared online is false, add the task to myTaskList
+         * 		- if currentTask was online remove it from database
+         * 		- if currentTask was offline, it will be replaced
+         * 
+         * we need to check if editedTask.getPrivacy() == currentTask.getPrivacy()*/
+        
+        
+        
+        
+        
+        
     	
         // Determine whether it is a photo or text based task from the radio buttons
     	RadioGroup radioGroupTaskType = (RadioGroup) findViewById(R.id.radioGroupTaskType);
