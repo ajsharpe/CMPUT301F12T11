@@ -4,6 +4,8 @@
 package com.example.taskshare;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import android.app.Activity;
@@ -11,6 +13,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.text.format.Time;
 import android.util.Log;
@@ -66,7 +69,7 @@ public class FulfillPhotoTaskActivity extends Activity implements OnClickListene
     }
 	public void onClick(View v) {
 		if(v.equals(findViewById(R.id.takePhoto))){
-			Intent sCamera; 
+			/*Intent sCamera; 
 			Bundle bundle = getIntent().getExtras();
 					
 					sCamera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
@@ -81,11 +84,26 @@ public class FulfillPhotoTaskActivity extends Activity implements OnClickListene
 
 
 					startActivityForResult(sCamera, CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE); // Calls the camera application to get a Photo
+					*/
+			Intent sCamera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+
+			String folder = Environment.getExternalStorageDirectory().getAbsolutePath() + "/tmp";
+			File folderF = new File(folder);
+			if (!folderF.exists()) {
+			folderF.mkdir();
+			}
+
+			String imageFilePath = folder + "/" + String.valueOf(System.currentTimeMillis()) +".jpg";
+			File imageFile = new File(imageFilePath);
+			outputFileUri = Uri.fromFile(imageFile);
+
+			sCamera.putExtra(MediaStore.ACTION_IMAGE_CAPTURE, outputFileUri);
+			startActivityForResult(sCamera, CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);
 
 		}
 		if(v.equals(findViewById(R.id.uploadPhoto))){
 			
-			Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
+			Intent photoPickerIntent = new Intent(Intent.ACTION_PICK,android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
 			photoPickerIntent.setType("image/*");
 			startActivityForResult(photoPickerIntent, UPLOAD_IMAGE_ACTIVITY_REQUEST_CODE);
 		}
@@ -105,7 +123,7 @@ public class FulfillPhotoTaskActivity extends Activity implements OnClickListene
 					Bitmap thumbnail = (Bitmap) data.getExtras().get("data");
 					/* Construct a photo object from data */
 					
-					newestPhoto = new Photo("Stupid", name, thumbnail, new Time(Time.getCurrentTimezone()));
+					newestPhoto = new Photo("Stupid", name, thumbnail);
 					ArrayOfPhotoUpdates.add(newestPhoto);
 			    	iv.setImageBitmap(thumbnail);
 			    	iv.invalidate();
@@ -128,11 +146,28 @@ public class FulfillPhotoTaskActivity extends Activity implements OnClickListene
 			{
 				  if (data != null && resultCode == RESULT_OK) 
 		          {              
-					Bitmap thumbnail = (Bitmap) data.getExtras().get("data"); //NOT WORKING
-					newestPhoto = new Photo("Stupid", name, thumbnail, new Time(Time.getCurrentTimezone()));
+					  outputFileUri = data.getData();  
+					  Bitmap bitmap;
+                      try {
+                             bitmap = MediaStore.Images.Media.getBitmap(
+                                           getContentResolver(), outputFileUri);
+                             iv.setImageBitmap(bitmap);
+                      } catch (FileNotFoundException e) {
+                             // TODO Auto-generated catch block
+                             e.printStackTrace();
+                      } catch (IOException e) {
+                             // TODO Auto-generated catch block
+                             e.printStackTrace();
+                      }
+                      /*
+					Bundle extras = data.getExtras();
+					Bitmap thumbnail = (Bitmap) extras.get("data"); //NOT WORKING
+					newestPhoto = new Photo("Stupid", name, thumbnail);
 					ArrayOfPhotoUpdates.add(newestPhoto);
 			    	iv.setImageBitmap(thumbnail);
 			    	iv.invalidate();
+			    	*/
+					  
 		          } else if (resultCode == RESULT_CANCELED) {
 						// User cancelled the image capture
 						Toast.makeText(this, "You have canceled capturing a photo\n", Toast.LENGTH_LONG).show();

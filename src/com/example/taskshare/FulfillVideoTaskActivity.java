@@ -4,17 +4,17 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
 
-public class AddPhotoActivity extends Activity {
+public class FulfillVideoTaskActivity extends Activity {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_photo);
+        setContentView(R.layout.activity_fulfill_video_task);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.activity_add_photo, menu);
+        getMenuInflater().inflate(R.menu.activity_fulfill_video_task, menu);
         return true;
     }
 }

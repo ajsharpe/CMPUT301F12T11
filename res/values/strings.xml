@@ -11,37 +11,38 @@
     <string name="title_activity_task_share">Task Share</string>
     <string name="title_activity_view_task">View Task</string>
     <string name="title_activity_take_photo">Take Photo</string>
-
-	    
-	<string name="text_name">Name</string>
-	<string name="text_description">Description</string>
-	<string name="text_photo_task">Photo Task</string>
-	<string name="text_text_based_task">Text Based Task</string>
-	<string name="text_shared_online">Shared Online</string>
-	<string name="text_save">Save</string>
-	<string name="text_fulfill_task">Fulfill Task</string>
-	<string name="text_view_previous_content">View Previous Content</string>
-	<string name="text_store_offline">Store Offline</string>
-	<string name="text_store_online">Store Online</string>
-	<string name="text_notify_creator">Notify Creator</string>
-	
-	<string name="text_photo">Photo</string>
-	<string name="text_add_photo">Add Photo</string>
+    <string name="text_name">Name</string>
+    <string name="text_description">Description</string>
+    <string name="text_photo_task">Photo Task</string>
+    <string name="text_audio_task">Audio Task</string>
+    <string name="text_video_task">Video Task</string>
+    <string name="text_text_based_task">Text Based Task</string>
+    <string name="text_shared_online">Shared Online</string>
+    <string name="text_save">Save</string>
+    <string name="text_fulfill_task">Fulfill Task</string>
+    <string name="text_view_previous_content">View Previous Content</string>
+    <string name="text_store_offline">Store Offline</string>
+    <string name="text_store_online">Store Online</string>
+    <string name="text_notify_creator">Notify Creator</string>
+    <string name="text_photo">Photo</string>
+    <string name="text_add_photo">Add Photo</string>
     <string name="text_upload_photo">Upload Photo</string>
     <string name="text_take_photo">Take Photo</string>
-    
     <string name="text_title">Title</string>
-	<string name="text_author">Author</string>
-	<string name="text_add_text">Add Text</string>
-	<string name="text_my_task">My Tasks</string>
-	<string name="text_other_task">Others Tasks</string>
-	<string name="text_shared">Shared</string>
-	<string name="text_stored">Stored</string>
-	<string name="text_new_task">New Task</string>
-	
-	<string name="text_not_implemented">Not yet implemented.</string>
-	
-	<string name="text_update">Update Task</string>
-	<string name="text_added_to_task">Text Was Added, Make Sure To Click Save To Save Your Work!</string>
-	
+    <string name="text_author">Author</string>
+    <string name="text_add_text">Add Text</string>
+    <string name="text_my_task">My Tasks</string>
+    <string name="text_other_task">Others Tasks</string>
+    <string name="text_shared">Shared</string>
+    <string name="text_stored">Stored</string>
+    <string name="text_new_task">New Task</string>
+    <string name="text_edit">Edit</string>
+    <string name="text_delete">Delete</string>
+    <string name="text_not_implemented">Not yet implemented.</string>
+    <string name="text_update">Update Task</string>
+    <string name="text_added_to_task">Text Was Added, Make Sure To Click Save To Save Your Work!</string>
+    <string name="title_activity_edit_task">EditTaskActivity</string>
+    <string name="title_activity_fulfill_audio_task">FulfillAudioTaskActivity</string>
+    <string name="title_activity_fulfill_video_task">FulfillVideoTaskActivity</string>
+
 </resources>

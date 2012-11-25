@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 public class TaskShare extends FModel<FView> {
 	private ArrayList<Task> myTaskList, onlineTaskList;
+	private String user;
 	
 	TaskShare(){
 		this.myTaskList = new ArrayList<Task>();
@@ -40,6 +41,16 @@ public class TaskShare extends FModel<FView> {
 		return false;
 	}
 	
+	/* Add a task from  myTaskList, and	*
+	 * remove the task previously at 	*
+	 * that index.						*
+	 * Returns true if successful,      *
+	 * false if not found			 	*/
+	public void replaceMyTask(Task task, int index){
+		myTaskList.add(index, task);
+		myTaskList.remove(index+1);
+	}
+	
 	//Online stuff
 	public ArrayList<Task> getOnlineTaskList(){
 		return this.onlineTaskList;
@@ -65,5 +76,9 @@ public class TaskShare extends FModel<FView> {
 			return true;
 		}
 		return false;
+	}
+	
+	public String getUser(){
+		return this.user;
 	}
 }

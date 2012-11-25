@@ -1,58 +1,58 @@
-/** Allows saving of photos */
-
 package com.example.taskshare;
 
-import android.graphics.Bitmap;
+import android.media.AudioTrack;
 import android.text.format.Time;
 
-public class Photo {
-	private String title, photographer;
-	private Bitmap photo;
+public class Audio {
+	/** Allows saving of audio */
+
+	private String title, artist;
+	private AudioTrack audio;
 	private Time created, modified;
-	
-	Photo(String title, String photographer, Bitmap photo){
+
+	Audio(String title, String artist, AudioTrack audio){
 		this.title = title;
-		this.photographer = photographer;
-		this.photo = photo;
+		this.artist = artist;
+		this.audio = audio;
 		this.created = new Time(Time.getCurrentTimezone());
 		this.created.setToNow();
 		this.modified = new Time(Time.getCurrentTimezone());
 		this.modified.setToNow();
 	}
-	
+
 	public String getTitle(){
 		return this.title;
 	}
-	
-	public String getPhotographer(){
-		return this.photographer;
+
+	public String getArtist(){
+		return this.artist;
 	}
-	
-	public Bitmap getPhoto(){
-		return this.photo;
+
+	public AudioTrack getAudio(){
+		return this.audio;
 	}
-	
+
 	public Time getDateCreated(){
 		return this.created;
 	}
-	
+
 	public Time getDateModified(){
 		return this.modified;
 	}
-	
+
 	public void setTitle(String title){
 		this.title = title;
 		this.modified = new Time(Time.getCurrentTimezone());
 	}
-	
-	public void setPhotographer(String photographer){
-		this.photographer = photographer;
+
+	public void setArtist(String artist){
+		this.artist = artist;
 		this.modified = new Time(Time.getCurrentTimezone());
 	}
-	
-	public void setPhoto(Bitmap photo){
-		this.photo = photo;
+
+	public void setAudio(AudioTrack audio){
+		this.audio = audio;
 		this.modified = new Time(Time.getCurrentTimezone());
 	}
-	
+
 }

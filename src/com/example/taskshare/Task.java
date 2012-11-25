@@ -8,11 +8,14 @@ import java.util.ArrayList;
 import android.text.format.Time;
 
 public class Task<T>{
+	private String user;
 	private String name, description;
 	private Time created, modified;
 	private Integer authorID;
 	private Boolean sharedOnline;
 	private ArrayList<T> fulfillment;
+	private Integer likes;
+	private Boolean favourite;
 	
 	Task(String name, String description, Integer authorID, Boolean sharedOnline){
 		this.name = name;
@@ -24,6 +27,10 @@ public class Task<T>{
 		this.modified.setToNow();
 		this.sharedOnline = sharedOnline;
 		this.fulfillment = new ArrayList<T>();
+		this.likes = 0;
+		this.favourite = false;
+		
+		//todo: set user from model
 	}
 	
 	public String getName(){
@@ -73,6 +80,28 @@ public class Task<T>{
 	}
 	public String getDateAndTypeFormatted(){
 		return "Modified on " + this.modified.format("%Y/%m/%d %H:%M");
+	}
+	
+	public Integer getLikes(){
+		return this.likes;
+	}
+	
+	public Boolean getFavourite(){
+		return this.favourite;
+	}
+	
+	public void setFavourite(){
+		if (this.favourite == true){
+			this.favourite = false;
+			this.likes--;
+		} else {
+			this.favourite = true;
+			this.likes++;
+		}
+	}
+	
+	public String getUser(){
+		return this.user;
 	}
 	
 	public String toString(){

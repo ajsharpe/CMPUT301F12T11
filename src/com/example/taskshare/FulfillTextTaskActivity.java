@@ -44,10 +44,28 @@ public class FulfillTextTaskActivity extends Activity implements FView<TaskShare
         Button addTextButton = (Button) findViewById(R.id.addText);
         addTextButton.setOnClickListener(new View.OnClickListener() {
         	public void onClick(View view) {
+        		//Get all items of text-Error Checking will be added later
+        		EditText editTitle = (EditText) findViewById(R.id.textTitle);
+        		EditText editAuthor = (EditText) findViewById(R.id.textAuthor);
+        		EditText editText = (EditText) findViewById(R.id.addedText);
+        		String title = editTitle.getText().toString();
+        		String author = editAuthor.getText().toString();
+        		String text = editText.getText().toString();
+        		//Create a Text object and put it in a list
+        		Text Text = new Text(title, author, text);
+        		ArrayOfTextUpdates.add(Text);
+        		//Empty all the text fields
+        		((EditText) findViewById(R.id.textTitle)).setText("");
+        		((EditText) findViewById(R.id.textAuthor)).setText("");
+        		((EditText) findViewById(R.id.addedText)).setText("");
+        		findViewById(R.id.textTitle).requestFocus();
+        		String message = getResources().getString(R.string.text_added_to_task);
+            	Toast.makeText(FulfillTextTaskActivity.this, message, Toast.LENGTH_LONG).show();
+
         		if (addText() == true){
         			clearAllText();
-        			String message = getResources().getString(R.string.text_added_to_task);
-                	Toast.makeText(FulfillTextTaskActivity.this, message, Toast.LENGTH_LONG).show();
+        			String errorMessage = getResources().getString(R.string.text_added_to_task);
+                	Toast.makeText(FulfillTextTaskActivity.this, errorMessage, Toast.LENGTH_LONG).show();
         		}        		
         	}
         });         
@@ -104,7 +122,7 @@ public class FulfillTextTaskActivity extends Activity implements FView<TaskShare
     		Time now = new Time();
     		now.setToNow();
     		//Create a Text object and put it in a list
-    		Text Text = new Text(title, author, text, now);
+    		Text Text = new Text(title, author, text);
     		ArrayOfTextUpdates.add(Text);
     		return true;
     	}    

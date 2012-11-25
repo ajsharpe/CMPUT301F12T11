@@ -1,58 +1,58 @@
-/** Allows saving of photos */
-
 package com.example.taskshare;
 
-import android.graphics.Bitmap;
+import java.io.File;
 import android.text.format.Time;
 
-public class Photo {
-	private String title, photographer;
-	private Bitmap photo;
+public class Video {
+	/** Allows saving of video */
+
+	private String title, description;
+	private File video;
 	private Time created, modified;
-	
-	Photo(String title, String photographer, Bitmap photo){
+
+	Video(String title, String description, File video){
 		this.title = title;
-		this.photographer = photographer;
-		this.photo = photo;
+		this.description = description;
+		this.video = video;
 		this.created = new Time(Time.getCurrentTimezone());
 		this.created.setToNow();
 		this.modified = new Time(Time.getCurrentTimezone());
 		this.modified.setToNow();
 	}
-	
+
 	public String getTitle(){
 		return this.title;
 	}
-	
-	public String getPhotographer(){
-		return this.photographer;
+
+	public String getDescription(){
+		return this.description;
 	}
-	
-	public Bitmap getPhoto(){
-		return this.photo;
+
+	public File getVideo(){
+		return this.video;
 	}
-	
+
 	public Time getDateCreated(){
 		return this.created;
 	}
-	
+
 	public Time getDateModified(){
 		return this.modified;
 	}
-	
+
 	public void setTitle(String title){
 		this.title = title;
 		this.modified = new Time(Time.getCurrentTimezone());
 	}
-	
-	public void setPhotographer(String photographer){
-		this.photographer = photographer;
+
+	public void setDescription(String description){
+		this.description = description;
 		this.modified = new Time(Time.getCurrentTimezone());
 	}
-	
-	public void setPhoto(Bitmap photo){
-		this.photo = photo;
+
+	public void setVideo(File video){
+		this.video = video;
 		this.modified = new Time(Time.getCurrentTimezone());
 	}
-	
+
 }

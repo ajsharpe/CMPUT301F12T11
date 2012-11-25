@@ -29,7 +29,6 @@ public class NewTaskActivity extends Activity{
         /** Saves a new task and adds it to the model */
         Button buttonSave = (Button) findViewById(R.id.buttonSave);
         buttonSave.setOnClickListener(new OnClickListener() {
-            @Override
             public void onClick(View arg0) {
                 if (saveNewTask() == true) finish();
             }
@@ -68,6 +67,17 @@ public class NewTaskActivity extends Activity{
     	CheckBox checkBoxSharedOnline = (CheckBox) findViewById(R.id.checkBoxSharedOnline);
         if (checkBoxSharedOnline.isChecked())
             sharedOnline = true;
+        
+        
+        
+        
+        /**TODO:
+         * if shared online is true, add the task to online database */
+        
+        
+        
+        
+        
     	
         // Determine whether it is a photo or text based task from the radio buttons
     	RadioGroup radioGroupTaskType = (RadioGroup) findViewById(R.id.radioGroupTaskType);
@@ -79,6 +89,12 @@ public class NewTaskActivity extends Activity{
     	}
     	else if (taskType == (RadioButton) findViewById(R.id.radioText)){
     		newTask = new TextTask(name, description, Integer.valueOf(1), sharedOnline);
+    	}
+    	else if (taskType == (RadioButton) findViewById(R.id.radioAudio)){
+    		newTask = new AudioTask(name, description, Integer.valueOf(1), sharedOnline);
+    	}
+    	else if (taskType == (RadioButton) findViewById(R.id.radioVideo)){
+    		newTask = new VideoTask(name, description, Integer.valueOf(1), sharedOnline);
     	}
     	else return false;
     	
