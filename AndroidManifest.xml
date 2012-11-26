@@ -113,6 +113,7 @@
         </activity>
         <activity
             android:name=".FulfillVideoTaskActivity"
+            android:screenOrientation="landscape"
             android:label="@string/title_activity_fulfill_video_task" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

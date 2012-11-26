@@ -3,12 +3,69 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
+    <Button
+        android:id="@+id/initBtn"
+        android:layout_width="130dp"
+        android:layout_height="40dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:text="Initialize" />
+
+    <Button
+        android:id="@+id/startBtn"
+        android:layout_width="130dp"
+        android:layout_height="40dp"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/initBtn"
+        android:text="Start" />
+
+    <Button
+        android:id="@+id/stopBtn"
+        android:layout_width="130dp"
+        android:layout_height="40dp"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/startBtn"
+        android:text="Stop" />
+
+    <Button
+        android:id="@+id/playBtn"
+        android:layout_width="130dp"
+        android:layout_height="40dp"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/stopBtn"
+        android:text="Review" />
+
+    <Button
+        android:id="@+id/stopPlayBtn"
+        android:layout_width="130dp"
+        android:layout_height="40dp"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/playBtn"
+        android:text="Stop Review" />
+
+    <Button
+        android:id="@+id/saveVideoBtn"
+        android:layout_width="130dp"
+        android:layout_height="40dp"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/stopPlayBtn"
+        android:text="Save" />
+
     <TextView
+        android:id="@+id/recording"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/initBtn"
+        android:layout_above="@+id/videoView"
+        android:text=" " />
+
+    <VideoView
+        android:id="@+id/videoView"
+        android:layout_width="280dp"
+        android:layout_height="200dp"
         android:layout_centerVertical="true"
-        android:text="@string/hello_world"
-        tools:context=".FulfillVideoTaskActivity" />
+        android:layout_marginLeft="20dp"
+        android:layout_toRightOf="@+id/recording" />
 
 </RelativeLayout>
