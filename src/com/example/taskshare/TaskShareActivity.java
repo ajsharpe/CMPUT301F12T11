@@ -4,6 +4,7 @@
  * -Only other working button is New Task*/
 
 package com.example.taskshare;
+import java.net.InetAddress;
 import java.util.ArrayList;
 
 import android.os.Bundle;
@@ -11,6 +12,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.text.InputType;
 import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
@@ -23,10 +25,9 @@ import android.widget.AdapterView.OnItemClickListener;
 
 
 public class TaskShareActivity extends Activity {
-	
-	
+
     ArrayAdapter<Task> adapter = null;
-    
+    static String emailvalue;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,19 +65,29 @@ public class TaskShareActivity extends Activity {
         	}
         }); 
         /** 1 try getting user email */
+        boolean notValid =true;
+       
         AlertDialog.Builder alert = new AlertDialog.Builder(this);
 
         alert.setTitle("Welcome");
         alert.setMessage("Please Type the email address!");
-
-        // Set an EditText view to get user input 
-        final EditText userEmail = new EditText(this);
-        alert.setView(userEmail);
         
+        // Set an EditText view to get user input 
+       final EditText userEmail = new EditText(this);
+        
+        alert.setView(userEmail);
+        alert.setCancelable(false);
+        userEmail.setInputType(InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);
         alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
         	public void onClick(DialogInterface dialog, int whichButton) {
-        	  String value = userEmail.getText().toString();
-        	  // Do something with value!
+        	 //emailvalue = userEmail.getText().toString();
+        	    if (isValidEmail(userEmail.getText().toString())){
+        	    	emailvalue = userEmail.getText().toString();               
+                }else{
+
+                    Toast.makeText(getApplicationContext(), "Wrong email input, RUN AGAIN THE PROGRMA TO PUT THE RIGHT INPUT", Toast.LENGTH_SHORT).show();
+                }
+        	  // Do something with value!0s
         	  }
         	});
 
@@ -88,19 +99,24 @@ public class TaskShareActivity extends Activity {
         });
 
         alert.show();
-        
-    }
+ 
+        }
+    
     
     public void onResume (){
     	super.onResume();
     	/** Reload task list when the activity is resumed */
         adapter.notifyDataSetChanged();  
     }
-
+    public static boolean isValidEmail(String value) {
+        return value.matches("^([^.@]+)(\\.[^.@]+)*@([^.@]+\\.)+([^.@]+)$");
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.activity_task_share, menu);
         return true;
     }
+    
+
     
 }
