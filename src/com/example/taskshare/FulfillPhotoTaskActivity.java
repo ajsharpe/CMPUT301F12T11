@@ -3,9 +3,12 @@
 
 package com.example.taskshare;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.util.ArrayList;
 
 import android.app.Activity;
@@ -40,6 +43,8 @@ public class FulfillPhotoTaskActivity extends Activity implements OnClickListene
 	Button save;
 	Intent cameraIntent;
 	File file;
+	Bitmap myBit;
+	String folder;
 	final static int cameraData = 0;
 	static Uri photoUri;
     @Override
@@ -61,7 +66,7 @@ public class FulfillPhotoTaskActivity extends Activity implements OnClickListene
     	save.setOnClickListener(this);
     }
     
- 
+   
 	@Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.activity_fulfill_photo_task, menu);
@@ -87,7 +92,7 @@ public class FulfillPhotoTaskActivity extends Activity implements OnClickListene
 					*/
 			Intent sCamera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 
-			String folder = Environment.getExternalStorageDirectory().getAbsolutePath() + "/tmp";
+			folder = Environment.getExternalStorageDirectory().getAbsolutePath() + "/tmp";
 			File folderF = new File(folder);
 			if (!folderF.exists()) {
 			folderF.mkdir();
@@ -98,6 +103,8 @@ public class FulfillPhotoTaskActivity extends Activity implements OnClickListene
 			outputFileUri = Uri.fromFile(imageFile);
 
 			sCamera.putExtra(MediaStore.ACTION_IMAGE_CAPTURE, outputFileUri);
+			 
+			
 			startActivityForResult(sCamera, CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);
 
 		}
@@ -108,7 +115,50 @@ public class FulfillPhotoTaskActivity extends Activity implements OnClickListene
 			startActivityForResult(photoPickerIntent, UPLOAD_IMAGE_ACTIVITY_REQUEST_CODE);
 		}
 		if(v.equals(findViewById(R.id.SavePhotoB))){
-			//NOT IMPLEMENTED YET
+			
+	    	 ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+	         myBit.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+	         name =String.valueOf(System.currentTimeMillis()) +".jpg";
+	         File file = new File(Environment.getExternalStorageDirectory()+File.separator + name);
+	            try {
+	                file.createNewFile();
+	                FileOutputStream fo = new FileOutputStream(file);
+	                //5
+	                fo.write(bytes.toByteArray());
+	                fo.close();
+	            } catch (IOException e) {
+	                // TODO Auto-generated catch block
+	                e.printStackTrace();
+	            }
+			
+			
+			
+			
+			Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
+//	        emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, emailSignature);
+	        emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL, TaskShareActivity.emailvalue);
+	        emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "HELLLOOOOOOO");
+	        emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, "LETS GET THIS THING WORKING \n\n FML)"); 
+	        emailIntent.setType("image/jpeg");
+	        File bitmapFile = new File(Environment.getExternalStorageDirectory()+
+	            "/"+folder+"/picture.jpg");
+	        //myUri = Uri.fromFile(bitmapFile);
+	        emailIntent.putExtra(Intent.EXTRA_STREAM, outputFileUri);
+
+
+	        startActivity(Intent.createChooser(emailIntent, "Send your email in:"));
+	      //  eraseContent();
+	        //sentMode = true;
+			/*String path = Environment.getExternalStorageDirectory().toString()d;
+			OutputStream fOut = null;
+			file = new File(path, "FitnessGirl.jpg");
+			fOut = new FileOutputStream(file);
+			
+			getImageBitmap(myBit).compress(Bitmap.CompressFormat.JPEG, 85, fOut);
+			fOut.flush();
+			fOut.close();
+
+			MediaStore.Images.Media.insertImage(getContentResolver(),file.getAbsolutePath(),file.getName(),file.getName(*/
 		}
 	}
  
@@ -122,11 +172,12 @@ public class FulfillPhotoTaskActivity extends Activity implements OnClickListene
 					/*if the program gets here, a picture was succesfully captured, call the method to tag the photo here */
 					Bitmap thumbnail = (Bitmap) data.getExtras().get("data");
 					/* Construct a photo object from data */
-					
+					myBit=thumbnail;
 					newestPhoto = new Photo("Stupid", name, thumbnail);
 					ArrayOfPhotoUpdates.add(newestPhoto);
 			    	iv.setImageBitmap(thumbnail);
 			    	iv.invalidate();
+
 					//final Context context = this;
 					//Intent intent = new Intent(context, FulfillPhotoTaskActivity.class);
 					
@@ -151,6 +202,7 @@ public class FulfillPhotoTaskActivity extends Activity implements OnClickListene
                       try {
                              bitmap = MediaStore.Images.Media.getBitmap(
                                            getContentResolver(), outputFileUri);
+                             myBit=bitmap;
                              iv.setImageBitmap(bitmap);
                       } catch (FileNotFoundException e) {
                              // TODO Auto-generated catch block

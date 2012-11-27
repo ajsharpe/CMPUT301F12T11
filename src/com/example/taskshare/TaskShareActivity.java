@@ -77,7 +77,7 @@ public class TaskShareActivity extends Activity {
         
         alert.setView(userEmail);
         alert.setCancelable(false);
-        userEmail.setInputType(InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);
+       userEmail.setInputType(InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);
         alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
         	public void onClick(DialogInterface dialog, int whichButton) {
         	 //emailvalue = userEmail.getText().toString();
@@ -85,9 +85,10 @@ public class TaskShareActivity extends Activity {
         	    	emailvalue = userEmail.getText().toString();               
                 }else{
 
-                    Toast.makeText(getApplicationContext(), "Wrong email input, RUN AGAIN THE PROGRMA TO PUT THE RIGHT INPUT", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Wrong email input, RUN AGAIN THE PROGRAM TO PUT THE RIGHT INPUT", Toast.LENGTH_SHORT).show();
+                    
                 }
-        	  // Do something with value!0s
+        	  // Do something with value!0sa
         	  }
         	});
 
@@ -95,10 +96,16 @@ public class TaskShareActivity extends Activity {
         alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
           public void onClick(DialogInterface dialog, int whichButton) {
             // Canceled.djdkdjkl
+        	  dialog.dismiss();
+        	  
           }
         });
 
-        alert.show();
+     // create alert dialog
+		AlertDialog alertDialog = alert.create();
+
+		// show it
+		alertDialog.show();
  
         }
     
