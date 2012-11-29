@@ -58,8 +58,16 @@ public class Task<T>{
 		return this.created;
 	}
 	
+	public String getStringDateCreated(){
+		return this.created.format("%Y/%m/%d %H:%M");
+	}
+	
 	public Time getDateModified(){
 		return this.modified;
+	}
+	
+	public String getStringDateModified(){
+		return this.modified.format("%Y/%m/%d %H:%M");
 	}
 	
 	public Boolean getPrivacy(){
@@ -86,8 +94,22 @@ public class Task<T>{
 		return this.likes;
 	}
 	
+	public String getStringLikes(){
+		int likes = this.likes;
+		return String.valueOf(likes);
+	}
+	
 	public Boolean getFavourite(){
 		return this.favourite;
+	}
+	
+	public String getStringFavorite(){
+		if(this.favourite){
+			return "True";
+		}
+		else{
+			return "False";
+		}
 	}
 	
 	public void setFavourite(){

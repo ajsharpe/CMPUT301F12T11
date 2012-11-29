@@ -3,8 +3,15 @@
 
 package com.example.taskshare;
 
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+
+import com.google.gson.Gson;
+
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.view.Menu;
 import android.view.View;
@@ -67,18 +74,7 @@ public class NewTaskActivity extends Activity{
     	CheckBox checkBoxSharedOnline = (CheckBox) findViewById(R.id.checkBoxSharedOnline);
         if (checkBoxSharedOnline.isChecked())
             sharedOnline = true;
-        
-        
-        
-        
-        /**TODO:
-         * if shared online is true, add the task to online database */
-        
-        
-        
-        
-        
-    	
+
         // Determine whether it is a photo or text based task from the radio buttons
     	RadioGroup radioGroupTaskType = (RadioGroup) findViewById(R.id.radioGroupTaskType);
     	int taskTypeIdSelected = radioGroupTaskType.getCheckedRadioButtonId();
@@ -97,6 +93,16 @@ public class NewTaskActivity extends Activity{
     		newTask = new VideoTask(name, description, Integer.valueOf(1), sharedOnline);
     	}
     	else return false;
+    	
+    	/**TODO:
+         * if shared online is true, add the task to online database */
+        if (sharedOnline){
+        	
+        	boolean upload = new UploadTasks().execute(newTask) != null;
+        	
+        	if (!upload) Toast.makeText(NewTaskActivity.this, "Upload Unsucessful", Toast.LENGTH_SHORT).show();
+        	if (upload) Toast.makeText(NewTaskActivity.this, "Upload Sucessful", Toast.LENGTH_SHORT).show();
+        }
     	
     	// Add new task to the model before returning
     	TaskShare ts = TaskShareApplication.getTaskShare();
