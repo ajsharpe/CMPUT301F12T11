@@ -1,9 +1,14 @@
 package com.example.taskshare;
 
 import java.io.File;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
+
 import android.text.format.Time;
 
-public class Video {
+public class Video implements Serializable{
 	/** Allows saving of video */
 
 	private String title, description;
@@ -55,4 +60,19 @@ public class Video {
 		this.modified = new Time(Time.getCurrentTimezone());
 	}
 
+	private void writeObject(ObjectOutputStream out) throws IOException{
+		out.writeObject(this.title);
+		out.writeObject(this.description);
+		out.writeObject(this.video);
+		out.writeObject(this.created);
+		out.writeObject(this.modified);
+	}
+	
+	private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException{
+		title = (String)in.readObject();
+		description = (String) in.readObject();
+		video = (File) in.readObject();
+		created = (Time) in.readObject();
+		modified = (Time) in.readObject();
+	}
 }
