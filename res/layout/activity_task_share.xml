@@ -11,37 +11,41 @@
         android:layout_centerHorizontal="true"
         android:text="@string/text_new_task" />
 
-    <Button
+    <ToggleButton
         android:id="@+id/myTasks"
         android:layout_width="162dp"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:text="@string/text_my_task" />
+        android:textOff="@string/text_my_task"
+        android:textOn="@string/text_my_task"  />
 
-    <Button
+    <ToggleButton
         android:id="@+id/otherTasks"
         android:layout_width="162dp"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
-        android:text="@string/text_other_task" />
+        android:textOff="@string/text_other_task"
+        android:textOn="@string/text_other_task" />
 
-    <Button
-        android:id="@+id/shared"
+    <ToggleButton
+        android:id="@+id/stored"
         android:layout_width="162dp"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/myTasks"
-        android:text="@string/text_shared" />
+        android:textOff="@string/text_stored"
+        android:textOn="@string/text_stored" />
 
-    <Button
-        android:id="@+id/stored"
+    <ToggleButton
+        android:id="@+id/shared"
         android:layout_width="162dp"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/shared"
-        android:layout_alignBottom="@+id/shared"
+        android:layout_alignBaseline="@+id/stored"
+        android:layout_alignBottom="@+id/stored"
         android:layout_alignParentRight="true"
-        android:text="@string/text_stored" />
+        android:textOff="@string/text_shared"
+        android:textOn="@string/text_shared" />
 
     <ListView
         android:id="@+id/taskList"
@@ -49,7 +53,7 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/newTask"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/shared"
+        android:layout_below="@+id/stored"
         android:scrollbars="vertical"
         tools:listitem="@android:layout/simple_list_item_2" >
 
