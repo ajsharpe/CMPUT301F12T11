@@ -31,8 +31,7 @@ public class Task<T> implements Serializable{
 		this.fulfillment = new ArrayList<T>();
 		this.likes = 0;
 		this.favourite = false;
-		
-		//todo: set user from model
+		this.user = TaskShareApplication.getTaskShare().getUser();
 	}
 	
 	public String getName(){

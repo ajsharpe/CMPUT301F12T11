@@ -13,7 +13,7 @@ import java.io.Serializable;
 import android.text.format.Time;
 
 public class Text implements Serializable{
-	private String title, author, text;
+	private String title, author, text, user;
 	private Time created, modified;
 	
 	Text(String title, String author, String text){
@@ -24,6 +24,7 @@ public class Text implements Serializable{
 		this.created.setToNow();
 		this.modified = new Time(Time.getCurrentTimezone());
 		this.modified.setToNow();
+		this.user = TaskShareApplication.getTaskShare().getUser();
 	}
 	
 	public String getTitle(){

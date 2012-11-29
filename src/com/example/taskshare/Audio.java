@@ -12,7 +12,7 @@ import android.text.format.Time;
 public class Audio implements Serializable{
 	/** Allows saving of audio */
 
-	private String title, artist;
+	private String title, artist, user;
 	private File audio;
 	private Time created, modified;
 
@@ -24,6 +24,7 @@ public class Audio implements Serializable{
 		this.created.setToNow();
 		this.modified = new Time(Time.getCurrentTimezone());
 		this.modified.setToNow();
+		this.user = TaskShareApplication.getTaskShare().getUser();
 	}
 
 	public String getTitle(){

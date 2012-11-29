@@ -11,7 +11,7 @@ import java.io.Serializable;
 import android.text.format.Time;
 
 public class Photo implements Serializable{
-	private String title, photographer;
+	private String title, photographer, user;
 	private File photo;
 	private Time created, modified;
 	
@@ -23,6 +23,7 @@ public class Photo implements Serializable{
 		this.created.setToNow();
 		this.modified = new Time(Time.getCurrentTimezone());
 		this.modified.setToNow();
+		this.user = TaskShareApplication.getTaskShare().getUser();
 	}
 	
 	public String getTitle(){

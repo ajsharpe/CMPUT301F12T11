@@ -11,7 +11,7 @@ import android.text.format.Time;
 public class Video implements Serializable{
 	/** Allows saving of video */
 
-	private String title, description;
+	private String title, description, user;
 	private File video;
 	private Time created, modified;
 
@@ -23,6 +23,7 @@ public class Video implements Serializable{
 		this.created.setToNow();
 		this.modified = new Time(Time.getCurrentTimezone());
 		this.modified.setToNow();
+		this.user = TaskShareApplication.getTaskShare().getUser();
 	}
 
 	public String getTitle(){
