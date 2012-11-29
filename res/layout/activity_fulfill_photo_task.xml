@@ -30,7 +30,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
-        android:text="@string/text_save"
+        android:text="@string/text_email"
         android:textSize="25sp" />
 
     <Button

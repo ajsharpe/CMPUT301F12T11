@@ -20,7 +20,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
         android:layout_below="@+id/startBtn"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="30dp"
         android:text="Finish recording" />
 
     <Button
@@ -30,7 +30,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
         android:layout_below="@+id/finishBtn"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="30dp"
         android:text="Play recording" />
 
     <Button
@@ -40,7 +40,17 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
         android:layout_below="@+id/playBtn"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="30dp"
         android:text="Stop playback" />
+
+    <Button
+        android:id="@+id/saveBtna"
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="30dp"
+        android:text="Save" />
 
 </RelativeLayout>
