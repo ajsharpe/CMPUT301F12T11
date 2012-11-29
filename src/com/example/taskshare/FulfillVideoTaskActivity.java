@@ -256,6 +256,7 @@ public class FulfillVideoTaskActivity extends Activity implements SurfaceHolder.
 	}
 
 	// initializes the camera 
+	@SuppressWarnings("deprecation")
 	private boolean initCamera() {
 		try {
 			camera = Camera.open();
