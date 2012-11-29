@@ -5,10 +5,15 @@
 
 package com.example.taskshare;
 
+import java.io.File;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import android.text.format.Time;
 
-public class Text {
-	private String title, author, text;
+public class Text implements Serializable{
+	private String title, author, text, user;
 	private Time created, modified;
 	
 	Text(String title, String author, String text){
@@ -19,6 +24,7 @@ public class Text {
 		this.created.setToNow();
 		this.modified = new Time(Time.getCurrentTimezone());
 		this.modified.setToNow();
+		this.user = TaskShareApplication.getTaskShare().getUser();
 	}
 	
 	public String getTitle(){
@@ -54,6 +60,22 @@ public class Text {
 	public void setText(String text){
 		this.text = text;
 		this.modified.setToNow();
+	}
+	
+	private void writeObject(ObjectOutputStream out) throws IOException{
+		out.writeObject(this.title);
+		out.writeObject(this.author);
+		out.writeObject(this.text);
+		out.writeObject(this.created);
+		out.writeObject(this.modified);
+	}
+	
+	private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException{
+		title = (String)in.readObject();
+		author = (String) in.readObject();
+		text = (String) in.readObject();
+		created = (Time) in.readObject();
+		modified = (Time) in.readObject();
 	}
 
 }

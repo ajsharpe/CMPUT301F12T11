@@ -4,9 +4,13 @@
 
 package com.example.taskshare;
 
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class TaskShare extends FModel<FView> {
+public class TaskShare extends FModel<FView> implements Serializable{
 	private ArrayList<Task> myTaskList, onlineTaskList;
 	private String user;
 	
@@ -80,5 +84,15 @@ public class TaskShare extends FModel<FView> {
 	
 	public String getUser(){
 		return this.user;
+	}
+	
+	private void writeObject(ObjectOutputStream out) throws IOException{
+		out.writeObject(this.myTaskList);
+		out.writeObject(this.user);
+	}
+	
+	private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException{
+		this.myTaskList = (ArrayList<Task>) in.readObject();
+		this.user = (String) in.readObject();
 	}
 }

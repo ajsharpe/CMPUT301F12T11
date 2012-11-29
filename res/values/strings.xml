@@ -37,6 +37,7 @@
     <string name="text_stored">Stored</string>
     <string name="text_new_task">New Task</string>
     <string name="text_edit">Edit</string>
+    <string name="text_email">Save and Email</string>
     <string name="text_delete">Delete</string>
     <string name="text_not_implemented">Not yet implemented.</string>
     <string name="text_update">Update Task</string>

@@ -3,9 +3,12 @@
 
 package com.example.taskshare;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.util.ArrayList;
 
 import android.app.Activity;
@@ -26,7 +29,7 @@ import android.widget.Toast;
 
 
 public class FulfillPhotoTaskActivity extends Activity implements OnClickListener {
-	//MAKE PHOTO OBJECT
+	//MAKE PHOTO OBJECTs
 	private String name = null;
 	private Photo newestPhoto = null;
 	//
@@ -40,6 +43,8 @@ public class FulfillPhotoTaskActivity extends Activity implements OnClickListene
 	Button save;
 	Intent cameraIntent;
 	File file;
+	Bitmap myBit;
+	String folder;
 	final static int cameraData = 0;
 	static Uri photoUri;
     @Override
@@ -61,7 +66,7 @@ public class FulfillPhotoTaskActivity extends Activity implements OnClickListene
     	save.setOnClickListener(this);
     }
     
- 
+   
 	@Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.activity_fulfill_photo_task, menu);
@@ -69,25 +74,10 @@ public class FulfillPhotoTaskActivity extends Activity implements OnClickListene
     }
 	public void onClick(View v) {
 		if(v.equals(findViewById(R.id.takePhoto))){
-			/*Intent sCamera; 
-			Bundle bundle = getIntent().getExtras();
-					
-					sCamera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-					//sCamera.putExtras(bundle);
-					//photoUri = getOutputMediaFileUri(MEDIA_TYPE_IMAGE);     // Create a file to store the image
-//					DateFormat dateFormat = new SimpleDateFormat("yyyyMMdd-HHmm"); 
-					//Date dDate = new Date();        // get a timestamp too!
-					//time = new Timestamp(dDate.getTime());
 
-					sCamera.putExtra(MediaStore.EXTRA_OUTPUT, photoUri);    // Sets the image file name
-					//Log.d("take photo", photoUri.getPath());
-
-
-					startActivityForResult(sCamera, CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE); // Calls the camera application to get a Photo
-					*/
 			Intent sCamera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 
-			String folder = Environment.getExternalStorageDirectory().getAbsolutePath() + "/tmp";
+			folder = Environment.getExternalStorageDirectory().getAbsolutePath() + "/tmp";
 			File folderF = new File(folder);
 			if (!folderF.exists()) {
 			folderF.mkdir();
@@ -98,6 +88,8 @@ public class FulfillPhotoTaskActivity extends Activity implements OnClickListene
 			outputFileUri = Uri.fromFile(imageFile);
 
 			sCamera.putExtra(MediaStore.ACTION_IMAGE_CAPTURE, outputFileUri);
+			 
+			
 			startActivityForResult(sCamera, CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);
 
 		}
@@ -108,7 +100,52 @@ public class FulfillPhotoTaskActivity extends Activity implements OnClickListene
 			startActivityForResult(photoPickerIntent, UPLOAD_IMAGE_ACTIVITY_REQUEST_CODE);
 		}
 		if(v.equals(findViewById(R.id.SavePhotoB))){
-			//NOT IMPLEMENTED YET
+			
+	    	 ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+	         myBit.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+	         name =String.valueOf(System.currentTimeMillis()) +".jpg";
+	         File file = new File(Environment.getExternalStorageDirectory()+File.separator + name);
+	            try {
+	                file.createNewFile();
+	                FileOutputStream fo = new FileOutputStream(file);
+	                fo.write(bytes.toByteArray());
+	                fo.close();
+	            } catch (IOException e) {
+	                // TODO Auto-generated catch block
+	                e.printStackTrace();
+	            }
+	         
+			
+	    
+	        // i.setType("message/rfc822");
+	         Intent i = new Intent(android.content.Intent.ACTION_SEND); 
+             //String Email[] = { "seoungyu@ualberta.ca" }; 
+             i.putExtra(android.content.Intent.EXTRA_EMAIL, TaskShareActivity.emailvalue); 
+             i.putExtra(android.content.Intent.EXTRA_SUBJECT, "Helloworld"); 
+             i.putExtra(Intent.EXTRA_STREAM, Uri.parse("file://"+ Environment.getExternalStorageDirectory())); 
+             i.setType("plain/text"); 
+          
+	         try {
+	             startActivity(Intent.createChooser(i, "Send mail..."));
+	         } catch (android.content.ActivityNotFoundException ex) {
+	             Toast.makeText(getApplicationContext(), "There are no email clients installed.", Toast.LENGTH_SHORT).show();
+	         }
+	         sendBroadcast(new Intent(Intent.ACTION_MEDIA_MOUNTED, Uri.parse("file://"+ Environment.getExternalStorageDirectory())));
+/*			Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
+//	        emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, emailSignature);
+	        emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL, TaskShareActivity.emailvalue);
+	        emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "HELLLOOOOOOO");
+	        emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, "LETS GET THIS THING WORKING \n\n FML)"); 
+	        emailIntent.setType("image/jpeg");
+	        File bitmapFile = new File(Environment.getExternalStorageDirectory()+
+	            "/"+folder+"/picture.jpg");
+	        //myUri = Uri.fromFile(bitmapFile);
+	        emailIntent.putExtra(Intent.EXTRA_STREAM, outputFileUri);
+
+
+	        startActivity(Intent.createChooser(emailIntent, "Send your email in:"));*/
+	       //eraseContent();
+	       //sentMode = true;
 		}
 	}
  
@@ -122,11 +159,12 @@ public class FulfillPhotoTaskActivity extends Activity implements OnClickListene
 					/*if the program gets here, a picture was succesfully captured, call the method to tag the photo here */
 					Bitmap thumbnail = (Bitmap) data.getExtras().get("data");
 					/* Construct a photo object from data */
-					
-					newestPhoto = new Photo("Stupid", name, thumbnail);
+					myBit=thumbnail;
+					//newestPhoto = new Photo("Stupid", name, thumbnail);
 					ArrayOfPhotoUpdates.add(newestPhoto);
 			    	iv.setImageBitmap(thumbnail);
 			    	iv.invalidate();
+
 					//final Context context = this;
 					//Intent intent = new Intent(context, FulfillPhotoTaskActivity.class);
 					
@@ -151,6 +189,7 @@ public class FulfillPhotoTaskActivity extends Activity implements OnClickListene
                       try {
                              bitmap = MediaStore.Images.Media.getBitmap(
                                            getContentResolver(), outputFileUri);
+                             myBit=bitmap;
                              iv.setImageBitmap(bitmap);
                       } catch (FileNotFoundException e) {
                              // TODO Auto-generated catch block
@@ -164,7 +203,7 @@ public class FulfillPhotoTaskActivity extends Activity implements OnClickListene
 					Bitmap thumbnail = (Bitmap) extras.get("data"); //NOT WORKING
 					newestPhoto = new Photo("Stupid", name, thumbnail);
 					ArrayOfPhotoUpdates.add(newestPhoto);
-			    	iv.setImageBitmap(thumbnail);
+			    	iv.setImageBitmap(thumbnail);fd
 			    	iv.invalidate();
 			    	*/
 					  

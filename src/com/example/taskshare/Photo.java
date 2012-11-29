@@ -2,15 +2,20 @@
 
 package com.example.taskshare;
 
-import android.graphics.Bitmap;
+import java.io.File;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
+
 import android.text.format.Time;
 
-public class Photo {
-	private String title, photographer;
-	private Bitmap photo;
+public class Photo implements Serializable{
+	private String title, photographer, user;
+	private File photo;
 	private Time created, modified;
 	
-	Photo(String title, String photographer, Bitmap photo){
+	Photo(String title, String photographer, File photo){
 		this.title = title;
 		this.photographer = photographer;
 		this.photo = photo;
@@ -18,6 +23,7 @@ public class Photo {
 		this.created.setToNow();
 		this.modified = new Time(Time.getCurrentTimezone());
 		this.modified.setToNow();
+		this.user = TaskShareApplication.getTaskShare().getUser();
 	}
 	
 	public String getTitle(){
@@ -28,7 +34,7 @@ public class Photo {
 		return this.photographer;
 	}
 	
-	public Bitmap getPhoto(){
+	public File getPhoto(){
 		return this.photo;
 	}
 	
@@ -50,9 +56,25 @@ public class Photo {
 		this.modified = new Time(Time.getCurrentTimezone());
 	}
 	
-	public void setPhoto(Bitmap photo){
+	public void setPhoto(File photo){
 		this.photo = photo;
 		this.modified = new Time(Time.getCurrentTimezone());
+	}
+	
+	private void writeObject(ObjectOutputStream out) throws IOException{
+		out.writeObject(this.title);
+		out.writeObject(this.photographer);
+		out.writeObject(this.photo);
+		out.writeObject(this.created);
+		out.writeObject(this.modified);
+	}
+	
+	private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException{
+		title = (String)in.readObject();
+		photographer = (String) in.readObject();
+		photo = (File) in.readObject();
+		created = (Time) in.readObject();
+		modified = (Time) in.readObject();
 	}
 	
 }
