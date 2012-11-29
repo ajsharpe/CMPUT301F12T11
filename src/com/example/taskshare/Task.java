@@ -4,23 +4,25 @@
 
 package com.example.taskshare;
 
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 import android.text.format.Time;
 
-public class Task<T>{
+public class Task<T> implements Serializable{
 	private String user;
 	private String name, description;
 	private Time created, modified;
-	private Integer authorID;
 	private Boolean sharedOnline;
 	private ArrayList<T> fulfillment;
 	private Integer likes;
 	private Boolean favourite;
 	
-	Task(String name, String description, Integer authorID, Boolean sharedOnline){
+	Task(String name, String description, Boolean sharedOnline){
 		this.name = name;
 		this.description = description;
-		this.authorID = authorID;
 		this.created = new Time(Time.getCurrentTimezone());
 		this.created.setToNow();
 		this.modified = new Time(Time.getCurrentTimezone());
@@ -49,10 +51,6 @@ public class Task<T>{
 	public void setDescription(String description){
 		this.description = description;
 		this.modified.setToNow();	}
-	
-	public Integer getAuthorID(){
-		return this.authorID;
-	}
 	
 	public Time getDateCreated(){
 		return this.created;
@@ -90,7 +88,7 @@ public class Task<T>{
 		return this.favourite;
 	}
 	
-	public void setFavourite(){
+	public void toggleFavourite(){
 		if (this.favourite == true){
 			this.favourite = false;
 			this.likes--;
@@ -106,5 +104,29 @@ public class Task<T>{
 	
 	public String toString(){
 		return this.name + "\n" + this.modified.format("%Y/%m/%d %H:%M");
+	}
+	
+	private void writeObject(ObjectOutputStream out) throws IOException{
+		out.writeObject(this.user);
+		out.writeObject(this.name);
+		out.writeObject(this.description);
+		out.writeObject(this.created);
+		out.writeObject(this.modified);
+		out.writeObject(this.sharedOnline);
+		out.writeObject(this.fulfillment);
+		out.writeObject(this.likes);
+		out.writeObject(this.favourite);
+	}
+	
+	private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException{
+		this.user = (String) in.readObject();
+		this.name = (String) in.readObject();
+		this.description = (String) in.readObject();
+		this.created = (Time) in.readObject();
+		this.modified = (Time) in.readObject();
+		this.sharedOnline = (Boolean) in.readObject();
+		this.fulfillment = (ArrayList<T>) in.readObject();
+		this.likes = (Integer)  in.readObject();
+		this.favourite = (Boolean)  in.readObject();
 	}
 }
