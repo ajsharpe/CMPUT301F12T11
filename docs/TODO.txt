@@ -5,10 +5,10 @@ TO DO LIST:
 -Allow user to change email - affects database on a large scale, as the 
 	email will need to be changed in the database
 
--Only display "Edit Task" And "Delete" Buttons for myTasks - cant edit 
-	other users tasks
++Only display "Edit Task" And "Delete" Buttons for myTasks - cant edit 
+	other users tasks - AJ
 
--Set up file storage 
+-Set up file storage -AJ
 
 -Set up online connection stuff
 
@@ -19,7 +19,7 @@ TO DO LIST:
 
 -We need to document our code better. we're losing out on some easy marks here
 
--Test cases - more easy marks (lets at least shoot for satisfactory) - AJ
+-Test cases - more easy marks (lets at least shoot for satisfactory)
 
 -OOD - update UML - AJ
 
@@ -35,4 +35,4 @@ TO DO LIST:
 Put your ccid beside any of the items you want to work on, and add anything
 I haven't put here yet.
 
-
++mark finished stuff with a plus
