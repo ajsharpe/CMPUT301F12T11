@@ -29,7 +29,7 @@ import android.widget.Toast;
 
 
 public class FulfillPhotoTaskActivity extends Activity implements OnClickListener {
-	//MAKE PHOTO OBJECT
+	//MAKE PHOTO OBJECTs
 	private String name = null;
 	private Photo newestPhoto = null;
 	//
