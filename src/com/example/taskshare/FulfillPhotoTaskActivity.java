@@ -120,7 +120,7 @@ public class FulfillPhotoTaskActivity extends Activity implements OnClickListene
 	        // i.setType("message/rfc822");
 	         Intent i = new Intent(android.content.Intent.ACTION_SEND); 
              //String Email[] = { "seoungyu@ualberta.ca" }; 
-             i.putExtra(android.content.Intent.EXTRA_EMAIL, TaskShareActivity.emailvalue); 
+             //i.putExtra(android.content.Intent.EXTRA_EMAIL, TaskShareActivity.emailvalue); 
              i.putExtra(android.content.Intent.EXTRA_SUBJECT, "Helloworld"); 
              i.putExtra(Intent.EXTRA_STREAM, Uri.parse("file://"+ Environment.getExternalStorageDirectory())); 
              i.setType("plain/text"); 
