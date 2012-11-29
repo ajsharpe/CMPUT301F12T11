@@ -143,6 +143,14 @@ public class ViewTaskActivity extends Activity{
 			buttonStoreOffline.setText(R.string.text_store_offline);
 		else
 			buttonStoreOffline.setText(R.string.text_store_online);
+		
+		/** Do not show edit or delete buttons if task is not created by currentUser */
+		if(currentTask.getUser() != TaskShareApplication.getTaskShare().getUser()){
+			Button buttonEdit = (Button) findViewById(R.id.buttonEditTask);
+			Button buttonDelete = (Button) findViewById(R.id.buttonDeleteTask);
+			buttonEdit.setVisibility(View.INVISIBLE);
+			buttonDelete.setVisibility(View.INVISIBLE);
+		}
 	}
 	
 	@Override
