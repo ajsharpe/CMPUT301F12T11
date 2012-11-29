@@ -74,22 +74,7 @@ public class FulfillPhotoTaskActivity extends Activity implements OnClickListene
     }
 	public void onClick(View v) {
 		if(v.equals(findViewById(R.id.takePhoto))){
-			/*Intent sCamera; 
-			Bundle bundle = getIntent().getExtras();
-					
-					sCamera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-					//sCamera.putExtras(bundle);
-					//photoUri = getOutputMediaFileUri(MEDIA_TYPE_IMAGE);     // Create a file to store the image
-//					DateFormat dateFormat = new SimpleDateFormat("yyyyMMdd-HHmm"); 
-					//Date dDate = new Date();        // get a timestamp too!
-					//time = new Timestamp(dDate.getTime());
 
-					sCamera.putExtra(MediaStore.EXTRA_OUTPUT, photoUri);    // Sets the image file name
-					//Log.d("take photo", photoUri.getPath());
-
-
-					startActivityForResult(sCamera, CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE); // Calls the camera application to get a Photo
-					*/
 			Intent sCamera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 
 			folder = Environment.getExternalStorageDirectory().getAbsolutePath() + "/tmp";
@@ -123,18 +108,30 @@ public class FulfillPhotoTaskActivity extends Activity implements OnClickListene
 	            try {
 	                file.createNewFile();
 	                FileOutputStream fo = new FileOutputStream(file);
-	                //5
 	                fo.write(bytes.toByteArray());
 	                fo.close();
 	            } catch (IOException e) {
 	                // TODO Auto-generated catch block
 	                e.printStackTrace();
 	            }
+	         
 			
-			
-			
-			
-			Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
+	    
+	        // i.setType("message/rfc822");
+	         Intent i = new Intent(android.content.Intent.ACTION_SEND); 
+             String Email[] = { "seoungyu@ualberta.ca" }; 
+             i.putExtra(android.content.Intent.EXTRA_EMAIL, Email); 
+             i.putExtra(android.content.Intent.EXTRA_SUBJECT, "Helloworld"); 
+             i.putExtra(Intent.EXTRA_STREAM, Uri.parse("file://"+ Environment.getExternalStorageDirectory())); 
+             i.setType("plain/text"); 
+          
+	         try {
+	             startActivity(Intent.createChooser(i, "Send mail..."));
+	         } catch (android.content.ActivityNotFoundException ex) {
+	             Toast.makeText(getApplicationContext(), "There are no email clients installed.", Toast.LENGTH_SHORT).show();
+	         }
+	         sendBroadcast(new Intent(Intent.ACTION_MEDIA_MOUNTED, Uri.parse("file://"+ Environment.getExternalStorageDirectory())));
+/*			Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
 //	        emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, emailSignature);
 	        emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL, TaskShareActivity.emailvalue);
 	        emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "HELLLOOOOOOO");
@@ -146,19 +143,9 @@ public class FulfillPhotoTaskActivity extends Activity implements OnClickListene
 	        emailIntent.putExtra(Intent.EXTRA_STREAM, outputFileUri);
 
 
-	        startActivity(Intent.createChooser(emailIntent, "Send your email in:"));
-	      //  eraseContent();
-	        //sentMode = true;
-			/*String path = Environment.getExternalStorageDirectory().toString()d;
-			OutputStream fOut = null;
-			file = new File(path, "FitnessGirl.jpg");
-			fOut = new FileOutputStream(file);
-			
-			getImageBitmap(myBit).compress(Bitmap.CompressFormat.JPEG, 85, fOut);
-			fOut.flush();
-			fOut.close();
-
-			MediaStore.Images.Media.insertImage(getContentResolver(),file.getAbsolutePath(),file.getName(),file.getName(*/
+	        startActivity(Intent.createChooser(emailIntent, "Send your email in:"));*/
+	       //eraseContent();
+	       //sentMode = true;
 		}
 	}
  
