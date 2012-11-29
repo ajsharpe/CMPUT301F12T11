@@ -203,7 +203,7 @@ public class FulfillPhotoTaskActivity extends Activity implements OnClickListene
 					Bitmap thumbnail = (Bitmap) extras.get("data"); //NOT WORKING
 					newestPhoto = new Photo("Stupid", name, thumbnail);
 					ArrayOfPhotoUpdates.add(newestPhoto);
-			    	iv.setImageBitmap(thumbnail);
+			    	iv.setImageBitmap(thumbnail);fd
 			    	iv.invalidate();
 			    	*/
 					  
