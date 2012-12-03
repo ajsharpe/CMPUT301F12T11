@@ -154,20 +154,26 @@ public class Task<T> implements Serializable{
 		out.writeObject(this.user);
 		out.writeObject(this.name);
 		out.writeObject(this.description);
-		out.writeObject(this.created);
-		out.writeObject(this.modified);
+		Long longCreated = this.created.toMillis(true);
+		out.writeObject(longCreated);
+		Long longModified = this.modified.toMillis(true);
+		out.writeObject(longModified);
 		out.writeObject(this.sharedOnline);
 		out.writeObject(this.fulfillment);
 		out.writeObject(this.likes);
 		out.writeObject(this.favourite);
 	}
-	
+
 	private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException{
 		this.user = (String) in.readObject();
 		this.name = (String) in.readObject();
 		this.description = (String) in.readObject();
-		this.created = (Time) in.readObject();
-		this.modified = (Time) in.readObject();
+		Long longCreated = (Long) in.readObject();
+		this.created = new Time();
+		this.created.set(longCreated.longValue());
+		Long longModified = (Long) in.readObject();
+		this.modified = new Time();
+		this.modified.set(longModified.longValue());
 		this.sharedOnline = (Boolean) in.readObject();
 		this.fulfillment = (ArrayList<T>) in.readObject();
 		this.likes = (Integer)  in.readObject();

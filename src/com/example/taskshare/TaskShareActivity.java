@@ -34,6 +34,7 @@ public class TaskShareActivity extends Activity {
     boolean stored = true;  
     TaskShare ts = TaskShareApplication.getTaskShare();
     ArrayList<Task> listOfTasks = new ArrayList<Task>(ts.getMyTaskList()); 
+    static String emailvalue = null;
     
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -118,41 +119,70 @@ public class TaskShareActivity extends Activity {
         		startActivityForResult(myIntent, 0);
         	}
         }); 
-        /** 1 try getting user email */
-        AlertDialog.Builder alert = new AlertDialog.Builder(this);
+       if (ts.getUser() == null){
+			/** 1 try getting user email */
+			boolean notValid =true;
 
-        alert.setTitle("Welcome");
-        alert.setMessage("Please Type the email address!");
+			AlertDialog.Builder alert = new AlertDialog.Builder(this);
 
-        // Set an EditText view to get user input 
-        final EditText userEmail = new EditText(this);
-        alert.setView(userEmail);
-        
-        alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-        	public void onClick(DialogInterface dialog, int whichButton) {
-        	  String value = userEmail.getText().toString();
-        	  // Do something with value!
-        	  }
-        	});
+			alert.setTitle("Welcome");
+			alert.setMessage("Please Type the email address!");
+
+			// Set an EditText view to get user input 
+			final EditText userEmail = new EditText(this);
+
+			alert.setView(userEmail);
+			alert.setCancelable(false);
+			userEmail.setInputType(InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);
+			alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+				public void onClick(DialogInterface dialog, int whichButton) {
+					//emailvalue = userEmail.getText().toString();
+					if (isValidEmail(userEmail.getText().toString())){
+						emailvalue = userEmail.getText().toString();
+						TaskShare ts = TaskShareApplication.getTaskShare();
+						ts.setUser(emailvalue);
+					}else{
+						//Todo: make this into a loop that keeps prompting the user until a valid email has been entered
+						Toast.makeText(getApplicationContext(), "Wrong email input, please run the program again to input your correct email", Toast.LENGTH_SHORT).show();
+
+					}
+					// Do something with value!0sa
+				}
+			});
 
 
-        alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-          public void onClick(DialogInterface dialog, int whichButton) {
-            // Canceled.djdkdjkl
-          }
-        });
+			alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+				public void onClick(DialogInterface dialog, int whichButton) {
+					// Canceled.djdkdjkl
+					dialog.dismiss();
+					Toast.makeText(getApplicationContext(), "Please run the program again to input your correct email", Toast.LENGTH_SHORT).show();
 
-        alert.show();
 
-        
-    }
+				}
+			});
+
+			// create alert dialog
+			AlertDialog alertDialog = alert.create();
+
+			// show it
+			alertDialog.show();
+
+		}
+	}
+
+
     
     public void onResume (){
     	super.onResume();
     	/** Reload task list when the activity is resumed */
-    	setTaskList();
+    	listOfTasks.clear();
+    	listOfTasks.addAll(ts.getMyTaskList());
         adapter.notifyDataSetChanged();  
     }
+    
+    public static boolean isValidEmail(String value) {
+		return value.matches("^([^.@]+)(\\.[^.@]+)*@([^.@]+\\.)+([^.@]+)$");
+	}
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

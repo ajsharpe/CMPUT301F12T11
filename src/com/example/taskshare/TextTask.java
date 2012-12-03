@@ -6,8 +6,8 @@ import android.text.format.Time;
 
 public class TextTask extends Task<Text>{
 
-	TextTask(String name, String description, Integer authorID, Boolean sharedOnline) {
-		super(name, description, sharedOnline);
+	TextTask(String name, String description, Boolean sharedOnline) {
+		super(name, description,sharedOnline);
 		// TODO Auto-generated constructor stub
 	}
 

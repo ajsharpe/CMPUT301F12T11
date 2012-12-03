@@ -12,6 +12,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ToggleButton;
 
 public class ViewTaskActivity extends Activity{
 	private Task currentTask;
@@ -31,10 +32,15 @@ public class ViewTaskActivity extends Activity{
 		//Task info is loaded into fields in onResume() method
 
 		
-		/**TODO:
-		 * don't display the edit or delete buttons if currentTask.user != taskShare.user*/
-		
 		//Initiate onclick listeners
+		ToggleButton buttonFavourite = (ToggleButton) findViewById(R.id.buttonFavourite);
+		buttonFavourite.setOnClickListener(new OnClickListener() {
+			public void onClick(View arg0) {
+				currentTask.toggleFavourite();
+			}
+		});
+		
+		
 		/** Allows user to edit task */
 		Button buttonEditTask = (Button) findViewById(R.id.buttonEditTask);
 		buttonEditTask.setOnClickListener(new OnClickListener() {

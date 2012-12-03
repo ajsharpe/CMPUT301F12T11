@@ -9,6 +9,12 @@ import java.io.Serializable;
 import android.media.AudioTrack;
 import android.text.format.Time;
 
+/** This is a model class which acts as a container for 
+ *  audio files. It stores data about the audio clip's 
+ *  title, author, time created and last modified, and 
+ *  the user uploading the audio file.
+ *  @author AJ
+ */
 public class Audio implements Serializable{
 	/** Allows saving of audio */
 
@@ -26,11 +32,15 @@ public class Audio implements Serializable{
 		this.modified.setToNow();
 		this.user = TaskShareApplication.getTaskShare().getUser();
 	}
-
+	/** Getter for Title
+	 * @return title
+	 */
 	public String getTitle(){
 		return this.title;
 	}
-
+	/** Getter for Artist
+	 * @return Artist
+	 */
 	public String getArtist(){
 		return this.artist;
 	}
@@ -62,7 +72,8 @@ public class Audio implements Serializable{
 		this.modified = new Time(Time.getCurrentTimezone());
 	}
 	
-	private void writeObject(ObjectOutputStream out) throws IOException{
+	private void writeObject(ObjectOutputStream out) 
+			throws IOException{
 		out.writeObject(this.title);
 		out.writeObject(this.artist);
 		out.writeObject(this.audio);
@@ -70,7 +81,8 @@ public class Audio implements Serializable{
 		out.writeObject(this.modified);
 	}
 	
-	private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException{
+	private void readObject(ObjectInputStream in) 
+			throws IOException, ClassNotFoundException{
 		title = (String)in.readObject();
 		artist = (String) in.readObject();
 		audio = (File) in.readObject();

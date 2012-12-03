@@ -8,8 +8,14 @@ import java.io.Serializable;
 
 import android.text.format.Time;
 
+/** This is a model class which acts as a container for 
+ *  video files. It stores data about the video's title, 
+ *  a text description which could include actors, directors,
+ *  or other info, as well as time created and last modified,  
+ *  and the user who uploaded the file.
+ *  @author AJ
+ */
 public class Video implements Serializable{
-	/** Allows saving of video */
 
 	private String title, description, user;
 	private File video;

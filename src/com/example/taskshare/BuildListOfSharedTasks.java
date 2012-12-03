@@ -56,6 +56,7 @@ public class BuildListOfSharedTasks extends AsyncTask<Void, Void, Boolean> {
 			HttpResponse response = httpC.execute(httpP);
 			HttpEntity entity = response.getEntity();
 			
+
 			if (entity != null) {
 		        InputStream is = entity.getContent();
 		        String jsonStringVersion = convertStreamToString(is);
@@ -69,11 +70,9 @@ public class BuildListOfSharedTasks extends AsyncTask<Void, Void, Boolean> {
 		   			onlineTasks.add(task);			
 			        i++;
 			    }      
+
 			}
-			if (onlineTasks.isEmpty()) {
-				return false;
-			}
-			else return true;
+			return true;
 		}
 		catch (Exception e) {
 			// TODO Auto-generated catch block

@@ -1,21 +1,18 @@
 TO DO LIST:
 
--Prompt user to enter email on first use -Felix
-
--Allow user to change email - affects database on a large scale, as the 
-	email will need to be changed in the database
++Prompt user to enter email on first use -Felix
 
 +Only display "Edit Task" And "Delete" Buttons for myTasks - cant edit 
 	other users tasks - AJ
 
--Set up file storage -AJ
++Set up file storage -AJ
 
--Set up online connection stuff
+-Set up online connection stuff -Chance (How is this going anyways? almost done?)
 
--(Possibly) change model for photos and audio so that the content is 
-	stored as a file URL instead of Bitmap or AudioClip
++(Possibly) change model for photos and audio so that the content is 
+	stored as a file URL instead of Bitmap or AudioClip -Felix "photos are saved in sdcard, Gallery"
 
--Set up email notifications for user confirmation and fulfillment confirmation
+
 
 -We need to document our code better. we're losing out on some easy marks here
 
@@ -36,3 +33,9 @@ Put your ccid beside any of the items you want to work on, and add anything
 I haven't put here yet.
 
 +mark finished stuff with a plus
+
+
+
+future release planning:
+-Allow user to edit/change email
+-Set up email notifications for user confirmation and fulfillment confirmation

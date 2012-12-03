@@ -10,6 +10,12 @@ import java.io.Serializable;
 
 import android.text.format.Time;
 
+/** This is a model class which acts as a container for 
+ *  photo files. It stores data about the photo's title, 
+ *  photographer, time created and last modified, and 
+ *  the user uploading the file.
+ *  @author AJ
+ */
 public class Photo implements Serializable{
 	private String title, photographer, user;
 	private File photo;

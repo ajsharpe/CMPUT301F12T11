@@ -12,6 +12,12 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import android.text.format.Time;
 
+/** This is a model class which acts as a container for 
+ *  texts. It stores data about the title and original 
+ *  author, as well as time created and last modified, 
+ *  and the user uploading the file.
+ *  @author AJ
+ */
 public class Text implements Serializable{
 	private String title, author, text, user;
 	private Time created, modified;
