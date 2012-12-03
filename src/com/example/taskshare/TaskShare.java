@@ -25,10 +25,6 @@ public class TaskShare extends FModel<FView> implements Serializable{
 		return this.myTaskList;
 	}
 	
-	public ArrayList<Task> getOnlineList(){
-		return myTaskList;
-
-	}
 	
 	/* Adds a new task to taskList  *
 	 * Returns true if successful,  *
