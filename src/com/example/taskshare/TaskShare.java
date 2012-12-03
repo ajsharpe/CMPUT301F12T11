@@ -10,6 +10,8 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+import android.content.Context;
+
 public class TaskShare extends FModel<FView> implements Serializable{
 	private ArrayList<Task> myTaskList, onlineTaskList;
 	private String user;
@@ -24,9 +26,8 @@ public class TaskShare extends FModel<FView> implements Serializable{
 	}
 	
 	public ArrayList<Task> getOnlineList(){
-		boolean download = new BuildListOfSharedTasks().execute(onlineTaskList) != null;
-		if (download) return this.onlineTaskList;
-		else return this.myTaskList;
+		return myTaskList;
+
 	}
 	
 	/* Adds a new task to taskList  *
@@ -61,10 +62,6 @@ public class TaskShare extends FModel<FView> implements Serializable{
 		myTaskList.remove(index+1);
 	}
 	
-	//Online stuff
-	public ArrayList<Task> getOnlineTaskList(){
-		return this.onlineTaskList;
-	}
 	
 	/* Adds a new task to taskList  *
 	 * Returns true if successful,  *

@@ -11,9 +11,9 @@ import com.google.gson.Gson;
 import android.os.AsyncTask;
 
 
-public class UploadTasks extends AsyncTask<Task, Void, Boolean> {
+public class UploadTasks extends AsyncTask<Task<?>, Void, Boolean> {
 
-	protected Boolean doInBackground(Task... taskP) {
+	protected Boolean doInBackground(Task<?>... taskP) {
 		if(taskP != null){
 			HttpClient httpC = new DefaultHttpClient();
 			HttpPost httpP = new HttpPost("http://crowdsourcer.softwareprocess.es/F12/CMPUT301F12T11/");
@@ -21,7 +21,7 @@ public class UploadTasks extends AsyncTask<Task, Void, Boolean> {
 			
 			List <BasicNameValuePair> nvps = new ArrayList <BasicNameValuePair>();
 			nvps.add(new BasicNameValuePair("action", "post"));
-			nvps.add(new BasicNameValuePair("content", gson.toJson(taskP)));
+			nvps.add(new BasicNameValuePair("content", gson.toJson(taskP[0])));
 		
 			try {
 				httpP.setEntity(new UrlEncodedFormEntity(nvps));				
