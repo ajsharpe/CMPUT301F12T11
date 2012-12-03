@@ -101,6 +101,9 @@ public class ViewTaskActivity extends Activity{
 			}
 		});
 
+
+        /**TODO:																*
+         * handle removing tasks from database if user clicks store offline 	*/
 		/* Toggles online storage */
 		Button buttonStoreOffline = (Button) findViewById(R.id.buttonStoreOffline);
 		buttonStoreOffline.setOnClickListener(new OnClickListener() {

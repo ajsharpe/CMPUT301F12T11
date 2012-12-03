@@ -11,6 +11,10 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import android.text.format.Time;
 
+/** This class acts as a superclass for TextTask, PhotoTask, AudioTask,
+ *  and VideoTask. It is a model container class that holds information 
+ *  about the User who posted the task, the name
+ */
 public class Task<T> implements Serializable{
 	private String user;
 	private String name, description;
