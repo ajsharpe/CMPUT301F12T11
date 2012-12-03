@@ -38,6 +38,7 @@ public class TaskShare implements Serializable{
 	public Boolean addMyTask(Task task){
 		if (! myTaskList.contains(task)){
 			myTaskList.add(task);
+			saveToFile();
 			return true;
 		}
 		return false;
@@ -49,6 +50,7 @@ public class TaskShare implements Serializable{
 	public Boolean removeMyTask(Task task){
 		if (myTaskList.contains(task)){
 			myTaskList.remove(task);
+			saveToFile();
 			return true;
 		}
 		return false;
@@ -62,6 +64,7 @@ public class TaskShare implements Serializable{
 	public void replaceMyTask(Task task, int index){
 		myTaskList.add(index, task);
 		myTaskList.remove(index+1);
+		saveToFile();
 	}
 
 	//Online stuff
@@ -91,24 +94,29 @@ public class TaskShare implements Serializable{
 		return false;
 	}
 
+	public void setUser(String user){
+		this.user = user;
+		saveToFile();
+	}
+
 	public String getUser(){
 		return this.user;
 	}
 
 	private void writeObject(ObjectOutputStream out) throws IOException{
-		out.writeObject(this.myTaskList);
 		out.writeObject(this.user);
+		out.writeObject(this.myTaskList);
 	}
 
 	private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException{
-		this.myTaskList = (ArrayList<Task>) in.readObject();
 		this.user = (String) in.readObject();
+		this.myTaskList = (ArrayList<Task>) in.readObject();
 	}
 
 	public void saveToFile(){
-		String path = "/sdcard/.taskshare/taskshare";
+		String path = "/mnt/sdcard/.taskshare/taskshare";
 		try {  
-			ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(path)); 
+			ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(path, false)); 
 			this.writeObject(out);
 			out.close();  
 		} catch (FileNotFoundException e) {  
@@ -119,16 +127,16 @@ public class TaskShare implements Serializable{
 	}
 
 	public void loadFromFile(){
-		String path = "/sdcard/.taskshare/taskshare";
+		String path = "/mnt/sdcard/.taskshare/taskshare";
 		try {  
-            ObjectInputStream in = new ObjectInputStream(new FileInputStream(path)); 
-            this.readObject(in);
-            in.close();  
-        } 
-         catch (IOException e) {  
-            e.printStackTrace();  
-        } catch (ClassNotFoundException e) {  
-            e.printStackTrace();  
-        } 
+			ObjectInputStream in = new ObjectInputStream(new FileInputStream(path)); 
+			this.readObject(in);
+			in.close();  
+		} 
+		catch (IOException e) {  
+			e.printStackTrace();  
+		} catch (ClassNotFoundException e) {  
+			e.printStackTrace();  
+		} 
 	}
 }

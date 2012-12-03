@@ -27,7 +27,7 @@ import android.widget.AdapterView.OnItemClickListener;
 public class TaskShareActivity extends Activity {
 
 	ArrayAdapter<Task> adapter = null;
-	static String emailvalue;
+	static String emailvalue = null;
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -84,7 +84,9 @@ public class TaskShareActivity extends Activity {
 				public void onClick(DialogInterface dialog, int whichButton) {
 					//emailvalue = userEmail.getText().toString();
 					if (isValidEmail(userEmail.getText().toString())){
-						emailvalue = userEmail.getText().toString();               
+						emailvalue = userEmail.getText().toString();
+						TaskShare ts = TaskShareApplication.getTaskShare();
+						ts.setUser(emailvalue);
 					}else{
 						//Todo: make this into a loop that keeps prompting the user until a valid email has been entered
 						Toast.makeText(getApplicationContext(), "Wrong email input, please run the program again to input your correct email", Toast.LENGTH_SHORT).show();
@@ -99,6 +101,8 @@ public class TaskShareActivity extends Activity {
 				public void onClick(DialogInterface dialog, int whichButton) {
 					// Canceled.djdkdjkl
 					dialog.dismiss();
+					Toast.makeText(getApplicationContext(), "Please run the program again to input your correct email", Toast.LENGTH_SHORT).show();
+
 
 				}
 			});
