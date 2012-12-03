@@ -13,7 +13,7 @@ TO DO LIST:
 -Set up online connection stuff
 
 -(Possibly) change model for photos and audio so that the content is 
-	stored as a file URL instead of Bitmap or AudioClip
+	stored as a file URL instead of Bitmap or AudioClip -Felix "photos are saved in sdcard, Gallery"
 
 -Set up email notifications for user confirmation and fulfillment confirmation
 
