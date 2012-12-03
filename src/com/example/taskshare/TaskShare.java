@@ -16,7 +16,7 @@ import java.util.ArrayList;
 
 import android.content.Context;
 
-public class TaskShare extends FModel<FView> implements Serializable{
+public class TaskShare implements Serializable{
 
 	private ArrayList<Task> myTaskList, onlineTaskList;
 	private String user;
