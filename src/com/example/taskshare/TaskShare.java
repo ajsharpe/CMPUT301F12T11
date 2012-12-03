@@ -16,11 +16,17 @@ public class TaskShare extends FModel<FView> implements Serializable{
 	
 	TaskShare(){
 		this.myTaskList = new ArrayList<Task>();
-		this.onlineTaskList = null; //will be implemented later
+		this.onlineTaskList = new ArrayList<Task>();
 	}
 	
 	public ArrayList<Task> getMyTaskList(){
 		return this.myTaskList;
+	}
+	
+	public ArrayList<Task> getOnlineList(){
+		boolean download = new BuildListOfSharedTasks().execute(onlineTaskList) != null;
+		if (download) return this.onlineTaskList;
+		else return this.myTaskList;
 	}
 	
 	/* Adds a new task to taskList  *

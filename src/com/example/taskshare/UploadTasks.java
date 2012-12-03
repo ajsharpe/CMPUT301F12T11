@@ -21,7 +21,6 @@ public class UploadTasks extends AsyncTask<Task, Void, Boolean> {
 			
 			List <BasicNameValuePair> nvps = new ArrayList <BasicNameValuePair>();
 			nvps.add(new BasicNameValuePair("action", "post"));
-			nvps.add(new BasicNameValuePair("summary", taskP[0].getName()));
 			nvps.add(new BasicNameValuePair("content", gson.toJson(taskP)));
 		
 			try {
