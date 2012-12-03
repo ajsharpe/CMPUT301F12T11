@@ -81,16 +81,16 @@ public class NewTaskActivity extends Activity{
     	RadioButton taskType = (RadioButton) findViewById(taskTypeIdSelected);
     	
     	if (taskType == (RadioButton) findViewById(R.id.radioPhoto)){
-    		newTask = new PhotoTask(name, description, Integer.valueOf(1), sharedOnline);
+    		newTask = new PhotoTask(name, description, sharedOnline);
     	}
     	else if (taskType == (RadioButton) findViewById(R.id.radioText)){
-    		newTask = new TextTask(name, description, Integer.valueOf(1), sharedOnline);
+    		newTask = new TextTask(name, description, sharedOnline);
     	}
     	else if (taskType == (RadioButton) findViewById(R.id.radioAudio)){
-    		newTask = new AudioTask(name, description, Integer.valueOf(1), sharedOnline);
+    		newTask = new AudioTask(name, description, sharedOnline);
     	}
     	else if (taskType == (RadioButton) findViewById(R.id.radioVideo)){
-    		newTask = new VideoTask(name, description, Integer.valueOf(1), sharedOnline);
+    		newTask = new VideoTask(name, description, sharedOnline);
     	}
     	else return false;
     	

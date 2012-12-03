@@ -4,31 +4,34 @@
 
 package com.example.taskshare;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class TaskShare extends FModel<FView> implements Serializable{
+public class TaskShare implements Serializable{
 	private ArrayList<Task> myTaskList, onlineTaskList;
 	private String user;
-	
+
 	TaskShare(){
 		this.myTaskList = new ArrayList<Task>();
 		this.onlineTaskList = new ArrayList<Task>();
 	}
-	
+
 	public ArrayList<Task> getMyTaskList(){
 		return this.myTaskList;
 	}
-	
+
 	public ArrayList<Task> getOnlineList(){
 		boolean download = new BuildListOfSharedTasks().execute(onlineTaskList) != null;
 		if (download) return this.onlineTaskList;
 		else return this.myTaskList;
 	}
-	
+
 	/* Adds a new task to taskList  *
 	 * Returns true if successful,  *
 	 * false if duplicate			*/
@@ -39,7 +42,7 @@ public class TaskShare extends FModel<FView> implements Serializable{
 		}
 		return false;
 	}
-	
+
 	/* Removes a task from  myTaskList  *
 	 * Returns true if successful,      *
 	 * false if not found			 	*/
@@ -50,7 +53,7 @@ public class TaskShare extends FModel<FView> implements Serializable{
 		}
 		return false;
 	}
-	
+
 	/* Add a task from  myTaskList, and	*
 	 * remove the task previously at 	*
 	 * that index.						*
@@ -60,12 +63,12 @@ public class TaskShare extends FModel<FView> implements Serializable{
 		myTaskList.add(index, task);
 		myTaskList.remove(index+1);
 	}
-	
+
 	//Online stuff
 	public ArrayList<Task> getOnlineTaskList(){
 		return this.onlineTaskList;
 	}
-	
+
 	/* Adds a new task to taskList  *
 	 * Returns true if successful,  *
 	 * false if duplicate			*/
@@ -76,7 +79,7 @@ public class TaskShare extends FModel<FView> implements Serializable{
 		}
 		return false;
 	}
-	
+
 	/* Removes a task from  onlineTaskList  *
 	 * Returns true if successful,      *
 	 * false if not found			 	*/
@@ -87,18 +90,45 @@ public class TaskShare extends FModel<FView> implements Serializable{
 		}
 		return false;
 	}
-	
+
 	public String getUser(){
 		return this.user;
 	}
-	
+
 	private void writeObject(ObjectOutputStream out) throws IOException{
 		out.writeObject(this.myTaskList);
 		out.writeObject(this.user);
 	}
-	
+
 	private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException{
 		this.myTaskList = (ArrayList<Task>) in.readObject();
 		this.user = (String) in.readObject();
+	}
+
+	public void saveToFile(){
+		String path = "/sdcard/.taskshare/taskshare";
+		try {  
+			ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(path)); 
+			this.writeObject(out);
+			out.close();  
+		} catch (FileNotFoundException e) {  
+			e.printStackTrace();  
+		} catch (IOException e) {  
+			e.printStackTrace();  
+		}  
+	}
+
+	public void loadFromFile(){
+		String path = "/sdcard/.taskshare/taskshare";
+		try {  
+            ObjectInputStream in = new ObjectInputStream(new FileInputStream(path)); 
+            this.readObject(in);
+            in.close();  
+        } 
+         catch (IOException e) {  
+            e.printStackTrace();  
+        } catch (ClassNotFoundException e) {  
+            e.printStackTrace();  
+        } 
 	}
 }

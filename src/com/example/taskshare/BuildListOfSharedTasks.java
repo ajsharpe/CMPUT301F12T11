@@ -44,10 +44,10 @@ public class BuildListOfSharedTasks extends AsyncTask<ArrayList<Task>, Void, Boo
 			        int i = 0;
 			        while(i < tasks.length){
 			        	
-			        	String taskId = tasks[i].getId();
+			        	//String taskId = tasks[i].getId();
 			        	List <BasicNameValuePair> get = new ArrayList <BasicNameValuePair>();
 			    		get.add(new BasicNameValuePair("action", "get"));
-			    		get.add(new BasicNameValuePair("id", taskId));
+			    		//get.add(new BasicNameValuePair("id", taskId));
 
 			    		httpP.setEntity(new UrlEncodedFormEntity(get));
 			    		HttpResponse responseGet = httpC.execute(httpP);
@@ -72,7 +72,6 @@ public class BuildListOfSharedTasks extends AsyncTask<ArrayList<Task>, Void, Boo
 				else return false;
 			}
 			catch (Exception e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 				return false;				
 			}

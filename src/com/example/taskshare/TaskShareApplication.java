@@ -13,14 +13,4 @@ public class TaskShareApplication extends Application {
         }
         return taskShare;
     }
-
-    // Singleton
-    transient private static Controller controller = null;
-
-    public static Controller getController() {
-        if (controller == null) {
-            controller = new Controller(getTaskShare());
-        }
-        return controller;
-    }
 }

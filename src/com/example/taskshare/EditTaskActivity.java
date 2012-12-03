@@ -110,23 +110,7 @@ public class EditTaskActivity extends Activity {
         
         
 
-        
-        
-        /**TODO:
-         * if shared online is true, add the task to online database 
-         * 		- if currentTask was offline, delete it from myTaskList, 
-         * 		- if it was online, remove it from the database
-         * 
-         * if shared online is false, add the task to myTaskList
-         * 		- if currentTask was online remove it from database
-         * 		- if currentTask was offline, it will be replaced
-         * 
-         * we need to check if editedTask.getPrivacy() == currentTask.getPrivacy()*/
-        
-        
-        
-        
-        
+
         
     	
         // Determine whether it is a photo or text based task from the radio buttons
@@ -135,23 +119,34 @@ public class EditTaskActivity extends Activity {
     	RadioButton taskType = (RadioButton) findViewById(taskTypeIdSelected);
     	
     	if (taskType == (RadioButton) findViewById(R.id.radioPhoto)){
-    		editedTask = new PhotoTask(name, description, Integer.valueOf(1), sharedOnline);
+    		editedTask = new PhotoTask(name, description, sharedOnline);
     	}
     	else if (taskType == (RadioButton) findViewById(R.id.radioText)){
-    		editedTask = new TextTask(name, description, Integer.valueOf(1), sharedOnline);
+    		editedTask = new TextTask(name, description, sharedOnline);
     	}
     	else if (taskType == (RadioButton) findViewById(R.id.radioAudio)){
-    		editedTask = new AudioTask(name, description, Integer.valueOf(1), sharedOnline);
+    		editedTask = new AudioTask(name, description, sharedOnline);
     	}
     	else if (taskType == (RadioButton) findViewById(R.id.radioVideo)){
-    		editedTask = new VideoTask(name, description, Integer.valueOf(1), sharedOnline);
+    		editedTask = new VideoTask(name, description, sharedOnline);
     	}
     	else return false;
     	
-    	// Add new task to the model before returning
-    	TaskShare ts = TaskShareApplication.getTaskShare();
     	
-    	//remove old task from model before adding edited task
+        if (sharedOnline){
+        	
+        	boolean upload = new UploadTasks().execute(editedTask) != null;
+        	
+        	if (!upload) Toast.makeText(EditTaskActivity.this, "Upload Unsucessful", Toast.LENGTH_SHORT).show();
+        	if (upload) Toast.makeText(EditTaskActivity.this, "Upload Sucessful", Toast.LENGTH_SHORT).show();
+        }
+        
+        /**TODO:																*
+         * handle removing tasks from database if user deselects shared online 	*/
+        
+        
+    	// Replace edited task in the model before returning
+    	TaskShare ts = TaskShareApplication.getTaskShare();
     	ts.replaceMyTask(editedTask, index.intValue());
     	return true;
     	

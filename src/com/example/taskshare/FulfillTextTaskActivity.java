@@ -15,7 +15,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-public class FulfillTextTaskActivity extends Activity implements FView<TaskShare>{
+public class FulfillTextTaskActivity extends Activity{
 	public final static String INDEX = "com.example.myfirstapp.MESSAGE";
 	private Task<Text> currentTask;
 	private ArrayList<Text> ArrayOfTextUpdates = null;
