@@ -39,6 +39,8 @@
     <string name="text_edit">Edit</string>
     <string name="text_email">Save and Email</string>
     <string name="text_delete">Delete</string>
+    <string name="text_favourite">Favourite</string>
+    <string name="text_favourited">Favourited</string>
     <string name="text_not_implemented">Not yet implemented.</string>
     <string name="text_update">Update Task</string>
     <string name="text_added_to_task">Text Was Added, Make Sure To Click Save To Save Your Work!</string>
