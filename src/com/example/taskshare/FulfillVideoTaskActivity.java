@@ -1,3 +1,8 @@
+/* This is an activity class for fulfilling video tasks.
+ * It can record, playback, and save the file to the SDcard.
+ * 
+ * @author Derrick, Seoungyul
+ * */
 package com.example.taskshare;
 
 import java.io.File;
@@ -54,7 +59,7 @@ public class FulfillVideoTaskActivity extends Activity implements SurfaceHolder.
         
         
     }
-
+    //Button taps
     public void buttonTapped(View view) {
     	switch(view.getId()) {
     	case R.id.initBtn:
@@ -74,11 +79,13 @@ public class FulfillVideoTaskActivity extends Activity implements SurfaceHolder.
     		break;
     	}
     }
+    //stops the playback
     private void stopPlayback() {
 		videoView.stopPlayback();
 		
 	}
-
+    
+    //plays the recorded video
 	private void playRecording() {
 		MediaController mc = new MediaController(this);
 		videoView.setMediaController(mc);
@@ -87,7 +94,7 @@ public class FulfillVideoTaskActivity extends Activity implements SurfaceHolder.
 		stopPlayBtn.setEnabled(true);
 				
 	}
-
+	//stops recording video
 	private void stopRecording() {
 		if(recorder != null) {
 			recorder.setOnErrorListener(null);

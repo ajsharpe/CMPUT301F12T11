@@ -1,3 +1,8 @@
+/* This is an activity class for fulfilling audio tasks.
+ * It can record, playback, and save the file to the SDcard.
+ * 
+ * @author Derrick, Seoungyul
+ * */
 package com.example.taskshare;
 
 import java.io.File;
@@ -27,7 +32,7 @@ public class FulfillAudioTaskActivity extends Activity {
         OUTPUT_FILE = Environment.getExternalStorageDirectory()+"/audiorecorder.3gpp";
         
     }
-    
+    //Button taps
     public void buttonTapped(View view){
     	switch(view.getId()) {
     	case R.id.startBtn:
@@ -63,13 +68,14 @@ public class FulfillAudioTaskActivity extends Activity {
     		break;
     	}
     }
-
+    
+    //stops playback
     private void stopPlayback() {
 		if(mediaPlayer != null)
 			mediaPlayer.stop();
 		
 	}
-
+    //plays the recorded video
 	private void playRecording() throws Exception{
 		ditchMediaPlayer();
 		mediaPlayer = new MediaPlayer();
@@ -95,7 +101,7 @@ public class FulfillAudioTaskActivity extends Activity {
 		if (recorder != null)
 			recorder.stop();
 	}
-
+	//begins to record 
 	private void beginRecording() throws Exception {
 		
 		ditchMediaRecorder();
