@@ -162,6 +162,8 @@ public class Task<T> implements Serializable{
 		out.writeObject(this.fulfillment);
 		out.writeObject(this.likes);
 		out.writeObject(this.favourite);
+		out.writeObject(this.type);
+		out.writeObject(this.id);
 	}
 
 	private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException{
@@ -178,5 +180,7 @@ public class Task<T> implements Serializable{
 		this.fulfillment = (ArrayList<T>) in.readObject();
 		this.likes = (Integer)  in.readObject();
 		this.favourite = (Boolean)  in.readObject();
+		this.type = (String) in.readObject();
+		this.id = (String) in.readObject();
 	}
 }

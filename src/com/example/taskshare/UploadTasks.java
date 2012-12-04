@@ -21,7 +21,8 @@ public class UploadTasks extends AsyncTask<Task<?>, Void, Boolean> {
 			
 			List <BasicNameValuePair> nvps = new ArrayList <BasicNameValuePair>();
 			nvps.add(new BasicNameValuePair("action", "post"));
-			nvps.add(new BasicNameValuePair("content", gson.toJson(taskP[0])));
+			Task<?> task = taskP[0];
+			nvps.add(new BasicNameValuePair("content", gson.toJson(task)));
 		
 			try {
 				httpP.setEntity(new UrlEncodedFormEntity(nvps));				

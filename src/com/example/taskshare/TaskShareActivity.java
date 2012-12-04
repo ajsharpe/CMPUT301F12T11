@@ -34,7 +34,7 @@ public class TaskShareActivity extends Activity {
     boolean shared = false;
     boolean stored = true;  
     TaskShare ts = TaskShareApplication.getTaskShare();
-    ArrayList<Task> listOfTasks = new ArrayList<Task>(ts.getMyTaskList()); 
+   ArrayList<Task> listOfTasks = new ArrayList<Task>(ts.getMyTaskList()); 
     static String emailvalue = null;
     
     @Override

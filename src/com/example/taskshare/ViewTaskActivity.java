@@ -68,22 +68,22 @@ public class ViewTaskActivity extends Activity{
 		Button buttonFulfillTask = (Button) findViewById(R.id.buttonFulfillTask);
 		buttonFulfillTask.setOnClickListener(new OnClickListener() {
 			public void onClick(View arg0) {
-				if (currentTask.getClass() == TextTask.class){
+				if (currentTask.getType().equals("Text")){
 					Intent i = new Intent(ViewTaskActivity.this, FulfillTextTaskActivity.class);
 					i.putExtra("INDEX", index);
 					startActivity(i);
 				}
-				else if (currentTask.getClass() == PhotoTask.class){
+				else if (currentTask.getType().equals("Photo")){
 					Intent i = new Intent(ViewTaskActivity.this, FulfillPhotoTaskActivity.class);
 					i.putExtra("INDEX", index);
 					startActivity(i);            	
 				}
-				else if (currentTask.getClass() == AudioTask.class){
+				else if (currentTask.getType().equals("Audio")){
 					Intent i = new Intent(ViewTaskActivity.this, FulfillAudioTaskActivity.class);
 					i.putExtra("INDEX", index);
 					startActivity(i);            	
 				}
-				else if (currentTask.getClass() == VideoTask.class){
+				else if (currentTask.getType().equals("Video")){
 					Intent i = new Intent(ViewTaskActivity.this, FulfillVideoTaskActivity.class);
 					i.putExtra("INDEX", index);
 					startActivity(i);            	

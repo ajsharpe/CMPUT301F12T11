@@ -49,10 +49,12 @@ public class TaskArrayAdapter extends ArrayAdapter<Task> {
         
         Task task = taskList.get(position);
         String message = "";
-        if (task instanceof PhotoTask) message="Photo Based Task\n";
-        if (task instanceof TextTask) message="Text Based Task\n";
-        if (task instanceof AudioTask) message="Audio Based Task\n";
-        if (task instanceof VideoTask) message="Video Based Task\n";
+        if(task != null){
+        	String taskType = task.getType();
+        	if(taskType != null && taskType.length() != 0){
+        		message = taskType + " Based Task\n";
+        	}
+        }
         holder.title.setHorizontallyScrolling(true);
         holder.title.setLines(1);
         holder.title.setText(task.getName());

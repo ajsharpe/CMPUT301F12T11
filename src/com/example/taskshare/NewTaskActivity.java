@@ -84,15 +84,11 @@ public class NewTaskActivity extends Activity{
     		newTask = new PhotoTask(name, description, sharedOnline);
     		newTask.setType("Photo");
 
-    		newTask = new PhotoTask(name, description, sharedOnline);
-
     	}
     	else if (taskType == (RadioButton) findViewById(R.id.radioText)){
 
     		newTask = new TextTask(name, description, sharedOnline);
     		newTask.setType("Text");
-
-    		newTask = new TextTask(name, description, sharedOnline);
 
     	}
     	else if (taskType == (RadioButton) findViewById(R.id.radioAudio)){
@@ -100,15 +96,11 @@ public class NewTaskActivity extends Activity{
     		newTask = new AudioTask(name, description, sharedOnline);
     		newTask.setType("Audio");
 
-    		newTask = new AudioTask(name, description, sharedOnline);
-
     	}
     	else if (taskType == (RadioButton) findViewById(R.id.radioVideo)){
 
     		newTask = new VideoTask(name, description, sharedOnline);
     		newTask.setType("Video");
-
-    		newTask = new VideoTask(name, description, sharedOnline);
 
     	}
     	else return false;
