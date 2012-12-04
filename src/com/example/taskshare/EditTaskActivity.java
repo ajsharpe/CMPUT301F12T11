@@ -109,10 +109,6 @@ public class EditTaskActivity extends Activity {
         
         
         
-
-
-        
-    	
         // Determine whether it is a photo or text based task from the radio buttons
     	RadioGroup radioGroupTaskType = (RadioGroup) findViewById(R.id.radioGroupTaskType);
     	int taskTypeIdSelected = radioGroupTaskType.getCheckedRadioButtonId();
