@@ -18,7 +18,7 @@ TO DO LIST:
 
 -Test cases - more easy marks (lets at least shoot for satisfactory)
 
--OOD - update UML - AJ
++OOD - update UML - AJ
 
 -release planning - everyone (add whatever seems too large to finish, or too tedious)
 
