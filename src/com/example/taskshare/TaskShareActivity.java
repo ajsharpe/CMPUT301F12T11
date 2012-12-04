@@ -177,7 +177,6 @@ public class TaskShareActivity extends Activity {
     	super.onResume();
     	/** Reload task list when the activity is resumed */
     	setTaskList();
-        adapter.notifyDataSetChanged();  
     }
     
     public static boolean isValidEmail(String value) {
@@ -192,17 +191,22 @@ public class TaskShareActivity extends Activity {
     public void setTaskList(){
     	//Need to figure out how to change the list of tasks according to the toggle buttons
         if(mytasks & stored){
-        	listOfTasks.clear();
-        	listOfTasks.addAll(ts.getMyTaskList());
+        	synchronized (listOfTasks){
+        		listOfTasks.clear();
+        		listOfTasks.addAll(ts.getMyTaskList());
+        	}   	
         	adapter.notifyDataSetChanged(); 
         	ts.setCurrentTaskList(listOfTasks);
         	
         }
         else if(mytasks & shared){
         	ProgressDialog dialog = new ProgressDialog(this);
-        	listOfTasks.clear();
-        	BuildListOfSharedTasks blst = new BuildListOfSharedTasks(listOfTasks, this, dialog, adapter, ts);
-    		blst.execute();
+        	synchronized (listOfTasks){
+        		listOfTasks.clear();
+            	BuildListOfSharedTasks blst = new BuildListOfSharedTasks(listOfTasks, this, dialog, adapter, ts);
+        		blst.execute();
+        	}   	
+        	
         }
         else if (otherstasks & shared){
         	//TODO
