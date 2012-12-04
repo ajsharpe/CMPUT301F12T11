@@ -31,12 +31,14 @@ public class BuildListOfSharedTasks extends AsyncTask<Void, Void, Boolean> {
 	HttpPost httpP = new HttpPost("http://crowdsourcer.softwareprocess.es/F12/CMPUT301F12T11/");
 	Gson gson = new Gson();
 	ArrayAdapter<Task> adapter;
+	TaskShare ts;
 	 
-	public BuildListOfSharedTasks(ArrayList<Task> appOnlineTasks, Context context, ProgressDialog dialog, ArrayAdapter<Task> adapter){
+	public BuildListOfSharedTasks(ArrayList<Task> appOnlineTasks, Context context, ProgressDialog dialog, ArrayAdapter<Task> adapter, TaskShare ts){
 		this.appOnlineTasks = appOnlineTasks;
 		this.context = context;
 		this.dialog = dialog;
 		this.adapter = adapter;
+		this.ts = ts;
     }
 	 @Override
 	    protected void onPreExecute() {
@@ -113,6 +115,7 @@ public class BuildListOfSharedTasks extends AsyncTask<Void, Void, Boolean> {
 				}
 			}
         }
+        ts.setCurrentTaskList(appOnlineTasks);
         adapter.notifyDataSetChanged();
     }
 

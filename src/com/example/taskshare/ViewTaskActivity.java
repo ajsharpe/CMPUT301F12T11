@@ -134,7 +134,7 @@ public class ViewTaskActivity extends Activity{
 		/**Load current task from index in the TaskList*/
 		if (index != null) {
 			TaskShare ts = TaskShareApplication.getTaskShare();
-			currentTask = ts.getMyTaskList().get(index.intValue());
+			currentTask = ts.getCurrentTaskList().get(index.intValue());
 		} else finish();
 
 		/** Load name and description into text fields */
