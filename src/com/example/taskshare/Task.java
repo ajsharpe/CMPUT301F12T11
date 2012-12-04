@@ -17,13 +17,15 @@ import android.text.format.Time;
  */
 public class Task<T> implements Serializable{
 	private String user;
+	private String type;
+	private String id;
 	private String name, description;
 	private Time created, modified;
 	private Boolean sharedOnline;
 	private ArrayList<T> fulfillment;
 	private Integer likes;
 	private Boolean favourite;
-
+	
 	Task(String name, String description, Boolean sharedOnline){
 		this.name = name;
 		this.description = description;
@@ -37,7 +39,7 @@ public class Task<T> implements Serializable{
 		this.favourite = false;
 		this.user = TaskShareApplication.getTaskShare().getUser();
 	}
-
+	
 	public String getName(){
 		return this.name;
 	}
@@ -46,7 +48,24 @@ public class Task<T> implements Serializable{
 		this.name = name;
 		this.modified.setToNow();
 	}
+	
+	public String getType(){
+		return this.type;
+	}
 
+	public void setType(String type){
+		this.type = type;
+
+	}
+	
+	public String getId(){
+		return this.id;
+	}
+	
+	public void setId(String id){
+		this.id = id;
+	}
+	
 	public String getDescription(){
 		return this.description;
 	}
@@ -54,24 +73,32 @@ public class Task<T> implements Serializable{
 	public void setDescription(String description){
 		this.description = description;
 		this.modified.setToNow();	}
-
+	
 	public Time getDateCreated(){
 		return this.created;
 	}
-
+	
+	public String getStringDateCreated(){
+		return this.created.format("%Y/%m/%d %H:%M");
+	}
+	
 	public Time getDateModified(){
 		return this.modified;
 	}
-
+	
+	public String getStringDateModified(){
+		return this.modified.format("%Y/%m/%d %H:%M");
+	}
+	
 	public Boolean getPrivacy(){
 		return this.sharedOnline;
 	}
-
+	
 	public void setPrivacy(Boolean sharedOnline){
 		this.sharedOnline = sharedOnline;
 		this.modified.setToNow();	
 	}
-
+	
 	public void updateFulfillment(ArrayList<T> newFulfillment){
 		for (T item : newFulfillment){
 			if (! this.fulfillment.contains((T) item)){
@@ -82,16 +109,34 @@ public class Task<T> implements Serializable{
 	public String getDateAndTypeFormatted(){
 		return "Modified on " + this.modified.format("%Y/%m/%d %H:%M");
 	}
-
+	
 	public Integer getLikes(){
 		return this.likes;
 	}
-
+	
+	public String getStringLikes(){
+		int likes = this.likes;
+		return String.valueOf(likes);
+	}
+	
 	public Boolean getFavourite(){
 		return this.favourite;
 	}
+	
+
+	public String getStringFavorite(){
+		if(this.favourite){
+			return "True";
+		}
+		else{
+			return "False";
+		}
+	}
+	
+
 
 	public void toggleFavourite(){
+
 		if (this.favourite == true){
 			this.favourite = false;
 			this.likes--;
@@ -100,15 +145,15 @@ public class Task<T> implements Serializable{
 			this.likes++;
 		}
 	}
-
+	
 	public String getUser(){
 		return this.user;
 	}
-
+	
 	public String toString(){
 		return this.name + "\n" + this.modified.format("%Y/%m/%d %H:%M");
 	}
-
+	
 	private void writeObject(ObjectOutputStream out) throws IOException{
 		out.writeObject(this.user);
 		out.writeObject(this.name);

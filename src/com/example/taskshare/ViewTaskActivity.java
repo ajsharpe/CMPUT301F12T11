@@ -1,6 +1,3 @@
-/** This activity is used to view details of a selected tasks, and determine if 
- * one would like to complete the given task
- * currently the only working button is fulfill task */
 package com.example.taskshare;
 
 import android.os.Bundle;
@@ -14,6 +11,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
+/** This activity is used to view details of a selected tasks, and determine if 
+ * one would like to complete the given task currently the only working buttons 
+ * are fulfill, edit, and delete task 
+ */
 public class ViewTaskActivity extends Activity{
 	private Task currentTask;
 	private Long index;

@@ -38,7 +38,7 @@ public class FulfillTextTaskActivity extends Activity{
         final int index = extras.getInt(INDEX);
         if ((Integer) index != null) {
         	TaskShare ts = TaskShareApplication.getTaskShare();
-        	currentTask = ts.getMyTaskList().get(index);
+        	currentTask = ts.getCurrentTaskList().get(index);
         } else finish();
         //Error check and add text to local list of text objects        
         Button addTextButton = (Button) findViewById(R.id.addText);

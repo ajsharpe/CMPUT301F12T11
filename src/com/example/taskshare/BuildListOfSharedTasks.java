@@ -14,72 +14,111 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import com.google.gson.Gson;
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.os.AsyncTask;
+import android.widget.ArrayAdapter;
+import android.widget.Toast;
 
 
-public class BuildListOfSharedTasks extends AsyncTask<ArrayList<Task>, Void, Boolean> {
 
-	protected Boolean doInBackground(ArrayList<Task>... onlineTasks) {
-		if(onlineTasks != null){
-			HttpClient httpC = new DefaultHttpClient();
-			HttpPost httpP = new HttpPost("http://crowdsourcer.softwareprocess.es/F12/CMPUT301F12T11/");
-			Gson gson = new Gson();
+public class BuildListOfSharedTasks extends AsyncTask<Void, Void, Boolean> {
+	ArrayList<Task> onlineTasks = new ArrayList<Task>();
+	ProgressDialog dialog;
+	ArrayList<Task> appOnlineTasks;
+	Context context;
+	HttpClient httpC = new DefaultHttpClient();
+	HttpPost httpP = new HttpPost("http://crowdsourcer.softwareprocess.es/F12/CMPUT301F12T11/");
+	Gson gson = new Gson();
+	ArrayAdapter<Task> adapter;
+	TaskShare ts;
+	 
+	public BuildListOfSharedTasks(ArrayList<Task> appOnlineTasks, Context context, ProgressDialog dialog, ArrayAdapter<Task> adapter, TaskShare ts){
+		this.appOnlineTasks = appOnlineTasks;
+		this.context = context;
+		this.dialog = dialog;
+		this.adapter = adapter;
+		this.ts = ts;
+    }
+	 @Override
+	    protected void onPreExecute() {
+	        dialog.setTitle("Fetching...");
+	        dialog.setMessage("Please wait...");
+	        dialog.setIndeterminate(true);
+	        dialog.show();
 
+	    }
+	@Override
+	protected Boolean doInBackground(Void...voids) {	
+		List <BasicNameValuePair> nvps = new ArrayList <BasicNameValuePair>();
+		nvps.add(new BasicNameValuePair("action", "list"));
+
+		try {
+			httpP.setEntity(new UrlEncodedFormEntity(nvps));				
+			HttpResponse response = httpC.execute(httpP);
+			HttpEntity entity = response.getEntity();
 			
-			List <BasicNameValuePair> nvps = new ArrayList <BasicNameValuePair>();
-			nvps.add(new BasicNameValuePair("action", "list"));
 
-		
-			try {
-				httpP.setEntity(new UrlEncodedFormEntity(nvps));				
-				HttpResponse response = httpC.execute(httpP);
-				HttpEntity entity = response.getEntity();
-				
-				if (entity != null) {
-			        InputStream is = entity.getContent();
-			        String jsonStringVersion = convertStreamToString(is);
-			        Task[] tasks = new Gson().fromJson(jsonStringVersion, Task[].class);
-			        System.out.println(new Gson().toJson(tasks));
-			          
-			        int i = 0;
-			        while(i < tasks.length){
-			        	
-			        	//String taskId = tasks[i].getId();
-			        	List <BasicNameValuePair> get = new ArrayList <BasicNameValuePair>();
-			    		get.add(new BasicNameValuePair("action", "get"));
-			    		//get.add(new BasicNameValuePair("id", taskId));
+			if (entity != null) {
+		        InputStream is = entity.getContent();
+		        String jsonStringVersion = convertStreamToString(is);
+		        TaskId[] taskIds = new Gson().fromJson(jsonStringVersion, TaskId[].class);
+		          
+		        int i = 0;
+		        while(i < taskIds.length){
+		        	String taskId = taskIds[i].getId();
+		        	Task<?> task = getTask(taskId);
+		        	task.setId(taskId);
+		   			onlineTasks.add(task);			
+			        i++;
+			    }      
 
-			    		httpP.setEntity(new UrlEncodedFormEntity(get));
-			    		HttpResponse responseGet = httpC.execute(httpP);
-
-			    	    String status = responseGet.getStatusLine().toString();
-			    	    HttpEntity entityGet = responseGet.getEntity();
-
-
-			    	    if (entityGet != null) {
-			    	        InputStream isGet = entity.getContent();
-			    	        String jsonStringVersionGet = convertStreamToString(isGet);
-			    	        Type taskType = Task.class;     
-			    	        Task getTask = gson.fromJson(jsonStringVersionGet, taskType);
-			    	        onlineTasks[0].add(getTask);
-			    	    }
-			        	
-			        	i++;
-			        }
-			        
-				}
-				if (!onlineTasks[0].isEmpty()) return true;
-				else return false;
 			}
-			catch (Exception e) {
-				e.printStackTrace();
-				return false;				
-			}
+			return true;
 		}
-		else {
-			return false;
-			}
+		catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return false;				
+		}
 	}
+	@Override
+	protected void onPostExecute(Boolean result) {
+        dialog.dismiss();
+        if (!onlineTasks.isEmpty()) Toast.makeText(context, "Download Successfull", Toast.LENGTH_SHORT).show();
+		else Toast.makeText(context, "Download Unsuccessfull", Toast.LENGTH_SHORT).show();
+        for (Task<?> task : onlineTasks){
+        	String id = task.getId();
+        	if (appOnlineTasks.isEmpty()) appOnlineTasks.add(task);
+        	
+        	for (Task<?> task2 : appOnlineTasks){
+				String id2 = task2.getId();
+
+				if(!id.equals(id2)){
+					appOnlineTasks.add(task);
+				/*if (task instanceof PhotoTask){
+					PhotoTask newTask = (PhotoTask) task;
+					appOnlineTasks.add(newTask);
+				}
+				else if (task instanceof TextTask){
+					TextTask newTask = (TextTask) task;
+					appOnlineTasks.add(newTask);
+				}
+				else if (task instanceof AudioTask){
+					AudioTask newTask = (AudioTask) task;
+					appOnlineTasks.add(newTask);
+				}
+				else if (task instanceof VideoTask){
+					VideoTask newTask =  (VideoTask) task;
+					appOnlineTasks.add(newTask);
+				}*/
+				}
+			}
+        }
+        ts.setCurrentTaskList(appOnlineTasks);
+        adapter.notifyDataSetChanged();
+    }
+
 	private  String convertStreamToString(InputStream is) {
 
 		BufferedReader reader = new BufferedReader(new InputStreamReader(is));
@@ -103,6 +142,27 @@ public class BuildListOfSharedTasks extends AsyncTask<ArrayList<Task>, Void, Boo
 			}
 		}
 		return sb.toString();
+	}
+	
+	public Task<?> getTask(String idP) throws Exception{
+		Gson gson = new Gson();
+		TaskId responseTaskId = new TaskId();
+		
+		List <BasicNameValuePair> nvps = new ArrayList <BasicNameValuePair>();
+		nvps.add(new BasicNameValuePair("action", "get"));
+		nvps.add(new BasicNameValuePair("id", idP));
+
+		httpP.setEntity(new UrlEncodedFormEntity(nvps));
+		HttpResponse response = httpC.execute(httpP);
+	    HttpEntity entity = response.getEntity();
+	    
+	    if (entity != null) {
+	        InputStream is = entity.getContent();
+	        String jsonStringVersion = convertStreamToString(is);
+	        responseTaskId = gson.fromJson(jsonStringVersion,  TaskId.class);
+	    }
+        return responseTaskId.getTask();
+
 	}
 }
 

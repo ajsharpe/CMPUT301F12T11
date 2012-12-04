@@ -13,23 +13,30 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+
+import android.content.Context;
+
 public class TaskShare implements Serializable{
-	private ArrayList<Task> myTaskList, onlineTaskList;
+
+	private ArrayList<Task> myTaskList, currentTaskList;
 	private String user;
 
 	TaskShare(){
 		this.myTaskList = new ArrayList<Task>();
-		this.onlineTaskList = new ArrayList<Task>();
+		this.currentTaskList = new ArrayList<Task>();
 	}
 
 	public ArrayList<Task> getMyTaskList(){
 		return this.myTaskList;
 	}
-
-	public ArrayList<Task> getOnlineList(){
-		boolean download = new BuildListOfSharedTasks().execute(onlineTaskList) != null;
-		if (download) return this.onlineTaskList;
-		else return this.myTaskList;
+	
+	public void setCurrentTaskList(ArrayList<Task> listOfTasks){
+		this.currentTaskList.clear();
+		this.currentTaskList.addAll(listOfTasks);		
+	}
+	
+	public ArrayList<Task> getCurrentTaskList(){
+		return this.currentTaskList;
 	}
 
 	/* Adds a new task to taskList  *
@@ -65,33 +72,6 @@ public class TaskShare implements Serializable{
 		myTaskList.add(index, task);
 		myTaskList.remove(index+1);
 		saveToFile();
-	}
-
-	//Online stuff
-	public ArrayList<Task> getOnlineTaskList(){
-		return this.onlineTaskList;
-	}
-
-	/* Adds a new task to taskList  *
-	 * Returns true if successful,  *
-	 * false if duplicate			*/
-	public Boolean addOnlineTask(Task task){
-		if (! onlineTaskList.contains(task)){
-			onlineTaskList.add(task);
-			return true;
-		}
-		return false;
-	}
-
-	/* Removes a task from  onlineTaskList  *
-	 * Returns true if successful,      *
-	 * false if not found			 	*/
-	public Boolean removeOnlineTask(Task task){
-		if (onlineTaskList.contains(task)){
-			onlineTaskList.remove(task);
-			return true;
-		}
-		return false;
 	}
 
 	public void setUser(String user){

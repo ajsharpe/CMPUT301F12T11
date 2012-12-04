@@ -82,32 +82,55 @@ public class NewTaskActivity extends Activity{
     	
     	if (taskType == (RadioButton) findViewById(R.id.radioPhoto)){
     		newTask = new PhotoTask(name, description, sharedOnline);
+    		newTask.setType("Photo");
+
+    		newTask = new PhotoTask(name, description, sharedOnline);
+
     	}
     	else if (taskType == (RadioButton) findViewById(R.id.radioText)){
+
     		newTask = new TextTask(name, description, sharedOnline);
+    		newTask.setType("Text");
+
+    		newTask = new TextTask(name, description, sharedOnline);
+
     	}
     	else if (taskType == (RadioButton) findViewById(R.id.radioAudio)){
+
     		newTask = new AudioTask(name, description, sharedOnline);
+    		newTask.setType("Audio");
+
+    		newTask = new AudioTask(name, description, sharedOnline);
+
     	}
     	else if (taskType == (RadioButton) findViewById(R.id.radioVideo)){
+
     		newTask = new VideoTask(name, description, sharedOnline);
+    		newTask.setType("Video");
+
+    		newTask = new VideoTask(name, description, sharedOnline);
+
     	}
     	else return false;
     	
     	/**TODO:
          * if shared online is true, add the task to online database */
-        if (sharedOnline){
-        	
+        if (sharedOnline){	
         	boolean upload = new UploadTasks().execute(newTask) != null;
-        	
-        	if (!upload) Toast.makeText(NewTaskActivity.this, "Upload Unsucessful", Toast.LENGTH_SHORT).show();
-        	if (upload) Toast.makeText(NewTaskActivity.this, "Upload Sucessful", Toast.LENGTH_SHORT).show();
+        	if (!upload) {
+        		Toast.makeText(NewTaskActivity.this, "Upload Unsucessful", Toast.LENGTH_SHORT).show();
+        		return false;
+        	}
+        	else{
+        		Toast.makeText(NewTaskActivity.this, "Upload Sucessful", Toast.LENGTH_SHORT).show();
+        		return true;
+        	}
         }
-    	
-    	// Add new task to the model before returning
-    	TaskShare ts = TaskShareApplication.getTaskShare();
-    	ts.addMyTask(newTask);
-    	return true;
-    	
+        else{
+        	// Add new task to the model before returning
+        	TaskShare ts = TaskShareApplication.getTaskShare();
+        	ts.addMyTask(newTask);
+        	return true;
+        }
     }
 }
