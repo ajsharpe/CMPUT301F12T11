@@ -1,5 +1,10 @@
-/** Allows fulfilment of photo based tasks
- * -gives option to choose photo or to take photo*/
+/* This is an activity class for fulfilling photo tasks.
+ * It can fulfill photo based tasks by taking a photo, uploading a photo from the SDcard.
+ * It saves the photo into the SDcard and sends email to the author who defined the task
+ * 
+ * @author Seoungyul, Derrick
+ * */
+ 
 
 package com.example.taskshare;
 
@@ -32,7 +37,6 @@ public class FulfillPhotoTaskActivity extends Activity implements OnClickListene
 	//MAKE PHOTO OBJECTs
 	private String name = null;
 	private Photo newestPhoto = null;
-	//
 	private ArrayList<Photo> ArrayOfPhotoUpdates = null;
 	private static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 100;
 	private static final int UPLOAD_IMAGE_ACTIVITY_REQUEST_CODE = 110;
@@ -116,11 +120,7 @@ public class FulfillPhotoTaskActivity extends Activity implements OnClickListene
 	            }
 	         
 			
-	    
-	        // i.setType("message/rfc822");
 	         Intent i = new Intent(android.content.Intent.ACTION_SEND); 
-             //String Email[] = { "seoungyu@ualberta.ca" }; 
-             //i.putExtra(android.content.Intent.EXTRA_EMAIL, TaskShareActivity.emailvalue); 
              i.putExtra(android.content.Intent.EXTRA_SUBJECT, "Helloworld"); 
              i.putExtra(Intent.EXTRA_STREAM, Uri.parse("file://"+ Environment.getExternalStorageDirectory())); 
              i.setType("plain/text"); 
@@ -131,21 +131,6 @@ public class FulfillPhotoTaskActivity extends Activity implements OnClickListene
 	             Toast.makeText(getApplicationContext(), "There are no email clients installed.", Toast.LENGTH_SHORT).show();
 	         }
 	         sendBroadcast(new Intent(Intent.ACTION_MEDIA_MOUNTED, Uri.parse("file://"+ Environment.getExternalStorageDirectory())));
-/*			Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
-//	        emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, emailSignature);
-	        emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL, TaskShareActivity.emailvalue);
-	        emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "HELLLOOOOOOO");
-	        emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, "LETS GET THIS THING WORKING \n\n FML)"); 
-	        emailIntent.setType("image/jpeg");
-	        File bitmapFile = new File(Environment.getExternalStorageDirectory()+
-	            "/"+folder+"/picture.jpg");
-	        //myUri = Uri.fromFile(bitmapFile);
-	        emailIntent.putExtra(Intent.EXTRA_STREAM, outputFileUri);
-
-
-	        startActivity(Intent.createChooser(emailIntent, "Send your email in:"));*/
-	       //eraseContent();
-	       //sentMode = true;
 		}
 	}
  
@@ -160,15 +145,9 @@ public class FulfillPhotoTaskActivity extends Activity implements OnClickListene
 					Bitmap thumbnail = (Bitmap) data.getExtras().get("data");
 					/* Construct a photo object from data */
 					myBit=thumbnail;
-					//newestPhoto = new Photo("Stupid", name, thumbnail);
 					ArrayOfPhotoUpdates.add(newestPhoto);
 			    	iv.setImageBitmap(thumbnail);
 			    	iv.invalidate();
-
-					//final Context context = this;
-					//Intent intent = new Intent(context, FulfillPhotoTaskActivity.class);
-					
-	    			//startActivity(intent);1
 
 				} else if (resultCode == RESULT_CANCELED) {
 					// User cancelled the image capture
@@ -198,14 +177,6 @@ public class FulfillPhotoTaskActivity extends Activity implements OnClickListene
                              // TODO Auto-generated catch block
                              e.printStackTrace();
                       }
-                      /*
-					Bundle extras = data.getExtras();
-					Bitmap thumbnail = (Bitmap) extras.get("data"); //NOT WORKING
-					newestPhoto = new Photo("Stupid", name, thumbnail);
-					ArrayOfPhotoUpdates.add(newestPhoto);
-			    	iv.setImageBitmap(thumbnail);fd
-			    	iv.invalidate();
-			    	*/
 					  
 		          } else if (resultCode == RESULT_CANCELED) {
 						// User cancelled the image capture
